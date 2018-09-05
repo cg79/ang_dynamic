@@ -1,8 +1,10 @@
-import {Component,
+import {
+  Component,
   NgModule,
   OnInit,
   ViewChild,
-  ViewContainerRef} from '@angular/core';
+  ViewContainerRef, ComponentFactoryResolver
+} from '@angular/core';
 
 import {DynamicComponent} from '../../dynamic.component';
 import { ComponentInjectorService } from '../../component-injector.service';
@@ -18,14 +20,21 @@ export class DynamicDivComponent extends DynamicComponent {
 
   @ViewChild('dynamic', { read: ViewContainerRef }) viewContainerRef: ViewContainerRef;
 
-  constructor(service: ComponentInjectorService) {
+  constructor(
+    private componentFactoryResolver: ComponentFactoryResolver,
+    ) {
     super();
-    this.service = service;
+    // this.service = service;
   }
-  
+
   ngOnInit() {
-    this.service.setRootViewContainerRef(this.viewContainerRef);
-    this.service.addChild('label', this.context);
+    const { children } = this.context;
+
+
+    if (children) {
+      this.addChild(this.viewContainerRef, this.componentFactoryResolver, this.context.type, children);
+
+    }
   }
 
 

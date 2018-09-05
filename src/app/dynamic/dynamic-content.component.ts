@@ -11,17 +11,13 @@ import {DynamicDivComponent} from "./components/dDiv/dynamic-div.component";
 @Component({
     selector: 'dynamic-content',
     template: `
-        <div>
             <div #container></div>
-        </div>
     `
 })
 export class DynamicContentComponent implements OnInit, OnDestroy {
 
     @ViewChild('container', { read: ViewContainerRef })
     container: ViewContainerRef;
-
-    @Input() type: string;
 
     @Input() context: any;
 
@@ -44,8 +40,8 @@ export class DynamicContentComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        if (this.type) {
-            let componentType = this.getComponentType(this.type);
+        if (this.context.type) {
+            let componentType = this.getComponentType(this.context.type);
 
             // note: componentType must be declared within module.entryComponents
             let factory = this.componentFactoryResolver.resolveComponentFactory(componentType);
