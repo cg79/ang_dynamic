@@ -7,6 +7,7 @@ import {DynamicSample1Component} from "./components/dynamic-sample1.component";
 import {DynamicComponent} from "./dynamic.component";
 import {DynamicLabelComponent} from "./components/dLabel/dynamic-label.component";
 import {DynamicDivComponent} from "./components/dDiv/dynamic-div.component";
+import { DynamicTextComponent } from './components/dInput/dynamic-text.component';
 
 @Component({
     selector: 'dynamic-content',
@@ -24,7 +25,8 @@ export class DynamicContentComponent implements OnInit, OnDestroy {
     private mappings = {
         'sample1': DynamicSample1Component,
         'label': DynamicLabelComponent,
-      'div': DynamicDivComponent
+      'div': DynamicDivComponent,
+      'text': DynamicTextComponent
     };
 
     private componentRef: ComponentRef<{}>;

@@ -2,7 +2,7 @@
 // import {DynamicSample1Component} from "./components/dynamic-sample1.component";
 // import {DynamicLabelComponent} from "./components/dLabel/dynamic-label.component";
 // import {DynamicDivComponent} from "./components/dDiv/dynamic-div.component";
-import {ViewContainerRef, ComponentFactoryResolver} from "@angular/core";
+import {ViewContainerRef, ComponentFactoryResolver, Type} from "@angular/core";
 
 
 export class DynamicComponent {
@@ -11,14 +11,15 @@ export class DynamicComponent {
   private mappings = {
     'sample1': 'DynamicSample1Component',
     'label': 'DynamicLabelComponent',
-    'div': 'DynamicDivComponent'
+    'div': 'DynamicDivComponent',
+    'text': 'DynamicTextComponent'
   };
 
 
   getComponentType(typeName: string, factoryResolver: ComponentFactoryResolver, container:ViewContainerRef, ) {
     let type = this.mappings[typeName];
     var factories = Array.from(factoryResolver['_factories'].keys());
-    var factoryClass = factories.find((x: any) => x.name === type);
+    var factoryClass = <Type<{}>>factories.find((x: any) => x.name === type);
 
     const factory = factoryResolver.resolveComponentFactory(factoryClass);
 

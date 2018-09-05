@@ -11,6 +11,7 @@ import {RuntimeContentComponentDemo} from './dynamic/components/runtime-content.
 import {DynamicLabelComponent} from './dynamic/components/dLabel/dynamic-label.component';
 import {DynamicDivComponent} from './dynamic/components/dDiv/dynamic-div.component';
 import { ComponentInjectorService } from './dynamic/component-injector.service';
+import { DynamicTextComponent } from './dynamic/components/dInput/dynamic-text.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ComponentInjectorService } from './dynamic/component-injector.service';
     DynamicLabelComponent,
     DynamicDivComponent,
     RuntimeContentComponent,
-    RuntimeContentComponentDemo
+    RuntimeContentComponentDemo,
+    DynamicTextComponent
   ],
   imports: [
     BrowserModule,
@@ -33,6 +35,7 @@ import { ComponentInjectorService } from './dynamic/component-injector.service';
     DynamicSample1Component,
     DynamicLabelComponent,
     DynamicDivComponent,
+    DynamicTextComponent
   ]
 })
 export class AppModule { }

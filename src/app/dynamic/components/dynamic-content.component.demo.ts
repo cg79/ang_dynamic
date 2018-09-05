@@ -16,11 +16,11 @@ export class DynamicContentComponentDemo {
     context: any = {
         text: 'label1',
         id:'asf1',
-      type:'label',
+      type:'text',
       children: {
               text: 'label2',
               id:'asf3',
-              type:'label'
+              type:'text'
             }
     }
 
