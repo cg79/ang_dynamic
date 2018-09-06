@@ -1,5 +1,6 @@
 import {Component, ViewContainerRef, ViewChild, ComponentFactoryResolver} from '@angular/core';
 import {DynamicComponent} from "../../dynamic.component";
+import {ComponentInjectorService} from "../../component-injector.service";
 
 @Component({
     selector: 'dynamic-label',
@@ -20,6 +21,7 @@ export class DynamicLabelComponent extends DynamicComponent {
   }
 
   ngOnInit() {
+
     if(!this.context )
     {
       return;

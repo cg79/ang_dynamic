@@ -6,6 +6,15 @@ import { Component, Input } from '@angular/core';
         <div>
             <h2>Dynamic content</h2>
             <dynamic-content [context]="context"></dynamic-content>
+            <dynamic-content [context]="context"></dynamic-content>
+            <dynamic-content [context]="context"></dynamic-content>
+            <dynamic-content [context]="context"></dynamic-content>
+            <dynamic-content [context]="context"></dynamic-content>
+            <dynamic-content [context]="context"></dynamic-content>
+            <dynamic-content [context]="context"></dynamic-content>
+            <dynamic-content [context]="context"></dynamic-content><dynamic-content [context]="context"></dynamic-content><dynamic-content [context]="context"></dynamic-content>
+            
+            
             
             <!--<dynamic-content type="some-other-type" [context]="context"></dynamic-content>-->
         </div>
@@ -16,11 +25,16 @@ export class DynamicContentComponentDemo {
     context: any = {
         text: 'label1',
         id:'asf1',
-      type:'text',
+      type:'div',
       children: {
               text: 'label2',
               id:'asf3',
-              type:'text'
+              type:'label',
+        children: {
+          text: 'label2',
+          id:'asf3',
+          type:'text',
+        }
             }
     }
 

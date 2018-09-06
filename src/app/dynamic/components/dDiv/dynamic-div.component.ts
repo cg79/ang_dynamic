@@ -32,7 +32,7 @@ export class DynamicDivComponent extends DynamicComponent {
 
 
     if (children) {
-      this.addChild(this.viewContainerRef, this.componentFactoryResolver, this.context.type, children);
+      this.addChild1(this.viewContainerRef, this.componentFactoryResolver,  children);
 
     }
   }

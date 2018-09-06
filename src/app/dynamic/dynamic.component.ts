@@ -1,12 +1,9 @@
 
-// import {DynamicSample1Component} from "./components/dynamic-sample1.component";
-// import {DynamicLabelComponent} from "./components/dLabel/dynamic-label.component";
-// import {DynamicDivComponent} from "./components/dDiv/dynamic-div.component";
-import {ViewContainerRef, ComponentFactoryResolver, Type} from "@angular/core";
+import {ViewContainerRef, ComponentFactoryResolver, Type, Input, ComponentRef, OnInit, OnDestroy} from "@angular/core";
 
 
-export class DynamicComponent {
-    context: any;
+export class DynamicComponent implements OnDestroy {
+    @Input() context: any;
 
   private mappings = {
     'sample1': 'DynamicSample1Component',
@@ -15,6 +12,7 @@ export class DynamicComponent {
     'text': 'DynamicTextComponent'
   };
 
+  protected componentRef: ComponentRef<{}> ;
 
   getComponentType(typeName: string, factoryResolver: ComponentFactoryResolver, container:ViewContainerRef, ) {
     let type = this.mappings[typeName];
@@ -24,14 +22,29 @@ export class DynamicComponent {
     const factory = factoryResolver.resolveComponentFactory(factoryClass);
 
 
-    const compRef = container.createComponent(factory);
+    this.componentRef = container.createComponent(factory);
 
-    return compRef;// || UnknownDynamicComponent;
+    return this.componentRef;// || UnknownDynamicComponent;
   }
 
 
-  addChild(container:ViewContainerRef, factoryResolver: ComponentFactoryResolver, typeName: string, data) {
-    let component = this.getComponentType(typeName, factoryResolver, container);
+  // addChild(container:ViewContainerRef, factoryResolver: ComponentFactoryResolver, typeName: string, data) {
+  //   let component = this.getComponentType(typeName, factoryResolver, container);
+  //
+  //   // const factory = factoryResolver.resolveComponentFactory(componentType);
+  //   // const component = factory.create(container.parentInjector);
+  //
+  //   // let componentRef = this.rootViewContainer.createComponent(component);
+  //   // (<AdComponent>componentRef.instance).data = adItem.data;
+  //
+  //   const inst = <DynamicComponent>component.instance;
+  //   inst.context = data;
+  //   // container.insert(component.hostView);
+  //
+  // }
+
+  addChild1(container:ViewContainerRef, factoryResolver: ComponentFactoryResolver,  data) {
+    let component = this.getComponentType(data.type, factoryResolver, container);
 
     // const factory = factoryResolver.resolveComponentFactory(componentType);
     // const component = factory.create(container.parentInjector);
@@ -43,6 +56,15 @@ export class DynamicComponent {
     inst.context = data;
     // container.insert(component.hostView);
 
+  }
+
+
+
+  ngOnDestroy() {
+    if (this.componentRef) {
+      this.componentRef.destroy();
+      this.componentRef = null;
+    }
   }
 
 }

@@ -20,7 +20,6 @@ export class DynamicTextComponent extends DynamicComponent {
   }
 
   ngOnInit() {
-debugger;
     if(!this.context )
     {
       return;
