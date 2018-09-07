@@ -3,18 +3,19 @@ import {
     ViewChild, ViewContainerRef,
     ComponentFactoryResolver, ComponentRef
 } from '@angular/core';
-import {DynamicComponent} from "./dynamic.component";
 import {container} from "@angular/core/src/render3/instructions";
+import {DynamicComponent} from "../../dynamic.component";
+import {PubSubService} from "../../../services/pubSub/pubsub";
 
 @Component({
-    selector: 'dynamic-content',
+    selector: 'dynamic-container',
     template: `
             <ng-template #container></ng-template>
     `
 })
 
 //implements OnInit, OnDestroy
-export class DynamicContentComponent extends DynamicComponent  {
+export class DynamicContainerComponent extends DynamicComponent  {
 
     @ViewChild('container', { read: ViewContainerRef }) viewContainerRef: ViewContainerRef;
 
@@ -29,10 +30,13 @@ export class DynamicContentComponent extends DynamicComponent  {
 
     // private componentRef: ComponentRef<{}>;
 
+  pubSubService: PubSubService;
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
 ) {
     super();
+    debugger;
+    this.pubSubService = new PubSubService();
     // this.service = service;
   }
 
@@ -42,12 +46,18 @@ export class DynamicContentComponent extends DynamicComponent  {
     // }
 
   ngOnInit() {
-    const context = this.context;
-    if(!context )
+    if(!this.context )
     {
       return;
     }
-    this.addChild1(this.viewContainerRef, this.componentFactoryResolver, context);
+    const { childrens } = this.context;
+
+    for(var i=0;i<childrens.length;i++) {
+      const children = childrens[i];
+      children.obs = this.pubSubService;
+      this.addChild1(this.viewContainerRef, this.componentFactoryResolver, {...children });
+
+    }
 
   }
     // ngOnInit() {

@@ -6,15 +6,6 @@ import { Component, Input } from '@angular/core';
         <div>
             <h2>Dynamic content</h2>
             <dynamic-content [context]="context"></dynamic-content>
-            <dynamic-content [context]="context"></dynamic-content>
-            <dynamic-content [context]="context"></dynamic-content>
-            <dynamic-content [context]="context"></dynamic-content>
-            <dynamic-content [context]="context"></dynamic-content>
-            <dynamic-content [context]="context"></dynamic-content>
-            <dynamic-content [context]="context"></dynamic-content>
-            <dynamic-content [context]="context"></dynamic-content><dynamic-content [context]="context"></dynamic-content><dynamic-content [context]="context"></dynamic-content>
-            
-            
             
             <!--<dynamic-content type="some-other-type" [context]="context"></dynamic-content>-->
         </div>
@@ -23,36 +14,66 @@ import { Component, Input } from '@angular/core';
 export class DynamicContentComponentDemo {
 
     context: any = {
-        text: 'label1',
         id:'asf1',
-      type:'div',
-      children: {
-              text: 'label2',
-              id:'asf3',
-              type:'label',
+      type:'container',
+      childrens: [{
+              text: 'ccccccccccccc',
+              id:'a',
+              type:'radioLblLeftList',
+              items:[{a:1, text:"ion", checked:true},{a:2, text:"Maria"}],
+              name:'hhhhhhhhhhhh',
+              bindText:"text",
+              bindValue:"a",
+              value:"1",
+              onchangeEvent:'bbb',
+              subscribeEvents:['aaa']
+        },
+        {
+          text: 'ccccccccccccc',
+          id:'b',
+          type:'text',
+          items:[{a:1, text:"ion", checked:true},{a:2, text:"Maria"}],
+          name:'hhhhhhhhhhhh',
+          bindText:"text",
+          bindValue:"a",
+          value:"1",
+          onchangeEvent:'aaa',
+          subscribeEvents:['bbb'],
+          validation:{
+            required: "introdu ceva"
+          }
+
+        }
+        ],
+
         children: {
-          text: 'label2',
+          title: 'label2',
           id:'asf3',
           type:'text',
         }
-            }
-    }
+    };
 
 
   // context: any = {
-  //   text: 'test',
   //   id:'asf1',
   //   type:'div',
   //   children: {
-  //     text: 'test',
-  //     id:'asf2',
-  //     type:'div',
+  //     text: 'ccccccccccccc',
+  //     id:'asf3',
+  //     type:'chkLblLeftList',
+  //     items:[{a:1, text:"ion", checked:true},{a:2, text:"Maria"}],
+  //     name:'hhhhhhhhhhhh',
+  //     bindText:"text",
+  //     bindValue:"a",
+  //     checked:"checked",
+  //
   //     children: {
-  //       text: 'test',
+  //       title: 'label2',
   //       id:'asf3',
-  //       type:'label'
+  //       type:'text',
   //     }
   //   }
-  // }
+  // };
+
 
 }

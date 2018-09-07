@@ -6,10 +6,15 @@ export class DynamicComponent implements OnDestroy {
     @Input() context: any;
 
   private mappings = {
+    'container':'DynamicContainerComponent',
     'sample1': 'DynamicSample1Component',
     'label': 'DynamicLabelComponent',
     'div': 'DynamicDivComponent',
-    'text': 'DynamicTextComponent'
+    'text': 'DynamicTextComponent',
+    'chkLblLeft': 'DynamicChkLabelLeftComponent',
+    'chkLblRight': 'DynamicChkLabelRightComponent',
+    'chkLblLeftList':'DynamicChkLabelLeftListComponent',
+    'radioLblLeftList':'DynamicRadioLabelLeftListComponent'
   };
 
   protected componentRef: ComponentRef<{}> ;
@@ -58,13 +63,81 @@ export class DynamicComponent implements OnDestroy {
 
   }
 
+  afterInit() {
+    const { obs, subscribeEvents } = this.context;
+    if (!obs || !subscribeEvents) {
+      return;
+    }
+    debugger;
 
+    for(var i=0;i<subscribeEvents.length;i++)
+    {
+      const eventName = subscribeEvents[i];
+      obs.subscribe(eventName, (val) => {
+        this.context.obsdata = val;
+        debugger;
+
+      });
+
+    }
+
+
+  }
+
+
+   onChange(data){
+    debugger;
+    const { onchangeEvent, validation } = this.context;
+    if(onchangeEvent) {
+      this.triggerEvent(onchangeEvent, this.context.value);
+    }
+
+    this.validate();
+
+
+  }
+
+  validate()
+  {
+    const { validation, value } = this.context;
+
+    if(validation) {
+      this.setError(false, null);
+      if(validation["required"]) {
+        if(!value) {
+          this.setError(true, validation["required"]);
+          return;
+        }
+      }
+    }
+  }
+
+  setError(isError, message){
+    if(!isError) {
+      setTimeout( () => {
+        this.context.hasError = false
+      }, 1);
+    }else{
+      setTimeout( () => {
+        this.context.hasError = true;
+        this.context.validation.errMessage = message;
+      }, 1);
+    }
+  }
 
   ngOnDestroy() {
     if (this.componentRef) {
       this.componentRef.destroy();
       this.componentRef = null;
     }
+  }
+
+  triggerEvent(eventName: string, data) {
+    const { obs } = this.context;
+    if (!obs) {
+      return;
+    }
+    obs.publish(eventName, data);
   }
 
 }

@@ -4,7 +4,15 @@ import { DynamicComponent } from '../../dynamic.component';
 @Component({
     selector: 'dynamic-text',
   template: `
-  <input type="text" class="form-control" id="title" required [(ngModel)]="context.title" name="title">
+  <input type="text" class="form-control" id="{{context.id}}" name="{{context.name}}" required [(ngModel)]="context.value"  (change)="onChange($event)">
+  <div class="form-group"
+  *ngIf="context.hasError"
+                  [ngClass]="{'has-error':context.hasError}"> 
+                        <label class="control-label">{{context.validation.errMessage}}
+                            <ng-content></ng-content>
+                        </label>
+             </div>
+  
   <pre> {{context | json}} </pre>
     `
 })
@@ -24,6 +32,8 @@ export class DynamicTextComponent extends DynamicComponent {
     {
       return;
     }
+    this.afterInit();
+
     const { children } = this.context;
 
 
@@ -32,5 +42,8 @@ export class DynamicTextComponent extends DynamicComponent {
 
     // }
   }
+
+
+
 
 }

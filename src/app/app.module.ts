@@ -12,6 +12,12 @@ import {DynamicLabelComponent} from './dynamic/components/dLabel/dynamic-label.c
 import {DynamicDivComponent} from './dynamic/components/dDiv/dynamic-div.component';
 import { ComponentInjectorService } from './dynamic/component-injector.service';
 import { DynamicTextComponent } from './dynamic/components/dInput/dynamic-text.component';
+import {DynamicChkLabelLeftComponent} from "./dynamic/components/input/dynamic-checkbox-label-left.component";
+import {DynamicChkLabelRightComponent} from "./dynamic/components/input/dynamic-checkbox-label-right.component";
+import {DynamicChkLabelLeftListComponent} from "./dynamic/components/input/dynamic-checkbox-label-left-list.component";
+import {DynamicRadioLabelLeftListComponent} from "./dynamic/components/input/dynamic-radio-label-left-list.component";
+import {DynamicContainerComponent} from "./dynamic/components/dContainer/dynamic-container.component";
+import {PubSubService} from "./services/pubSub/pubsub";
 
 @NgModule({
   declarations: [
@@ -23,19 +29,29 @@ import { DynamicTextComponent } from './dynamic/components/dInput/dynamic-text.c
     DynamicDivComponent,
     RuntimeContentComponent,
     RuntimeContentComponentDemo,
-    DynamicTextComponent
+    DynamicTextComponent,
+    DynamicChkLabelLeftComponent,
+    DynamicChkLabelRightComponent,
+    DynamicChkLabelLeftListComponent,
+    DynamicRadioLabelLeftListComponent,
+    DynamicContainerComponent
   ],
   imports: [
     BrowserModule,
     FormsModule
   ],
-  providers: [ComponentInjectorService],
+  providers: [ComponentInjectorService, PubSubService],
   bootstrap: [AppComponent],
   entryComponents: [
     DynamicSample1Component,
     DynamicLabelComponent,
     DynamicDivComponent,
-    DynamicTextComponent
+    DynamicTextComponent,
+    DynamicChkLabelLeftComponent,
+    DynamicChkLabelRightComponent,
+    DynamicChkLabelLeftListComponent,
+    DynamicRadioLabelLeftListComponent,
+    DynamicContainerComponent
   ]
 })
 export class AppModule { }

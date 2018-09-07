@@ -3,14 +3,14 @@ import {DynamicComponent} from "../../dynamic.component";
 import {ComponentInjectorService} from "../../component-injector.service";
 
 @Component({
-    selector: 'dynamic-label',
+    selector: 'dynamic-text',
   template: `
     <label  id={{context?.id}}>
       <span>{{context?.text}}</span>
-      <ng-template #dynamic1></ng-template>
+      <input type="checkbox" [checked]="context.val"/>
     </label>`
 })
-export class DynamicLabelComponent extends DynamicComponent {
+export class DynamicChkLabelLeftComponent extends DynamicComponent {
   @ViewChild('dynamic1', { read: ViewContainerRef }) viewContainerRef: ViewContainerRef;
 
   constructor(
