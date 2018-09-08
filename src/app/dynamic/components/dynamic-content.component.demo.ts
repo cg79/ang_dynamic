@@ -54,26 +54,26 @@ export class DynamicContentComponentDemo {
     // };
 
 
-  // context: any = {
-  //   id:'asf1',
-  //   type:'div',
-  //   children: {
-  //     text: 'ccccccccccccc',
-  //     id:'asf3',
-  //     type:'chkLblLeftList',
-  //     items:[{a:1, text:"ion", checked:true},{a:2, text:"Maria"}],
-  //     name:'hhhhhhhhhhhh',
-  //     bindText:"text",
-  //     bindValue:"a",
-  //     checked:"checked",
-  //
-  //     children: {
-  //       title: 'label2',
-  //       id:'asf3',
-  //       type:'text',
-  //     }
-  //   }
-  // };
+  context: any = {
+    id:'asf1',
+    type:'div',
+    children: {
+      text: 'ccccccccccccc',
+      id:'asf3',
+      type:'chkLblLeftList',
+      items:[{a:1, text:"ion", checked:true},{a:2, text:"Maria"}],
+      name:'hhhhhhhhhhhh',
+      bindText:"text",
+      bindValue:"a",
+      checked:"checked",
+  
+      children: {
+        title: 'label2',
+        id:'asf3',
+        type:'text',
+      }
+    }
+  };
 
 
 }

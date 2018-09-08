@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { ModuleMapLoaderModule } from '@nguniversal/module-map-ngfactory-loader';
 
 import { AppComponent } from './app.component';
 import {DynamicContentComponent} from './dynamic/dynamic-content.component';
@@ -51,8 +52,9 @@ import {PageLabelComponent} from "./dynamic/pages/page-label/page-label.componen
     ListCheckboxComponent
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'my-app' }),
-    FormsModule
+    BrowserModule.withServerTransition({ appId: 'anguynamic' }),
+    FormsModule,
+    ModuleMapLoaderModule,
   ],
   providers: [ComponentInjectorService, PubSubService],
   bootstrap: [AppComponent],

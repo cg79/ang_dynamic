@@ -24,13 +24,31 @@ export class DynamicComponent implements OnDestroy {
   protected componentRef: ComponentRef<{}> ;
 
   getComponentType(typeName: string, factoryResolver: ComponentFactoryResolver, container:ViewContainerRef, ) {
+    console.log('0000---------------');
     let type = this.mappings[typeName];
+    console.log(typeName);
+    console.log(type);
+
+    console.log('1111---------------');
+
+
     var factories = Array.from(factoryResolver['_factories'].keys());
+    console.log(factories);
+    console.log('2222---------------');
+    console.log(factoryResolver['_factories']);
+
     var factoryClass = <Type<{}>>factories.find((x: any) => x.name === type);
 
+    console.log(factoryClass);
+    console.log('3333---------------');
     const factory = factoryResolver.resolveComponentFactory(factoryClass);
+    
+    console.log(factory);
 
+    console.log('container=============================================================');
+    console.log(container);
 
+    console.log('4444---------------');
     this.componentRef = container.createComponent(factory);
 
     return this.componentRef;// || UnknownDynamicComponent;
