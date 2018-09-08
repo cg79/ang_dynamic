@@ -1,5 +1,8 @@
 
-import {ViewContainerRef, ComponentFactoryResolver, Type, Input, ComponentRef, OnInit, OnDestroy} from "@angular/core";
+import {
+  ViewContainerRef, ComponentFactoryResolver, Type, Input, ComponentRef, OnInit, OnDestroy,
+  SimpleChanges
+} from "@angular/core";
 
 
 export class DynamicComponent implements OnDestroy {
@@ -14,7 +17,8 @@ export class DynamicComponent implements OnDestroy {
     'chkLblLeft': 'DynamicChkLabelLeftComponent',
     'chkLblRight': 'DynamicChkLabelRightComponent',
     'chkLblLeftList':'DynamicChkLabelLeftListComponent',
-    'radioLblLeftList':'DynamicRadioLabelLeftListComponent'
+    'radioLblLeftList':'DynamicRadioLabelLeftListComponent',
+    'error':'DynamicErrorComponent'
   };
 
   protected componentRef: ComponentRef<{}> ;
@@ -60,7 +64,7 @@ export class DynamicComponent implements OnDestroy {
     const inst = <DynamicComponent>component.instance;
     inst.context = data;
     // container.insert(component.hostView);
-
+    return component;
   }
 
   afterInit() {
@@ -96,6 +100,15 @@ export class DynamicComponent implements OnDestroy {
 
 
   }
+  //
+  // ngOnChanges(changes: SimpleChanges) {
+  //
+  //   this.validate();
+  //   //this.doSomething(changes.categoryId.currentValue);
+  //   // You can also use categoryId.previousValue and
+  //   // categoryId.firstChange for comparing old and new values
+  //
+  // }
 
   validate()
   {
@@ -112,7 +125,18 @@ export class DynamicComponent implements OnDestroy {
     }
   }
 
+
   setError(isError, message){
+    if(!isError) {
+      this.context.hasError = false;
+
+    }else{
+        this.context.hasError = true;
+        this.context.validation.errMessage = message;
+    }
+  }
+
+  setError0(isError, message){
     if(!isError) {
       setTimeout( () => {
         this.context.hasError = false

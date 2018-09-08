@@ -13,45 +13,45 @@ import { Component, Input } from '@angular/core';
 })
 export class DynamicContentComponentDemo {
 
-    context: any = {
-        id:'asf1',
-      type:'container',
-      childrens: [{
-              text: 'ccccccccccccc',
-              id:'a',
-              type:'radioLblLeftList',
-              items:[{a:1, text:"ion", checked:true},{a:2, text:"Maria"}],
-              name:'hhhhhhhhhhhh',
-              bindText:"text",
-              bindValue:"a",
-              value:"1",
-              onchangeEvent:'bbb',
-              subscribeEvents:['aaa']
-        },
-        {
-          text: 'ccccccccccccc',
-          id:'b',
-          type:'text',
-          items:[{a:1, text:"ion", checked:true},{a:2, text:"Maria"}],
-          name:'hhhhhhhhhhhh',
-          bindText:"text",
-          bindValue:"a",
-          value:"1",
-          onchangeEvent:'aaa',
-          subscribeEvents:['bbb'],
-          validation:{
-            required: "introdu ceva"
-          }
-
-        }
-        ],
-
-        children: {
-          title: 'label2',
-          id:'asf3',
-          type:'text',
-        }
-    };
+    // context: any = {
+    //     id:'asf1',
+    //   type:'container',
+    //   childrens: [{
+    //           text: 'ccccccccccccc',
+    //           id:'a',
+    //           type:'radioLblLeftList',
+    //           items:[{a:1, text:"ion", checked:true},{a:2, text:"Maria"}],
+    //           name:'hhhhhhhhhhhh',
+    //           bindText:"text",
+    //           bindValue:"a",
+    //           value:"1",
+    //           onchangeEvent:'bbb',
+    //           subscribeEvents:['aaa']
+    //     },
+    //     {
+    //       text: 'ccccccccccccc',
+    //       id:'b',
+    //       type:'text',
+    //       items:[{a:1, text:"ion", checked:true},{a:2, text:"Maria"}],
+    //       name:'hhhhhhhhhhhh',
+    //       bindText:"text",
+    //       bindValue:"a",
+    //       value:"1",
+    //       onchangeEvent:'aaa',
+    //       subscribeEvents:['bbb'],
+    //       validation:{
+    //         required: "introdu ceva"
+    //       }
+    //
+    //     }
+    //     ],
+    //
+    //     children: {
+    //       title: 'label2',
+    //       id:'asf3',
+    //       type:'text',
+    //     }
+    // };
 
 
   // context: any = {

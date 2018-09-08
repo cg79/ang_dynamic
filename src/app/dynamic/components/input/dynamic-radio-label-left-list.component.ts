@@ -20,7 +20,7 @@ import {ComponentInjectorService} from "../../component-injector.service";
         </label>
     </div>
     </label>
-<pre>{{context | json}} <pre>
+<!--<pre>{{context | json}} <pre>-->
 `
 })
 export class DynamicRadioLabelLeftListComponent extends DynamicComponent {

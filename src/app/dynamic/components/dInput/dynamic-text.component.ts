@@ -4,27 +4,19 @@ import { DynamicComponent } from '../../dynamic.component';
 @Component({
     selector: 'dynamic-text',
   template: `
-  <input type="text" class="form-control" id="{{context.id}}" name="{{context.name}}" required [(ngModel)]="context.value"  (change)="onChange($event)">
-  <div class="form-group"
-  *ngIf="context.hasError"
-                  [ngClass]="{'has-error':context.hasError}"> 
-                        <label class="control-label">{{context.validation.errMessage}}
-                            <ng-content></ng-content>
-                        </label>
-             </div>
-  
-  <pre> {{context | json}} </pre>
+  <input type="text" class="form-control" id="{{context.id}}" name="{{context.name}}" [(ngModel)]="context.value"  (input)="change($event)">
+  <ng-template #errcontainer></ng-template>
+  <!--<pre> {{context | json}} </pre>-->
     `
 })
 
 export class DynamicTextComponent extends DynamicComponent {
-  // @ViewChild('dynamic1', { read: ViewContainerRef }) viewContainerRef: ViewContainerRef;
+  @ViewChild('errcontainer', { read: ViewContainerRef }) viewContainerRef: ViewContainerRef;
 
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
     ) {
     super();
-    // this.service = service;
   }
 
   ngOnInit() {
@@ -34,16 +26,26 @@ export class DynamicTextComponent extends DynamicComponent {
     }
     this.afterInit();
 
-    const { children } = this.context;
-
-
-    // if (children) {
-    //   this.addChild(this.viewContainerRef, this.componentFactoryResolver, this.context.type, children);
-
-    // }
   }
 
+  errorComponent = null;
 
+  change(data) {
+    this.onChange(data);
 
+    if(this.context.hasError) {
+      this.errorComponent = this.addChild1(this.viewContainerRef, this.componentFactoryResolver, {
+        errMessage: this.context.validation.errMessage,
+        id:'asf3',
+        type:'error',
+      });
+    }else{
+      if(!this.errorComponent) {
+        return;
+      }
+      this.errorComponent.destroy();
+
+    }
+  }
 
 }

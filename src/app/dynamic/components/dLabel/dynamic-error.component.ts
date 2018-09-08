@@ -2,14 +2,13 @@ import {Component, ViewContainerRef, ViewChild, ComponentFactoryResolver} from '
 import {DynamicComponent} from "../../dynamic.component";
 
 @Component({
-    selector: 'dynamic-label',
+    selector: 'dynamic-error',
   template: `
-    <label  id={{context?.id}}>
-      <span>{{context?.value}}</span>
-      <ng-template #dynamic1></ng-template>
+    <label class="has-error" id={{context?.id}}>
+      {{context.errMessage}}
     </label>`
 })
-export class DynamicLabelComponent extends DynamicComponent {
+export class DynamicErrorComponent extends DynamicComponent {
   @ViewChild('dynamic1', { read: ViewContainerRef }) viewContainerRef: ViewContainerRef;
 
   constructor(

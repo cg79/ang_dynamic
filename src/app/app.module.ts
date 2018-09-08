@@ -18,6 +18,13 @@ import {DynamicChkLabelLeftListComponent} from "./dynamic/components/input/dynam
 import {DynamicRadioLabelLeftListComponent} from "./dynamic/components/input/dynamic-radio-label-left-list.component";
 import {DynamicContainerComponent} from "./dynamic/components/dContainer/dynamic-container.component";
 import {PubSubService} from "./services/pubSub/pubsub";
+import {DynamicErrorComponent} from "./dynamic/components/dLabel/dynamic-error.component";
+import { PageCheckboxComponent } from './dynamic/pages/page-checkbox/page-checkbox.component';
+import { PageContainerComponent } from './dynamic/pages/page-container/page-container.component';
+import { PageTextComponent } from './dynamic/pages/page-text/page-text.component';
+import { ListRadioComponent } from './dynamic/pages/list-radio/list-radio.component';
+import { ListCheckboxComponent } from './dynamic/pages/list-checkbox/list-checkbox.component';
+import {PageLabelComponent} from "./dynamic/pages/page-label/page-label.component";
 
 @NgModule({
   declarations: [
@@ -34,7 +41,14 @@ import {PubSubService} from "./services/pubSub/pubsub";
     DynamicChkLabelRightComponent,
     DynamicChkLabelLeftListComponent,
     DynamicRadioLabelLeftListComponent,
-    DynamicContainerComponent
+    DynamicContainerComponent,
+    DynamicErrorComponent,
+    PageLabelComponent,
+    PageCheckboxComponent,
+    PageContainerComponent,
+    PageTextComponent,
+    ListRadioComponent,
+    ListCheckboxComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +65,8 @@ import {PubSubService} from "./services/pubSub/pubsub";
     DynamicChkLabelRightComponent,
     DynamicChkLabelLeftListComponent,
     DynamicRadioLabelLeftListComponent,
-    DynamicContainerComponent
+    DynamicContainerComponent,
+    DynamicErrorComponent
   ]
 })
 export class AppModule { }
