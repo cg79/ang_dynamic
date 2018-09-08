@@ -3,7 +3,7 @@ import {DynamicComponent} from "../../dynamic.component";
 import {ComponentInjectorService} from "../../component-injector.service";
 
 @Component({
-    selector: 'dynamic-chklblright',
+    selector: 'dynamic-chk-lbl-right',
   template: `
     <label  id={{context?.id}}>
       <input type="checkbox" [checked]="context.val"/>
@@ -22,17 +22,17 @@ export class DynamicChkLabelRightComponent extends DynamicComponent {
 
   ngOnInit() {
 
-    if(!this.context )
-    {
-      return;
-    }
-    const { children } = this.context;
+    // if(!this.context )
+    // {
+    //   return;
+    // }
+    // const { children } = this.context;
 
 
-    if (children) {
-      this.addChild1(this.viewContainerRef, this.componentFactoryResolver, children);
+    // if (children) {
+    //   this.addChild1(this.viewContainerRef, this.componentFactoryResolver, children);
 
-    }
+    // }
   }
 
 }

@@ -1,6 +1,6 @@
 
 import {
-  ViewContainerRef, ComponentFactoryResolver, Type, Input, ComponentRef, OnInit, OnDestroy,
+  ViewContainerRef, ComponentFactory, ComponentFactoryResolver, Type, Input, ComponentRef, OnInit, OnDestroy,
   SimpleChanges
 } from "@angular/core";
 
@@ -9,16 +9,15 @@ export class DynamicComponent implements OnDestroy {
     @Input() context: any;
 
   private mappings = {
-    'container':'DynamicContainerComponent',
-    'sample1': 'DynamicSample1Component',
-    'label': 'DynamicLabelComponent',
-    'div': 'DynamicDivComponent',
-    'text': 'DynamicTextComponent',
-    'chkLblLeft': 'DynamicChkLabelLeftComponent',
-    'chkLblRight': 'DynamicChkLabelRightComponent',
-    'chkLblLeftList':'DynamicChkLabelLeftListComponent',
-    'radioLblLeftList':'DynamicRadioLabelLeftListComponent',
-    'error':'DynamicErrorComponent'
+    'container':'dynamic-container',
+    'label': 'dynamic-label',
+    'div': 'dynamic-div',
+    'text': 'dynamic-text',
+    'chkLblLeft': 'dynamic-chk-lbl-left',
+    'chkLblRight': 'dynamic-chk-lbl-right',
+    'chkLblLeftList':'dynamic-chk-lbl-left-list',
+    'radioLblLeftList':'dynamic-radio-lbl-left-list',
+    'error':'dynamic-error'
   };
 
   protected componentRef: ComponentRef<{}> ;
@@ -32,16 +31,16 @@ export class DynamicComponent implements OnDestroy {
     console.log('1111---------------');
 
 
-    var factories = Array.from(factoryResolver['_factories'].keys());
+    var factories = Array.from(factoryResolver['_factories'].values());
     console.log(factories);
     console.log('2222---------------');
     console.log(factoryResolver['_factories']);
 
-    var factoryClass = <Type<{}>>factories.find((x: any) => x.name === type);
+    var factory = <ComponentFactory<{}>>factories.find((x: any) => x.selector === type);
 
-    console.log(factoryClass);
-    console.log('3333---------------');
-    const factory = factoryResolver.resolveComponentFactory(factoryClass);
+    // console.log(factoryClass);
+    // console.log('3333---------------');
+    // const factory = factoryResolver.resolveComponentFactory(factoryClass);
     
     console.log(factory);
 

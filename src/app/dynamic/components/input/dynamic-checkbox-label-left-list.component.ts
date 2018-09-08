@@ -3,7 +3,7 @@ import {DynamicComponent} from "../../dynamic.component";
 import {ComponentInjectorService} from "../../component-injector.service";
 
 @Component({
-    selector: 'dynamic-text',
+    selector: 'dynamic-chk-lbl-left-list',
   template: `
     <label  id={{context?.id}}>
       <span>{{context?.text}}</span>
@@ -34,13 +34,13 @@ export class DynamicChkLabelLeftListComponent extends DynamicComponent {
     {
       return;
     }
-    const { children } = this.context;
+    // const { children } = this.context;
 
 
-    if (children) {
-      this.addChild1(this.viewContainerRef, this.componentFactoryResolver, children);
+    // if (children) {
+    //   this.addChild1(this.viewContainerRef, this.componentFactoryResolver, children);
 
-    }
+    // }
     this.afterInit();
   }
 
