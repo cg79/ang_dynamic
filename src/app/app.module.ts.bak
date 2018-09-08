@@ -51,7 +51,7 @@ import {PageLabelComponent} from "./dynamic/pages/page-label/page-label.componen
     ListCheckboxComponent
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'my-app' }),
+    BrowserModule,
     FormsModule
   ],
   providers: [ComponentInjectorService, PubSubService],
