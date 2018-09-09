@@ -8,7 +8,7 @@
       "sourceRoot": "src",
       "projectType": "application",
       "prefix": "app",
- "schematics": {
+      "schematics": {
         "@schematics/angular:component": {
           "styleext": "scss"
         }
@@ -27,9 +27,14 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/materialize-css/dist/css/materialize.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.js",
+              "node_modules/hammerjs/hammer.js",
+              "node_modules/materialize-css/dist/js/materialize.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -107,7 +112,7 @@
         }
       }
     },
-    
+
     "anguynamic-e2e": {
 
       "root": "e2e/",
@@ -134,7 +139,7 @@
             ]
           }
         }
-        
+
       }
     }
   },
