@@ -86,9 +86,10 @@ export class PageDesignerComponent implements OnInit {
         name: 'chk left',
         structure: {
           type:'chkLblLeft',
-          value: '',
+          value: false,
           id:'l2',
-          class:""
+          class:"",
+          text:'hhh'
         }
       }
     ]

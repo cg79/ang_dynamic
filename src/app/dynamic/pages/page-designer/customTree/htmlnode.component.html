@@ -31,6 +31,17 @@
       </div>
     </div>
 
+    <div *ngIf="o.key == 'text'">
+      <div class="row">
+        <div class="col c1">
+          text
+        </div>
+        <div class="col c1">
+          <input type="text" [(ngModel)]="node.text">
+        </div>
+      </div>
+    </div>
+
     <div *ngIf="o.key == 'class'">
       <div class="row">
         <div class="col c1">

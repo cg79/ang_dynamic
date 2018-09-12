@@ -5,10 +5,11 @@ import {ComponentInjectorService} from "../../component-injector.service";
 @Component({
     selector: 'dynamic-chk-lbl-left',
   template: `
-    <label  id={{context?.id}}>
-      <span>{{context?.text}}</span>
-      <input type="checkbox" [checked]="context.value"/>
-    </label>`
+    <p>
+    <input type="checkbox" id={{context.id}} [checked]="context.value"/>
+      <label for="{{context.id}}">{{context.text}}</label>
+    </p>
+   `
 })
 export class DynamicChkLabelLeftComponent extends DynamicComponent {
   @ViewChild('dynamic1', { read: ViewContainerRef }) viewContainerRef: ViewContainerRef;
