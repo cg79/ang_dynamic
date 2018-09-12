@@ -31,6 +31,17 @@
       </div>
     </div>
 
+    <div *ngIf="o.key == 'class'">
+      <div class="row">
+        <div class="col c1">
+          class
+        </div>
+        <div class="col c1">
+          <input type="text" [(ngModel)]="node.class">
+        </div>
+      </div>
+    </div>
+
     <ul *ngIf="o.key == 'children'" class="browser-default">
       <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
       <!--{{o.value}}-->

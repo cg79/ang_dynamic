@@ -4,7 +4,7 @@ import { DynamicComponent } from '../../dynamic.component';
 @Component({
     selector: 'dynamic-text',
   template: `
-  <input type="text" class="form-control" id="{{context.id}}" name="{{context.name}}" [(ngModel)]="context.value"  (input)="change($event)">
+  <input type="text" class="{{context.class}}" id="{{context.id}}" name="{{context.name || context.id}}" [(ngModel)]="context.value"  (input)="change($event)">
   <ng-template #errcontainer></ng-template>
   <!--<pre> {{context | json}} </pre>-->
     `

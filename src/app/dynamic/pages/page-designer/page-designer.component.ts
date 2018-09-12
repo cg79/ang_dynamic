@@ -69,7 +69,6 @@ export class PageDesignerComponent implements OnInit {
         name: 'div',
         structure: {
           type:'div',
-          value: 'label1',
           id:'l2',
           class:"row"
         }
@@ -79,11 +78,23 @@ export class PageDesignerComponent implements OnInit {
         structure: {
           type:'text',
           value: 'label1',
-          id:'l2'
+          id:'l2',
+          class:""
+        }
+      },
+      {
+        name: 'chk left',
+        structure: {
+          type:'chkLblLeft',
+          value: '',
+          id:'l2',
+          class:""
         }
       }
     ]
   };
+
+
 
   tree = [];
 

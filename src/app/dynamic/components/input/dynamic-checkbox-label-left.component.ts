@@ -7,7 +7,7 @@ import {ComponentInjectorService} from "../../component-injector.service";
   template: `
     <label  id={{context?.id}}>
       <span>{{context?.text}}</span>
-      <input type="checkbox" [checked]="context.val"/>
+      <input type="checkbox" [checked]="context.value"/>
     </label>`
 })
 export class DynamicChkLabelLeftComponent extends DynamicComponent {

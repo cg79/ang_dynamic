@@ -42,8 +42,6 @@ import {PubSubService} from "../../../../services/pubSub/pubsub";
   onChange(code) {
   }
 
-  ngOnInit() {
-  }
 
   titleClick(el)
   {
