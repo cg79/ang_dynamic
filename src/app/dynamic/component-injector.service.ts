@@ -14,7 +14,6 @@ import { DynamicDivComponent } from './components/dDiv/dynamic-div.component';
 export class ComponentInjectorService {
 
   constructor() {
-    debugger;
   }
 
   private mappings = {

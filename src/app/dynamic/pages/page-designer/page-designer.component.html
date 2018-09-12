@@ -1,6 +1,78 @@
 <p>
-  page-container works!
-</p>
-<div *ngFor="let option of state.components; index as i;">
-  <div>{{option.name}}</div>
+  page-designer works!
+
+<ul class="browser-default">
+  <li>Coffee</li>
+  <li>Tea</li>
+  <li>Milk</li>
+  <ul class="browser-default">
+    <li>Coffee</li>
+    <li>Tea</li>
+    <li>Milk</li>
+    </ul>
+</ul>
+
+  <pre>{{ context.childrens | json}} </pre>
+
+<div class="row">
+
+  <div class="col s2">
+    <div *ngFor="let option of state.components; index as i;">
+      <div draggable="true"
+        [style.outlineColor]="dragging ? activeColor : baseColor"
+           (dragstart)="onDragStart($event, option)"
+      >{{option.name}}</div>
+    </div>
+  </div>
+
+
+  <div class="col s5">
+    <div class="row" (drop)="onDrop($event, dropData)" (dragover)="allowDrop($event)">
+      <span [hidden]="droppedData">Drop here</span>
+      <span [hidden]="!droppedData">{{ droppedData }}</span>
+    </div>
+
+
+    <div>
+    <app-tree-designer [tree]="context.childrens"></app-tree-designer>
+    </div>
+
+    <!--<div *ngFor="let tItem of tree; index as i;">-->
+      <!--&lt;!&ndash;<app-designer [data]="tItem"></app-designer>&ndash;&gt;-->
+      <!--<app-htmlnode [node]="tItem"></app-htmlnode>-->
+    <!--</div>-->
+
+  </div>
+
+  <div class="col s5">
+
+
+
+    <!--<pre> {{ renderContext | json }} </pre>-->
+    <json-editor [options]="editorOptions" [data]="context"></json-editor>
+
+    <!--<json-editor [config]="config" [schema]="mySchema" [(record)]="context""></json-editor>-->
+    <input type="button" (click)="refreshContext()" value="Refresf">
+
+  </div>
+  <!--<div class="col s1">3</div>-->
+  <!--<div class="col s1">4</div>-->
+  <!--<div class="col s1">5</div>-->
+  <!--<div class="col s1">6</div>-->
+  <!--<div class="col s1">7</div>-->
+  <!--<div class="col s1">8</div>-->
+  <!--<div class="col s1">9</div>-->
+  <!--<div class="col s1">10</div>-->
+  <!--<div class="col s1">11</div>-->
+  <!--<div class="col s1">12</div>-->
 </div>
+
+
+<div class="row">
+  <div class="col s12">
+    <dynamic-content [context]="renderContext"></dynamic-content>
+    </div>
+
+  </div>
+
+<label>----------------------------------------------</label>

@@ -41,7 +41,7 @@ export class DynamicComponent implements OnDestroy {
     // console.log(factoryClass);
     // console.log('3333---------------');
     // const factory = factoryResolver.resolveComponentFactory(factoryClass);
-    
+
     console.log(factory);
 
     console.log('container=============================================================');
@@ -89,14 +89,12 @@ export class DynamicComponent implements OnDestroy {
     if (!obs || !subscribeEvents) {
       return;
     }
-    debugger;
 
     for(var i=0;i<subscribeEvents.length;i++)
     {
       const eventName = subscribeEvents[i];
       obs.subscribe(eventName, (val) => {
         this.context.obsdata = val;
-        debugger;
 
       });
 
@@ -107,7 +105,6 @@ export class DynamicComponent implements OnDestroy {
 
 
    onChange(data){
-    debugger;
     const { onchangeEvent, validation } = this.context;
     if(onchangeEvent) {
       this.triggerEvent(onchangeEvent, this.context.value);

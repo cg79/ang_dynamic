@@ -4,9 +4,10 @@ import {DynamicComponent} from "../../dynamic.component";
 @Component({
     selector: 'dynamic-label',
   template: `
-    <label  id={{context?.id}}>
+    <label  id={{context?.id}} class={{context?.class}}>
       <span>{{context?.value}}</span>
       <ng-template #dynamic1></ng-template>
+      <!--<pre>{{context | json}} </pre>-->
     </label>`
 })
 export class DynamicLabelComponent extends DynamicComponent {

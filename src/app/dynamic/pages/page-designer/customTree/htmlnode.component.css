@@ -1,0 +1,23 @@
+ul {list-style-type: none;}
+
+ul li.notexpanded
+{
+  list-style-image: url(./../Content/images/arw1.png);
+  /*font-family: Verdana,Geneva,Tahoma,Arial,Helvetica,sans-serif;*/
+  font-size: 15px;
+  color: #494949;
+  line-height: 2;
+  text-align: justify;
+  cursor: pointer;
+}
+
+ul li.expanded
+{
+  list-style-image: url(./../Content/images/arw2.png);
+  /*font-family: Verdana,Geneva,Tahoma,Arial,Helvetica,sans-serif;*/
+  font-size: 15px;
+  color: #494949;
+  line-height: 2;
+  text-align: justify;
+  cursor: pointer;
+}

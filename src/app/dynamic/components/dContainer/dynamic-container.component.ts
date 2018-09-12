@@ -16,7 +16,7 @@ import {PubSubService} from "../../../services/pubSub/pubsub";
 
 //implements OnInit, OnDestroy
 export class DynamicContainerComponent extends DynamicComponent  {
-
+    @Input() context : any = null;
     @ViewChild('container', { read: ViewContainerRef }) viewContainerRef: ViewContainerRef;
 
     // @Input() context: any;
@@ -30,14 +30,21 @@ export class DynamicContainerComponent extends DynamicComponent  {
 
     // private componentRef: ComponentRef<{}>;
 
+  modelChanged() {
+    this.renderComponets();
+  }
+
   pubSubService: PubSubService;
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
 ) {
     super();
-    debugger;
     this.pubSubService = new PubSubService();
     // this.service = service;
+    this.pubSubService.subscribe('datachanged', (val) => {
+      this.context = val;
+      this.renderComponets();
+    });
   }
 
     // getComponentType(typeName: string) {
@@ -46,10 +53,16 @@ export class DynamicContainerComponent extends DynamicComponent  {
     // }
 
   ngOnInit() {
+    this.renderComponets();
+
+  }
+
+  renderComponets() {
     if(!this.context )
     {
       return;
     }
+    this.viewContainerRef.clear();
     const { childrens } = this.context;
 
     for(var i=0;i<childrens.length;i++) {
@@ -58,7 +71,6 @@ export class DynamicContainerComponent extends DynamicComponent  {
       this.addChild1(this.viewContainerRef, this.componentFactoryResolver, {...children });
 
     }
-
   }
     // ngOnInit() {
     //     if (this.context.type) {

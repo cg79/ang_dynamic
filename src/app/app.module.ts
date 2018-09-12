@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ModuleMapLoaderModule } from '@nguniversal/module-map-ngfactory-loader';
 
+import { NgJsonEditorModule } from 'ang-jsoneditor'
+
 import { AppComponent } from './app.component';
 import {DynamicContentComponent} from './dynamic/dynamic-content.component';
 import {DynamicSample1Component} from './dynamic/components/dynamic-sample1.component';
@@ -27,6 +29,11 @@ import { ListRadioComponent } from './dynamic/pages/list-radio/list-radio.compon
 import { ListCheckboxComponent } from './dynamic/pages/list-checkbox/list-checkbox.component';
 import {PageLabelComponent} from './dynamic/pages/page-label/page-label.component';
 import {PageDesignerComponent} from './dynamic/pages/page-designer/page-designer.component';
+import { DragAndDropModule } from 'angular-draggable-droppable';
+import {HtmlNodeComponent} from "./dynamic/pages/page-designer/customTree/htmlnode.component";
+import {ObjectKeysPipe} from "./pipes/objectKeys.pipe";
+import {EscapeHtmlPipe} from "./pipes/keep-html.pipe";
+import {TreeDesignerComponent} from "./dynamic/pages/page-designer/designerComponent/tree-designer.component";
 
 @NgModule({
   declarations: [
@@ -51,12 +58,18 @@ import {PageDesignerComponent} from './dynamic/pages/page-designer/page-designer
     PageTextComponent,
     ListRadioComponent,
     ListCheckboxComponent,
-    PageDesignerComponent
+    PageDesignerComponent,
+    TreeDesignerComponent,
+    HtmlNodeComponent,
+    ObjectKeysPipe,
+    EscapeHtmlPipe
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'anguynamic' }),
     FormsModule,
     ModuleMapLoaderModule,
+    DragAndDropModule,
+    NgJsonEditorModule
   ],
   providers: [ComponentInjectorService, PubSubService],
   bootstrap: [AppComponent],

@@ -1,0 +1,51 @@
+<!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
+
+<!--<pre>{{node | json}}</pre>-->
+<ul *ngFor="let o of node | keysToArray" class="browser-default">
+
+<!--<pre>{{o | json}}</pre>-->
+  <li *ngIf="o.key == 'type'" (click)="titleClick(node)" [ngClass]="getClases(node)" (drop)="onDrop($event, dropData)" (dragover)="allowDrop($event)">
+    {{o.value}}
+  </li>
+
+  <li *ngIf="node.expanded" >
+    <div *ngIf="o.key == 'value'">
+      <div class="row">
+        <div class="col c1">
+          value
+        </div>
+        <div class="col c1">
+          <input type="text" [(ngModel)]="node.value">
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="o.key == 'id'">
+      <div class="row">
+        <div class="col c1">
+          id
+        </div>
+        <div class="col c1">
+          <input type="text" [(ngModel)]="node.id">
+        </div>
+      </div>
+    </div>
+
+    <ul *ngIf="o.key == 'children'" class="browser-default">
+      <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+      <!--{{o.value}}-->
+        <app-htmlnode [node]=o.value></app-htmlnode>
+    </ul>
+
+    <ul *ngIf="o.key == 'childrens'" class="browser-default">
+      <li *ngFor="let el of o.value">
+        <app-htmlnode [node]=el></app-htmlnode>
+      </li>
+    </ul>
+
+
+
+  </li>
+
+
+</ul>
