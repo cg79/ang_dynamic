@@ -6,9 +6,11 @@ import {ComponentInjectorService} from "../../component-injector.service";
     selector: 'dynamic-chk-lbl-left',
   template: `
     <p>
-    <input type="checkbox" id={{context.id}} [checked]="context.value"/>
-      <label for="{{context.id}}">{{context.text}}</label>
+        <input type="checkbox" id="{{context.id}}"  [(ngModel)]="context.value"/>
+        <label for="{{context.id}}">{{context.text}}</label>
+        
     </p>
+    <pre> {{context | json}} </pre>
    `
 })
 export class DynamicChkLabelLeftComponent extends DynamicComponent {

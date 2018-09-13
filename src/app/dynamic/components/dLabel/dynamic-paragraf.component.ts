@@ -2,19 +2,19 @@ import {Component, ViewContainerRef, ViewChild, ComponentFactoryResolver} from '
 import {DynamicComponent} from "../../dynamic.component";
 
 @Component({
-    selector: 'dynamic-label',
+    selector: 'dynamic-paragraf',
   template: `
-    <label  id="{{context?.id}}" class="{{context?.class}}">
-      <span>{{context?.value}}</span>
+    <p>
+      {{context?.value}}
       <ng-template #dynamic1></ng-template>
-    </label>`
+    </p>`
 })
-export class DynamicLabelComponent extends DynamicComponent {
+export class DynamicParagrafComponent extends DynamicComponent {
   @ViewChild('dynamic1', { read: ViewContainerRef }) viewContainerRef: ViewContainerRef;
 
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
-    ) {
+  ) {
     super();
     // this.service = service;
   }

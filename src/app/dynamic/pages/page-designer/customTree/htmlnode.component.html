@@ -31,6 +31,17 @@
       </div>
     </div>
 
+    <div *ngIf="o.key == 'name'">
+      <div class="row">
+        <div class="col c1">
+          name
+        </div>
+        <div class="col c1">
+          <input type="text" [(ngModel)]="node.name">
+        </div>
+      </div>
+    </div>
+
     <div *ngIf="o.key == 'text'">
       <div class="row">
         <div class="col c1">
@@ -49,6 +60,65 @@
         </div>
         <div class="col c1">
           <input type="text" [(ngModel)]="node.class">
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="o.key == 'bindText'">
+      <div class="row">
+        <div class="col c1">
+          bindText
+        </div>
+        <div class="col c1">
+          <input type="text" [(ngModel)]="node.bindText">
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="o.key == 'bindValue'">
+      <div class="row">
+        <div class="col c1">
+          bindValue
+        </div>
+        <div class="col c1">
+          <input type="text" [(ngModel)]="node.bindValue">
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="o.key == 'checkedProperty'">
+      <div class="row">
+        <div class="col c1">
+          checkedProperty
+        </div>
+        <div class="col c1">
+          <input type="text" [(ngModel)]="node.checkedProperty">
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="o.key == 'controlType'">
+      <div class="row">
+        <div class="col c1">
+          controlType
+        </div>
+        <div class="col c1">
+          <input type="text" [(ngModel)]="node.controlType">
+        </div>
+      </div>
+    </div>
+
+
+    <div *ngIf="o.key == 'validation'">
+      <div class="row">
+        <div class="col c1">
+          validation
+        </div>
+        <div class="col c1">
+          <ul *ngFor="let vProp of node.validation | keysToArray" class="browser-default">
+            <li>{{vProp.key}} <input type="text" [(ngModel)]="node.validation[vProp.key]"></li>
+          </ul>
+
         </div>
       </div>
     </div>

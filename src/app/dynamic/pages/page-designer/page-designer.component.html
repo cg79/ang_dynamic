@@ -43,7 +43,7 @@
 
 
     <!--<pre> {{ renderContext | json }} </pre>-->
-    <json-editor [options]="editorOptions" [data]="context"></json-editor>
+    <!--<json-editor [options]="editorOptions" [data]="context"></json-editor>-->
 
     <!--<json-editor [config]="config" [schema]="mySchema" [(record)]="context""></json-editor>-->
     <input type="button" (click)="refreshContext()" value="Refresf">
@@ -64,7 +64,7 @@
 
 <div class="row">
   <div class="col s12">
-    <dynamic-content [context]="renderContext"></dynamic-content>
+    <dynamic-content [context]="context"></dynamic-content>
     </div>
 
   </div>

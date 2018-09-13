@@ -5,22 +5,19 @@ import {ComponentInjectorService} from "../../component-injector.service";
 @Component({
     selector: 'dynamic-radio-lbl-left-list',
   template: `
-    <label  id={{context?.id}}>
       <span>{{context?.text}}</span>
+      
       <div *ngFor="let option of context.items; index as i;">
-        <label>
             <input type="radio"
-                   name={{context.name}}
+                   id="{{i}}"
+                   name="{{context.name}}{{i}}"
                    value="{{option[context.bindValue]}}"
                    [(ngModel)]="context.value"
                    [checked]="context.value === option[context.bindValue]"
                    (change)="onChange()"
                    />
-            {{option[context.bindText]}}
-        </label>
+        <label for="{{context.name}}{{i}}">{{option[context.bindText]}}</label>
     </div>
-    </label>
-<!--<pre>{{context | json}} <pre>-->
 `
 })
 export class DynamicRadioLabelLeftListComponent extends DynamicComponent {

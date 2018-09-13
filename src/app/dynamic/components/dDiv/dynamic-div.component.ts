@@ -35,6 +35,14 @@ export class DynamicDivComponent extends DynamicComponent {
       this.addChild1(this.viewContainerRef, this.componentFactoryResolver,  children);
 
     }
+    const { childrens } = this.context;
+
+    for(var i=0;i<childrens.length;i++) {
+      const children = childrens[i];
+      this.addChild1(this.viewContainerRef, this.componentFactoryResolver, {...children });
+
+    }
+
   }
 
 

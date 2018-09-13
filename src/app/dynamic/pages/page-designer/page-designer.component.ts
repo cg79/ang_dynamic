@@ -31,7 +31,7 @@ export class PageDesignerComponent implements OnInit {
       const sss = JSON.stringify(this.context.childrens);
        const childrens = JSON.parse(sss);
       this.context.childrens = childrens;
-      this.editor.data = { ...this.context };
+      // this.editor.data = { ...this.context };
       // this.context.id = 'id-' +  Math.random().toString(36).substr(2, 16);
       // this.context.childrens[0].ooo = 'id-' +  Math.random().toString(36).substr(2, 16);
       //setTimeout(() => this.context.childrens = [ ...this.context.childrens ],10);
@@ -79,7 +79,10 @@ export class PageDesignerComponent implements OnInit {
           type:'text',
           value: 'label1',
           id:'l2',
-          class:""
+          class:"",
+          validation:{
+            required: "introdu ceva la container"
+          }
         }
       },
       {
@@ -91,12 +94,46 @@ export class PageDesignerComponent implements OnInit {
           class:"",
           text:'hhh'
         }
+      },
+      {
+        name: 'checkbox left list',
+        structure: {
+          type:'chkLblLeftList',
+          text: 'ccccccccccccc',
+          id:'asf3',
+          items:[{a:1, text:"ion", checked:true},{a:2, text:"Maria"}],
+          name:'hhhhhhhhhhhh',
+          bindText:"text",
+          bindValue:"a",
+          checkedProperty:"checked"
+        }
+      },
+      {
+        name:'radio list',
+        structure: {
+          type:'radioLblLeftList',
+          text: 'ccccccccccccc',
+          name:'a',
+          items:[{a:1, text:"ion", checked:true},{a:2, text:"Maria"}],
+          bindText:"text",
+          bindValue:"a",
+          value:"1",
+          onchangeEvent:'bbb',
+          subscribeEvents:['aaa']
+        }
+      },
+      {
+        name: 'paragraf',
+        structure: {
+          type:'paragraf',
+          value:'paragraf'
+        }
       }
     ]
   };
 
 
-
+  radioLblLeftList
   tree = [];
 
   context: any = {
@@ -156,7 +193,7 @@ export class PageDesignerComponent implements OnInit {
   }
 
   refreshContext() {
-  this.pubSubService.publish('datachanged', this.renderContext);
+  this.pubSubService.publish('datachanged', this.context);
   }
 
   handleDrop(e) {

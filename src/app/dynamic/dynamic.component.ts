@@ -17,7 +17,8 @@ export class DynamicComponent implements OnDestroy {
     'chkLblRight': 'dynamic-chk-lbl-right',
     'chkLblLeftList':'dynamic-chk-lbl-left-list',
     'radioLblLeftList':'dynamic-radio-lbl-left-list',
-    'error':'dynamic-error'
+    'error':'dynamic-error',
+    'paragraf':'dynamic-paragraf'
   };
 
   protected componentRef: ComponentRef<{}> ;

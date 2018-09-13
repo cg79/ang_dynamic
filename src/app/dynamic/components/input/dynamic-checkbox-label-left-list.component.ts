@@ -5,18 +5,16 @@ import {ComponentInjectorService} from "../../component-injector.service";
 @Component({
     selector: 'dynamic-chk-lbl-left-list',
   template: `
-    <label  id={{context?.id}}>
       <span>{{context?.text}}</span>
       <div *ngFor="let option of context.items; index as i;">
-        <label>
-            <input type="checkbox"
-                   name={{context.name}}
-                   value="{{option[context.bindValue]}}"
-                   [(ngModel)]="option[context.checked]"/>
-            {{option[context.bindText]}}
-        </label>
+        <input type="checkbox"
+          id="{{context.name}}{{i}}"
+          [value]=option[context.bindValue]
+          [(ngModel)]="option[context.checkedProperty]"
+        />
+        <label for="{{context.name}}{{i}}">{{option[context.bindText]}}</label>
     </div>
-    </label>`
+`
 })
 export class DynamicChkLabelLeftListComponent extends DynamicComponent {
   @ViewChild('dynamic1', { read: ViewContainerRef }) viewContainerRef: ViewContainerRef;

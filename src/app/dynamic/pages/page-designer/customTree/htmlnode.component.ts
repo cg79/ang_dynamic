@@ -26,6 +26,7 @@ import {PubSubService} from "../../../../services/pubSub/pubsub";
     const droppedData = JSON.parse(data0);
     // const state = {...this.node};
     // state.children = droppedData.structure;
+    // if()
     this.node.children = droppedData.structure;
     // debugger;
 

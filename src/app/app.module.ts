@@ -34,6 +34,7 @@ import {HtmlNodeComponent} from "./dynamic/pages/page-designer/customTree/htmlno
 import {ObjectKeysPipe} from "./pipes/objectKeys.pipe";
 import {EscapeHtmlPipe} from "./pipes/keep-html.pipe";
 import {TreeDesignerComponent} from "./dynamic/pages/page-designer/designerComponent/tree-designer.component";
+import {DynamicParagrafComponent} from "./dynamic/components/dLabel/dynamic-paragraf.component";
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import {TreeDesignerComponent} from "./dynamic/pages/page-designer/designerCompo
     TreeDesignerComponent,
     HtmlNodeComponent,
     ObjectKeysPipe,
-    EscapeHtmlPipe
+    EscapeHtmlPipe,
+    DynamicParagrafComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'anguynamic' }),
@@ -83,7 +85,8 @@ import {TreeDesignerComponent} from "./dynamic/pages/page-designer/designerCompo
     DynamicChkLabelLeftListComponent,
     DynamicRadioLabelLeftListComponent,
     DynamicContainerComponent,
-    DynamicErrorComponent
+    DynamicErrorComponent,
+    DynamicParagrafComponent
   ]
 })
 export class AppModule { }
