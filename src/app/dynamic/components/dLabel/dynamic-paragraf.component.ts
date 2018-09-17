@@ -24,13 +24,7 @@ export class DynamicParagrafComponent extends DynamicComponent {
     {
       return;
     }
-    const { children } = this.context;
-
-
-    if (children) {
-      this.addChild1(this.viewContainerRef, this.componentFactoryResolver, children);
-
-    }
+    this.addChildrens(this.viewContainerRef, this.componentFactoryResolver);
   }
 
 }

@@ -28,20 +28,11 @@ export class DynamicDivComponent extends DynamicComponent {
   }
 
   ngOnInit() {
-    const { children } = this.context;
-
-
-    if (children) {
-      this.addChild1(this.viewContainerRef, this.componentFactoryResolver,  children);
-
+    if(!this.context )
+    {
+      return;
     }
-    const { childrens } = this.context;
-
-    for(var i=0;i<childrens.length;i++) {
-      const children = childrens[i];
-      this.addChild1(this.viewContainerRef, this.componentFactoryResolver, {...children });
-
-    }
+    this.addChildrens(this.viewContainerRef, this.componentFactoryResolver);
 
   }
 

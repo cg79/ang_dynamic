@@ -63,14 +63,11 @@ export class DynamicContainerComponent extends DynamicComponent  {
       return;
     }
     this.viewContainerRef.clear();
-    const { childrens } = this.context;
-
-    for(var i=0;i<childrens.length;i++) {
-      const children = childrens[i];
-      children.obs = this.pubSubService;
-      this.addChild1(this.viewContainerRef, this.componentFactoryResolver, {...children });
-
+    if(!this.context )
+    {
+      return;
     }
+    this.addChildrens(this.viewContainerRef, this.componentFactoryResolver);
   }
     // ngOnInit() {
     //     if (this.context.type) {

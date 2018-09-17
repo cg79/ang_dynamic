@@ -18,7 +18,8 @@ export class DynamicComponent implements OnDestroy {
     'chkLblLeftList':'dynamic-chk-lbl-left-list',
     'radioLblLeftList':'dynamic-radio-lbl-left-list',
     'error':'dynamic-error',
-    'paragraf':'dynamic-paragraf'
+    'paragraf':'dynamic-paragraf',
+    'dropdown': 'dynamic-dropdown'
   };
 
   protected componentRef: ComponentRef<{}> ;
@@ -85,6 +86,18 @@ export class DynamicComponent implements OnDestroy {
     return component;
   }
 
+  addChildrens(container:ViewContainerRef, factoryResolver: ComponentFactoryResolver) {
+    const { childrens } = this.context;
+    if(!childrens) {
+      return;
+    }
+
+    for(var i=0;i<childrens.length;i++) {
+      const children = childrens[i];
+      this.addChild1(container, factoryResolver, children);
+    }
+  }
+
   afterInit() {
     const { obs, subscribeEvents } = this.context;
     if (!obs || !subscribeEvents) {
@@ -115,15 +128,6 @@ export class DynamicComponent implements OnDestroy {
 
 
   }
-  //
-  // ngOnChanges(changes: SimpleChanges) {
-  //
-  //   this.validate();
-  //   //this.doSomething(changes.categoryId.currentValue);
-  //   // You can also use categoryId.previousValue and
-  //   // categoryId.firstChange for comparing old and new values
-  //
-  // }
 
   validate()
   {

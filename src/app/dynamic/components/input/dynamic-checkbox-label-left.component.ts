@@ -24,18 +24,11 @@ export class DynamicChkLabelLeftComponent extends DynamicComponent {
   }
 
   ngOnInit() {
-
     if(!this.context )
     {
       return;
     }
-    // const { children } = this.context;
-
-
-    // if (children) {
-    //   this.addChild1(this.viewContainerRef, this.componentFactoryResolver, children);
-
-    // }
+    this.afterInit();
   }
 
 }

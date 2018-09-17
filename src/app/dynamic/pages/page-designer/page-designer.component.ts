@@ -1,6 +1,5 @@
 import {Component, OnInit, ViewChild, SimpleChanges} from '@angular/core';
 import {PubSubService} from "../../../services/pubSub/pubsub";
-import {JsonEditorOptions, JsonEditorComponent} from "ang-jsoneditor";
 
 @Component({
   selector: 'app-page-designer',
@@ -9,8 +8,6 @@ import {JsonEditorOptions, JsonEditorComponent} from "ang-jsoneditor";
 })
 export class PageDesignerComponent implements OnInit {
 
-  public editorOptions: JsonEditorOptions;
-  @ViewChild(JsonEditorComponent) editor: JsonEditorComponent;
   activeColor: string = 'green';
   baseColor: string = '#ccc';
   overlayColor: string = 'rgba(255,255,255,0.5)';
@@ -19,11 +16,7 @@ export class PageDesignerComponent implements OnInit {
   dragData: any = null;
 
   constructor( private pubSubService: PubSubService) {
-    this.editorOptions = new JsonEditorOptions()
-    this.editorOptions.modes = ['code', 'text', 'tree', 'view']; // set all allowed modes
-    this.editorOptions.mode = 'code';
-    this.editorOptions.modes = ['code', 'text', 'tree', 'view'];
-    this.editorOptions.statusBar = false;
+
 
 
     this.pubSubService.subscribe('refreshJsonEditor', (val) => {
@@ -42,16 +35,8 @@ export class PageDesignerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.editorOptions.onChange = this.change.bind(this);
   }
 
-
-
-  change() {
-    console.log('change:', this.editor);
-    const data = this.editor.get();
-    this.pubSubService.publish('datachanged', data);
-  }
 
   state = {
     components: [
@@ -127,6 +112,20 @@ export class PageDesignerComponent implements OnInit {
         structure: {
           type:'paragraf',
           value:'paragraf'
+        }
+      },
+      {
+        name:'dropdown',
+        structure: {
+          type:'dropdown',
+          text: 'ccccccccccccc',
+          name:'a',
+          items:[{a:1, text:"ion", checked:true},{a:2, text:"Maria"}],
+          bindText:"text",
+          bindValue:"a",
+          value:"1",
+          onchangeEvent:'bbb',
+          subscribeEvents:['aaa']
         }
       }
     ]

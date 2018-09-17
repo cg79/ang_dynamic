@@ -13,7 +13,7 @@ import {ComponentInjectorService} from "../../component-injector.service";
           [(ngModel)]="option[context.checkedProperty]"
         />
         <label for="{{context.name}}{{i}}">{{option[context.bindText]}}</label>
-    </div>
+      </div>
 `
 })
 export class DynamicChkLabelLeftListComponent extends DynamicComponent {
@@ -27,18 +27,10 @@ export class DynamicChkLabelLeftListComponent extends DynamicComponent {
   }
 
   ngOnInit() {
-
     if(!this.context )
     {
       return;
     }
-    // const { children } = this.context;
-
-
-    // if (children) {
-    //   this.addChild1(this.viewContainerRef, this.componentFactoryResolver, children);
-
-    // }
     this.afterInit();
   }
 

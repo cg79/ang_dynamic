@@ -24,6 +24,7 @@ export class DynamicTextComponent extends DynamicComponent {
     {
       return;
     }
+    this.addChildrens(this.viewContainerRef, this.componentFactoryResolver);
     this.afterInit();
 
   }

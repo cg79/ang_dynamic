@@ -2,14 +2,20 @@ import {Component, ViewContainerRef, ViewChild, ComponentFactoryResolver} from '
 import {DynamicComponent} from "../../dynamic.component";
 
 @Component({
-    selector: 'dynamic-label',
+    selector: 'dynamic-dropdown',
   template: `
-    <label  id="{{context?.id}}" class="{{context?.class}}">
-      <span>{{context?.value}}</span>
-      <ng-template #dynamic1></ng-template>
-    </label>`
+    <select class="browser-default"
+    (change)="onSelect($event.target.value)" 
+    [(ngModel)]="context.value">
+      <option *ngFor="let item of context.items"
+        [value]=item[context.bindValue]>
+         {{item[context.bindText]}}
+      </option>
+    </select>
+`
 })
-export class DynamicLabelComponent extends DynamicComponent {
+
+export class DynamicDropDownComponent extends DynamicComponent {
   @ViewChild('dynamic1', { read: ViewContainerRef }) viewContainerRef: ViewContainerRef;
 
   constructor(
@@ -19,6 +25,10 @@ export class DynamicLabelComponent extends DynamicComponent {
     // this.service = service;
   }
 
+  onSelect(data)
+  {
+
+  }
   ngOnInit() {
     if(!this.context )
     {

@@ -26,8 +26,11 @@ import {PubSubService} from "../../../../services/pubSub/pubsub";
     const droppedData = JSON.parse(data0);
     // const state = {...this.node};
     // state.children = droppedData.structure;
-    // if()
-    this.node.children = droppedData.structure;
+    const node = this.node;
+    if(!node.childrens) {
+      node.childrens = [];
+    }
+    node.childrens.push(droppedData.structure);
     // debugger;
 
     // this.tree.push(this.dragData);
@@ -48,10 +51,21 @@ import {PubSubService} from "../../../../services/pubSub/pubsub";
   {
     el.expanded = !el.expanded;
   }
-
   getClases(el)
   {
     return el.expanded? "expanded":"notexpanded";
+  }
+
+  toggleProp(el)
+  {
+    el.prop = !el.prop;
+
+  }
+
+
+  getPropClases(el)
+  {
+    return el.prop? "pexp":"notpexp";
   }
 
 

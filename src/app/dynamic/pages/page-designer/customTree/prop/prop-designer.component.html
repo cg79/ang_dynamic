@@ -1,0 +1,13 @@
+
+<div *ngIf="data.key == str">
+  <div class="row">
+    <div class="col c5 input-field inline">
+      <label for="{{id}}"> {{str}}
+      </label>
+    </div>
+    <div class="col c1">
+      <input type="text" id="{{id}}" [(ngModel)]="node[str]">
+    </div>
+  </div>
+</div>
+
