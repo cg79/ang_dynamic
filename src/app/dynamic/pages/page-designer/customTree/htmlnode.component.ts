@@ -58,8 +58,14 @@ import {PubSubService} from "../../../../services/pubSub/pubsub";
 
   toggleProp(el)
   {
+    el.showRowTemplate = false;
     el.prop = !el.prop;
 
+  }
+
+  toggleRowTemplate(el) {
+    el.prop = false;
+    el.showRowTemplate = !el.showRowTemplate;
   }
 
 

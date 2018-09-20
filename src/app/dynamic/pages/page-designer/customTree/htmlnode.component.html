@@ -18,6 +18,10 @@
             <span (click)="toggleProp(node)">Properties</span>
           </div>
 
+          <div class="col" [ngClass]="getPropClases(node)" *ngIf="node.rowTemplate">
+            <span (click)="toggleRowTemplate(node)">Row Template</span>
+          </div>
+
         </div>
 
       </li>
@@ -40,6 +44,8 @@
       <app-prop-designer [data]="o" [str]="'bindValue'" [node]="node"></app-prop-designer>
       <app-prop-designer [data]="o" [str]="'checkedProperty'" [node]="node"></app-prop-designer>
       <app-prop-designer [data]="o" [str]="'controlType'" [node]="node"></app-prop-designer>
+      <app-prop-designer [data]="o" [str]="'btntype'" [node]="node"></app-prop-designer>
+
       <div *ngIf="o.key == 'validation'">
         <div class="row">
           <div class="col c1">
@@ -54,16 +60,16 @@
         </div>
       </div>
     </li>
+
+    <li *ngIf="node.showRowTemplate">
+      <!--{{o.key}}-->
+      <app-htmlnode  *ngIf="o.key == 'rowTemplate'" [node]="node.rowTemplate"></app-htmlnode>
+    </li>
+
   </ul>
 
 
   <li *ngIf="node.expanded" >
-
-
-
-
-
-
     <ul *ngIf="o.key == 'children'" class="browser-default">
       <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
       <!--{{o.value}}-->
@@ -75,8 +81,6 @@
         <app-htmlnode [node]=el></app-htmlnode>
       </li>
     </ul>
-
-
 
   </li>
 

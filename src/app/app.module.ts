@@ -40,6 +40,11 @@ import {NotFoundComponent} from "./pages/not-found/notfound.component";
 import {AppRoutingModule} from "./routes/app-routing.module";
 import {SocketIoConfig, SocketIoModule} from "ngx-socket-io";
 import {DynamicDropDownComponent} from "./dynamic/components/dropdown/dynamic-dropdown.component";
+import {DynamicLinkComponent} from "./dynamic/components/dLabel/dynamic-link.component";
+import {DynamicButtonComponent} from "./dynamic/components/dLabel/dynamic-button.component";
+import {DynamicFileUploadComponent} from "./dynamic/components/dLabel/dynamic-file-upload.component";
+import {DynamicDropDownTemplateComponent} from "./dynamic/components/dropdown/dynamic-dropdown-template.component";
+import {DynamicRepeaterComponent} from "./dynamic/components/repeater/dynamic-repeater.component";
 
 const configSocket: SocketIoConfig = { url: 'http://localhost:6002', options: {} };
 
@@ -75,7 +80,12 @@ const configSocket: SocketIoConfig = { url: 'http://localhost:6002', options: {}
     EscapeHtmlPipe,
     DynamicParagrafComponent,
     PropDesignerComponent,
-    DynamicDropDownComponent
+    DynamicDropDownComponent,
+    DynamicLinkComponent,
+    DynamicButtonComponent,
+    DynamicFileUploadComponent,
+    DynamicDropDownTemplateComponent,
+    DynamicRepeaterComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'anguynamic' }),
@@ -88,6 +98,7 @@ const configSocket: SocketIoConfig = { url: 'http://localhost:6002', options: {}
   providers: [ComponentInjectorService, PubSubService],
   bootstrap: [AppComponent],
   entryComponents: [
+    DynamicContentComponent,
     DynamicSample1Component,
     DynamicLabelComponent,
     DynamicDivComponent,
@@ -99,7 +110,12 @@ const configSocket: SocketIoConfig = { url: 'http://localhost:6002', options: {}
     DynamicContainerComponent,
     DynamicErrorComponent,
     DynamicParagrafComponent,
-    DynamicDropDownComponent
+    DynamicDropDownComponent,
+    DynamicLinkComponent,
+    DynamicButtonComponent,
+    DynamicFileUploadComponent,
+    DynamicDropDownTemplateComponent,
+    DynamicRepeaterComponent
   ]
 })
 export class AppModule { }

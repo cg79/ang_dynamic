@@ -37,9 +37,21 @@ export class PageDesignerComponent implements OnInit {
   ngOnInit() {
   }
 
-
   state = {
     components: [
+      {
+        name: 'repeater',
+        structure: {
+          type:'repeater',
+          value: 'label1',
+          id:'l1',
+          class:'label',
+          items:[{a:1, text:"ion", checked:true},{a:2, text:"Maria"}],
+          rowTemplate: {
+            type:'container'
+          }
+        }
+      },
       {
         name: 'label',
         structure: {
@@ -48,6 +60,13 @@ export class PageDesignerComponent implements OnInit {
           id:'l1',
           class:'label'
 
+        }
+      },
+      {
+        name: 'container',
+        structure: {
+          type:'container',
+         childrens: []
         }
       },
       {
@@ -127,7 +146,58 @@ export class PageDesignerComponent implements OnInit {
           onchangeEvent:'bbb',
           subscribeEvents:['aaa']
         }
-      }
+      },
+      {
+        name:'dropdowntemplate',
+        structure: {
+          type:'dropdowntemp',
+          text: 'ccccccccccccc',
+          name:'a',
+          items:[{a:1, text:"ion", checked:true},{a:2, text:"Maria"}],
+          bindText:"text",
+          bindValue:"a",
+          value:"1",
+          onchangeEvent:'bbb',
+          subscribeEvents:['aaa'],
+          rowTemplate: {
+            type:'container'
+          }
+        }
+      },
+      {
+        name: 'link',
+        structure: {
+          type:'link',
+          value:'paragraf',
+          href:''
+        }
+      },
+      {
+        name: 'button',
+        structure: {
+          type:'button',
+          class:'',
+          btntype:'link',
+          value:'paragraf'
+        }
+      },
+      {
+        name: 'fileUpload',
+        structure: {
+          type:'fileUpload',
+          class:'',
+          value:'paragraf'
+        }
+      },
+      {
+        name: 'dynamicTemplate',
+        structure: {
+          type:'container',
+          class:'',
+          btntype:'link',
+          value:'paragraf'
+        }
+      },
     ]
   };
 

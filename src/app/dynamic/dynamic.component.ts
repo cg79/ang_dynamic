@@ -3,14 +3,29 @@ import {
   ViewContainerRef, ComponentFactory, ComponentFactoryResolver, Type, Input, ComponentRef, OnInit, OnDestroy,
   SimpleChanges
 } from "@angular/core";
-
+import * as math from 'mathjs';
 
 export class DynamicComponent implements OnDestroy {
     @Input() context: any;
 
+  private _data: any;
+  get data(): any {
+    return this._data;
+  }
+
+  @Input()
+  set data(obj: any) {
+    console.log('context: ', this.context);
+
+    console.log('prev value: ', this._data);
+    console.log('got name: ', obj);
+    this._data = obj;
+  }
+
   private mappings = {
     'container':'dynamic-container',
     'label': 'dynamic-label',
+    'dynamic-content':'dynamic-content',
     'div': 'dynamic-div',
     'text': 'dynamic-text',
     'chkLblLeft': 'dynamic-chk-lbl-left',
@@ -19,7 +34,13 @@ export class DynamicComponent implements OnDestroy {
     'radioLblLeftList':'dynamic-radio-lbl-left-list',
     'error':'dynamic-error',
     'paragraf':'dynamic-paragraf',
-    'dropdown': 'dynamic-dropdown'
+    'dropdown': 'dynamic-dropdown',
+    'dropdowntemp': 'dynamic-dropdown-template',
+    'link':'dynamic-link',
+    'button': 'dynamic-button',
+    'fileUpload': 'dynamic-file-upload',
+    'repeater': 'dynamic-repeater'
+
   };
 
   protected componentRef: ComponentRef<{}> ;
@@ -82,6 +103,22 @@ export class DynamicComponent implements OnDestroy {
 
     const inst = <DynamicComponent>component.instance;
     inst.context = data;
+    // container.insert(component.hostView);
+    return component;
+  }
+
+  addChild2(container:ViewContainerRef, factoryResolver: ComponentFactoryResolver, context, data) {
+    let component = this.getComponentType(context.type, factoryResolver, container);
+
+    // const factory = factoryResolver.resolveComponentFactory(componentType);
+    // const component = factory.create(container.parentInjector);
+
+    // let componentRef = this.rootViewContainer.createComponent(component);
+    // (<AdComponent>componentRef.instance).data = adItem.data;
+
+    const inst = <DynamicComponent>component.instance;
+    inst.context = context;
+    inst.data = data;
     // container.insert(component.hostView);
     return component;
   }
