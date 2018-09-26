@@ -6,11 +6,16 @@ import { ModuleWithProviders } from '@angular/core';
 import {HomeComponent} from "../pages/home/home.component";
 import {NotFoundComponent} from "../pages/not-found/notfound.component";
 import {PageDesignerComponent} from "../dynamic/pages/page-designer/page-designer.component";
+import {LoginComponent} from "../pages/login/login.component";
 
 const appRoutes: Routes = [
   {
     path: 'home',
     component: HomeComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   },
   {
     path: 'designer',

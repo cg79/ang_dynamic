@@ -16,19 +16,27 @@ import {PubSubService} from "../../../services/pubSub/pubsub";
 
 //implements OnInit, OnDestroy
 export class DynamicContainerComponent extends DynamicComponent  {
-    @Input() context : any = null;
-    @ViewChild('container', { read: ViewContainerRef }) viewContainerRef: ViewContainerRef;
+  @ViewChild('container', { read: ViewContainerRef }) viewContainerRef: ViewContainerRef;
 
-    // @Input() context: any;
+  // private _context: any;
 
-    // private mappings = {
-    //     'sample1': DynamicSample1Component,
-    //     'label': DynamicLabelComponent,
-    //   'div': DynamicDivComponent,
-    //   'text': DynamicTextComponent
-    // };
+  get context(): any {
+    return this._context;
+  }
 
-    // private componentRef: ComponentRef<{}>;
+  @Input()
+  set context(val: any) {
+    console.log('prev value: ', this._context);
+    console.log('got name: ', val);
+    this._context = val;
+
+    this.renderComponets();
+  }
+
+
+
+
+
 
   modelChanged() {
     this.renderComponets();
@@ -40,24 +48,18 @@ export class DynamicContainerComponent extends DynamicComponent  {
 ) {
     super();
     this.pubSubService = new PubSubService();
-    // this.service = service;
     this.pubSubService.subscribe('datachanged', (val) => {
       this.context = val;
       this.renderComponets();
     });
   }
 
-    // getComponentType(typeName: string) {
-    //     let type = this.mappings[typeName];
-    //     return type;// || UnknownDynamicComponent;
-    // }
 
   ngOnInit() {
-    this.renderComponets();
-
   }
 
   renderComponets() {
+    debugger;
     if(!this.context )
     {
       return;
@@ -69,26 +71,7 @@ export class DynamicContainerComponent extends DynamicComponent  {
     }
     this.addChildrens(this.viewContainerRef, this.componentFactoryResolver);
   }
-    // ngOnInit() {
-    //     if (this.context.type) {
-    //         let componentType = this.getComponentType(this.context.type);
-    //
-    //         // note: componentType must be declared within module.entryComponents
-    //         let factory = this.componentFactoryResolver.resolveComponentFactory(componentType);
-    //         this.componentRef = this.container.createComponent(factory);
-    //
-    //         // set component context
-    //         let instance = <DynamicComponent> this.componentRef.instance;
-    //         instance.context = this.context;
-    //
-    //
-    //       // const factory = this.componentFactoryResolver.resolveComponentFactory(DynamicLabelComponent);
-    //       //   const ref = this.viewContainerRef.createComponent(factory);
-    //       //   ref.changeDetectorRef.detectChanges();
-    //
-    //     }
-    // }
-    //
+
 
 
 }

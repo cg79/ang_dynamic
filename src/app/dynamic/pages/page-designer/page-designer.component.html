@@ -1,6 +1,23 @@
 <p>
   page-designer works!
 
+  <input type="button" value="Start" (click)="start()"/>
+
+  <!--<dynamic-dropdown *ngIf="started" [context]="formsDropDown" ></dynamic-dropdown>-->
+  <input type="text" [(ngModel)]="formName">
+
+  <input type="button" value="new Form" (click)="createForm()"/>
+
+  <select class="browser-default"
+          (change)="onChange($event.target.value)"
+          [(ngModel)]="formsDropDown.value">
+    <option *ngFor="let item of formsDropDown.items"
+            [value]=item[formsDropDown.bindValue]>
+      {{item[formsDropDown.bindText]}}
+    </option>
+  </select>
+
+<input type="button" value="Delete" (click)="deleteForm()"/>
 
 
   <pre>{{ context.childrens | json}} </pre>
@@ -63,7 +80,5 @@
   <div class="col s12">
     <dynamic-content [context]="context"></dynamic-content>
     </div>
-
   </div>
 
-<label>----------------------------------------------</label>

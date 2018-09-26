@@ -1,11 +1,12 @@
 import {Component, ViewContainerRef, ViewChild, ComponentFactoryResolver} from '@angular/core';
 import {DynamicComponent} from "../../dynamic.component";
+import {HttpWrapperService} from "../../../services/http/httpService";
 
 @Component({
     selector: 'dynamic-dropdown',
   template: `
     <select class="browser-default"
-    (change)="onSelect($event.target.value)" 
+    (change)="onChange($event.target.value)" 
     [(ngModel)]="context.value">
       <option *ngFor="let item of context.items"
         [value]=item[context.bindValue]>
@@ -20,21 +21,25 @@ export class DynamicDropDownComponent extends DynamicComponent {
 
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
+    private httpWrapperService: HttpWrapperService
     ) {
     super();
     // this.service = service;
   }
 
-  onSelect(data)
+  onChange(data)
   {
-
+    debugger;
   }
   ngOnInit() {
     if(!this.context )
     {
       return;
     }
+    this.http(this.httpWrapperService);
+
     this.addChildrens(this.viewContainerRef, this.componentFactoryResolver);
+
   }
 
 }

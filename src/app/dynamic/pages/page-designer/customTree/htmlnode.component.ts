@@ -17,7 +17,7 @@ import {PubSubService} from "../../../../services/pubSub/pubsub";
   }
 
 
-
+  newGuid = () => (((1+Math.random())*0x10000)|0).toString(16);
 
 
   onDrop(event) {
@@ -74,21 +74,47 @@ import {PubSubService} from "../../../../services/pubSub/pubsub";
     return el.prop? "pexp":"notpexp";
   }
 
+  getTemplateClases(el)
+  {
+    return el.showRowTemplate? "rexp":"notrexp";
+  }
 
-  // ngAfterViewInit() {
-  //   this.editor.setTheme("eclipse");
+  dragData: any = null;
+  onDragStartNode(event, data) {
+    this.dragData = data;
+    event.dataTransfer.setData("text/plain",JSON.stringify(data));
 
-  //   this.editor.getEditor().setOptions({
-  //       enableBasicAutocompletion: true
-  //   });
+    event.dataTransfer.data = data;
+  }
 
-  //   this.editor.getEditor().commands.addCommand({
-  //       name: "showOtherCompletions",
-  //       bindKey: "Ctrl-.",
-  //       exec: function (editor) {
+  onDropNode(node){
+    // console.log(this.dragData);
+    // const state = [ ...this.context.childrens];
+    // state.push(this.dragData.structure);
+    // this.context.childrens = state;
+    //
+    // this.pubSubService.publish('refreshJsonEditor',null);
+    //
+    //
+    // this.pubSubService.publish('datachanged', this.renderContext);
+    event.preventDefault();
+  }
 
-  //       }
-  //   })
-//}
+  allowDropNode(event) {
+    event.preventDefault();
+  }
+
+  moveUpNode(node) {
+    // this.moveUp(, node)
+    this.pubSubService.publish('moveUpNode', node.key);
+  }
+
+  moveDownNode(node) {
+    this.pubSubService.publish('moveDownNode', node.key);
+  }
+
+
+
+
 
 }

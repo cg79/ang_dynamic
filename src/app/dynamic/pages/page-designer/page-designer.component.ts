@@ -1,5 +1,6 @@
 import {Component, OnInit, ViewChild, SimpleChanges} from '@angular/core';
 import {PubSubService} from "../../../services/pubSub/pubsub";
+import {HttpWrapperService} from "../../../services/http/httpService";
 
 @Component({
   selector: 'app-page-designer',
@@ -15,7 +16,41 @@ export class PageDesignerComponent implements OnInit {
   loaded: boolean = false;
   dragData: any = null;
 
-  constructor( private pubSubService: PubSubService) {
+  formsDropDown = {
+    "text": "ccccccccccccc",
+    "name": "a",
+    "items": [
+      {
+        "a": 1,
+        "text": "ion",
+        "checked": true
+      },
+      {
+        "a": 2,
+        "text": "Maria"
+      }
+    ],
+    "bindText": "name",
+    "bindValue": "_id",
+    "value": "1",
+    http: {
+        body : {
+          data: {
+            _id: '',
+            name: 'f2'
+          },
+          proxy: {
+            module: "form",
+            method: "getForms"
+          }
+      },
+      url: '/api/private'
+    }
+  };
+
+
+
+  constructor( private pubSubService: PubSubService, private httpWrapperService: HttpWrapperService) {
 
 
 
@@ -31,7 +66,144 @@ export class PageDesignerComponent implements OnInit {
 
     });
 
+    this.pubSubService.subscribe('moveUpNode', (val) => {
+debugger;
+      this.treeNode = null;
+      this.searchTree(this.context, val);
+      if(this.treeNode) {
+        const { parentNode, element } = this.treeNode;
+        this.moveUp(parentNode.childrens, element);
+      }
 
+
+    });
+
+    this.pubSubService.subscribe('moveDownNode', (val) => {
+      this.treeNode = null;
+      this.searchTree(this.context, val);
+      if(this.treeNode) {
+        const { parentNode, element } = this.treeNode;
+        this.moveDown(parentNode.childrens, element);
+      }
+
+
+    });
+
+  }
+
+  move = function(array, element, delta) {
+    var index = array.indexOf(element);
+    var newIndex = index + delta;
+    if (newIndex < 0  || newIndex == array.length) return; //Already at the top or bottom.
+    var indexes = [index, newIndex].sort(); //Sort the indixes
+    array.splice(indexes[0], 2, array[indexes[1]], array[indexes[0]]); //Replace from lowest index, two elements, reverting the order
+  };
+
+  moveUp = function(array, element) {
+    this.move(array, element, -1);
+  };
+
+  moveDown = function(array, element) {
+    this.move(array, element, 1);
+  };
+
+  getForms()
+  {
+    debugger;
+    const body = {
+      data: {
+      },
+      proxy: {
+        module: "form",
+        method: "getForms"
+      }
+    };
+    this.httpWrapperService.postJson('/api/private', body).subscribe(
+      (data) =>this.formsDropDown.items = data.data, // success path
+      error => this.error = error // error path
+    );
+  }
+
+
+  error: any = null;
+  onChange(id)
+  {
+    debugger;
+    const body = {
+        data: {
+          _id: id,
+          name: 'f2'
+        },
+        proxy: {
+          module: "form",
+          method: "getForm"
+        }
+      };
+      this.httpWrapperService.postJson('/api/private', body)
+        .subscribe(data =>{
+          this.context.childrens = data.data.structure || [];
+        },
+          error => this.error = error
+      );
+  }
+
+  deleteForm() {
+    const body = {
+      data: {
+        _id: this.formsDropDown.value,
+        name: 'f2'
+      },
+      proxy: {
+        module: "form",
+        method: "deleteForm"
+      }
+    };
+    this.httpWrapperService.postJson('/api/private', body).subscribe(
+      (data) =>this.context.childrens = data.data, // success path
+      error => this.error = error
+    );
+  }
+
+
+  formName: string = null;
+  createForm() {
+    const body = {
+      data: {
+        name: this.formName
+      },
+      proxy: {
+        module: "form",
+        method: "add"
+      }
+    };
+    this.httpWrapperService.postJson('/api/private', body).subscribe(
+      (data) => this.getForms(), // success path
+      error => this.error = error
+    );
+  }
+
+  updateForm() {
+    const body = {
+      data: {
+        _id: this.formsDropDown.value,
+        structure: this.context.childrens
+      },
+      proxy: {
+        module: "form",
+        method: "edit"
+      }
+    };
+    this.httpWrapperService.postJson('/api/private', body).subscribe(
+      (data) => this.getForms(), // success path
+      error => this.error = error
+    );
+  }
+
+  started: boolean = false;
+  start()
+  {
+    this.started = true;
+    this.getForms();
   }
 
   ngOnInit() {
@@ -84,6 +256,7 @@ export class PageDesignerComponent implements OnInit {
           value: 'label1',
           id:'l2',
           class:"",
+          compType: 'text',
           validation:{
             required: "introdu ceva la container"
           }
@@ -177,7 +350,7 @@ export class PageDesignerComponent implements OnInit {
         structure: {
           type:'button',
           class:'',
-          btntype:'link',
+          compType:'link',
           value:'paragraf'
         }
       },
@@ -194,7 +367,7 @@ export class PageDesignerComponent implements OnInit {
         structure: {
           type:'container',
           class:'',
-          btntype:'link',
+          compType:'link',
           value:'paragraf'
         }
       },
@@ -208,6 +381,7 @@ export class PageDesignerComponent implements OnInit {
   context: any = {
     id:'asf1',
     type:'container',
+    key:'aaaa',
     childrens: this.tree
   };
 
@@ -262,6 +436,7 @@ export class PageDesignerComponent implements OnInit {
   }
 
   refreshContext() {
+    this.updateForm();
   this.pubSubService.publish('datachanged', this.context);
   }
 
@@ -283,6 +458,28 @@ export class PageDesignerComponent implements OnInit {
 
     this.loaded = false;
 
+  }
+
+  treeNode: any = null;
+  //tree is context
+  searchTree  =(node, nodeKey) =>{
+    const { childrens } = node;
+    if(childrens) {
+
+      for (let i = 0; i < childrens.length; i++) {
+        if (childrens[i].key == nodeKey) {
+          // it's parent
+          console.log(childrens[i].key);
+          this.treeNode = {
+            parentNode: node,
+            element: childrens[i]
+          };
+
+        } else {
+          this.searchTree(childrens[i], nodeKey);
+        }
+      }
+    }
   }
 
 

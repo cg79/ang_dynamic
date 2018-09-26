@@ -4,7 +4,7 @@ import {DynamicComponent} from "../../dynamic.component";
 @Component({
     selector: 'dynamic-button',
   template: `
-    <button class="{{context.class}}" type="{{context?.btntype}}">
+    <button class="{{context.class}}" type="{{context?.compType}}">
     {{context.value}}
       <ng-template #dynamic1></ng-template>
     </button>`

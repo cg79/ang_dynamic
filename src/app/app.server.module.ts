@@ -5,7 +5,6 @@ import { ModuleMapLoaderModule } from '@nguniversal/module-map-ngfactory-loader'
 import { AppModule } from './app.module';
 import { AppComponent } from './app.component';
 import {DynamicContentComponent} from './dynamic/dynamic-content.component';
-import {DynamicSample1Component} from './dynamic/components/dynamic-sample1.component';
 import {RuntimeContentComponent} from './dynamic/runtime-content.component';
 import {DynamicContentComponentDemo} from './dynamic/components/dynamic-content.component.demo';
 import {FormsModule} from '@angular/forms';
@@ -38,7 +37,6 @@ import {PageLabelComponent} from "./dynamic/pages/page-label/page-label.componen
   providers: [ComponentInjectorService, PubSubService],
   bootstrap: [ AppComponent ],
   entryComponents: [
-    DynamicSample1Component,
     DynamicLabelComponent,
     DynamicDivComponent,
     DynamicTextComponent,

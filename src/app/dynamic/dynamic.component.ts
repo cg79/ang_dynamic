@@ -6,7 +6,9 @@ import {
 import * as math from 'mathjs';
 
 export class DynamicComponent implements OnDestroy {
-    @Input() context: any;
+    // @Input() context: any;
+  template: string = 'default';
+  newGuid = () => (((1+Math.random())*0x10000)|0).toString(16);
 
   private _data: any;
   get data(): any {
@@ -20,7 +22,28 @@ export class DynamicComponent implements OnDestroy {
     console.log('prev value: ', this._data);
     console.log('got name: ', obj);
     this._data = obj;
+    this.template = 'data';
   }
+
+
+  protected _context: any;
+  get context(): any {
+    return this._context;
+  }
+
+  @Input()
+  set context(obj: any) {
+    console.log('context: ', this.context);
+
+    console.log('prev value: ', this._context);
+    console.log('got name: ', obj);
+    if(!obj.key) {
+      obj.key = this.newGuid();
+    }
+    this._context = obj;
+  }
+
+
 
   private mappings = {
     'container':'dynamic-container',
@@ -44,6 +67,8 @@ export class DynamicComponent implements OnDestroy {
   };
 
   protected componentRef: ComponentRef<{}> ;
+
+
 
   getComponentType(typeName: string, factoryResolver: ComponentFactoryResolver, container:ViewContainerRef, ) {
     console.log('0000---------------');
@@ -124,14 +149,27 @@ export class DynamicComponent implements OnDestroy {
   }
 
   addChildrens(container:ViewContainerRef, factoryResolver: ComponentFactoryResolver) {
+
     const { childrens } = this.context;
     if(!childrens) {
       return;
     }
 
+    // if(!container) {
+    //   throw "NO CONTAINER";
+    // }
+
     for(var i=0;i<childrens.length;i++) {
       const children = childrens[i];
-      this.addChild1(container, factoryResolver, children);
+      if(!children.key) {
+        children.key = this.newGuid();
+      }
+      if(this.data) {
+        this.addChild2(container, factoryResolver, children, this.data);
+      }else{
+        this.addChild1(container, factoryResolver, children);
+      }
+
     }
   }
 
@@ -168,7 +206,10 @@ export class DynamicComponent implements OnDestroy {
 
   validate()
   {
-    const { validation, value } = this.context;
+    let { validation, value } = this.context;
+    if(this.data) {
+      value = this.data[this.context.value];
+    }
 
     if(validation) {
       this.setError(false, null);
@@ -209,6 +250,20 @@ export class DynamicComponent implements OnDestroy {
     if (this.componentRef) {
       this.componentRef.destroy();
       this.componentRef = null;
+    }
+  }
+
+  error: null;
+  http(httpWrapperService) {
+    debugger;
+    const { http } = this.context;
+
+    if(http) {
+
+       httpWrapperService.postJson(http.url, http.body).subscribe(
+        (data) =>this.context.items = data.data, // success path
+        error => this.error = error // error path
+      );
     }
   }
 

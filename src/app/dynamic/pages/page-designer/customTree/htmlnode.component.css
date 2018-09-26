@@ -23,24 +23,34 @@ ul li.expanded
 }
 
 
-ul li.notpexp
+ul li span.notpexp
 {
-  list-style-image: url(./../Content/images/arw1.png);
+  background-image: url(./../Content/images/arw1.png);
   /*font-family: Verdana,Geneva,Tahoma,Arial,Helvetica,sans-serif;*/
-  font-size: 15px;
-  color: #494949;
-  line-height: 2;
-  text-align: justify;
-  cursor: pointer;
+  background-repeat: no-repeat;
+  padding-left: 5px;
 }
 
-ul li.pexp
+ul li span.pexp
 {
-  list-style-image: url(./../Content/images/arw2.png);
+  background-image: url(./../Content/images/arw2.png);
   /*font-family: Verdana,Geneva,Tahoma,Arial,Helvetica,sans-serif;*/
-  font-size: 15px;
-  color: #494949;
-  line-height: 2;
-  text-align: justify;
-  cursor: pointer;
+  background-repeat: no-repeat;
+  padding-left: 5px;
+}
+
+ul li span.notrexp
+{
+  background-image: url(./../Content/images/arw1.png);
+  /*font-family: Verdana,Geneva,Tahoma,Arial,Helvetica,sans-serif;*/
+  background-repeat: no-repeat;
+  padding-left: 5px;
+}
+
+ul li span.rexp
+{
+  background-image: url(./../Content/images/arw2.png);
+  /*font-family: Verdana,Geneva,Tahoma,Arial,Helvetica,sans-serif;*/
+  background-repeat: no-repeat;
+  padding-left: 5px;
 }

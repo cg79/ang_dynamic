@@ -4,10 +4,23 @@ import {DynamicComponent} from "../../dynamic.component";
 @Component({
     selector: 'dynamic-label',
   template: `
-    <label  id="{{context?.id}}" class="{{context?.class}}">
+{{template}}
+    <!--<ng-container *ngIf="template == 'default'">-->
+     <label  id="{{context?.id}}" class="{{context?.class}}">
       <span>{{context?.value}}</span>
       <ng-template #dynamic1></ng-template>
-    </label>`
+    </label>
+  <!--</ng-container>-->
+
+    <!--<ng-container *ngIf="template == 'data'">-->
+        <!--<label  id="{{context?.id}}" class="{{context?.class}}">-->
+          <!--<span>{{data[context.value]}}</span>-->
+          <!--<ng-template #dynamic1></ng-template>-->
+        <!--</label>-->
+    <!--</ng-container>-->
+    
+    
+  `
 })
 export class DynamicLabelComponent extends DynamicComponent {
   @ViewChild('dynamic1', { read: ViewContainerRef }) viewContainerRef: ViewContainerRef;

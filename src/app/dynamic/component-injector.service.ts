@@ -6,7 +6,6 @@ import {
 } from '@angular/core';
 
 import { DynamicComponent } from './dynamic.component';
-import { DynamicSample1Component } from './components/dynamic-sample1.component';
 import { DynamicLabelComponent } from './components/dLabel/dynamic-label.component';
 import { DynamicDivComponent } from './components/dDiv/dynamic-div.component';
 
@@ -17,7 +16,6 @@ export class ComponentInjectorService {
   }
 
   private mappings = {
-    'sample1': DynamicSample1Component,
     'label': DynamicLabelComponent,
     'div': DynamicDivComponent
   };

@@ -12,7 +12,7 @@ import { ComponentInjectorService } from '../../component-injector.service';
 @Component({
     selector: 'dynamic-div',
     template: `
-    <div  id={{context?.id}} class={{context?.class}}>
+    <div  id="{{context?.id}}" class="{{context?.class}}">
       <ng-template #dynamic></ng-template>
     </div>`
 })

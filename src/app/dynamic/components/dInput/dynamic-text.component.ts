@@ -4,8 +4,22 @@ import { DynamicComponent } from '../../dynamic.component';
 @Component({
     selector: 'dynamic-text',
   template: `
-  <input type="text" class="{{context.class}}" id="{{context.id}}" name="{{context.name || context.id}}" [(ngModel)]="context.value"  (input)="change($event)">
-  <ng-template #errcontainer></ng-template>
+    <ng-container *ngIf="template == 'default'">
+      <input type="{{context.compType || 'text'}}" class="{{context.class}}" id="{{context.id}}" name="{{context.name || context.id}}" [(ngModel)]="context.value"  (input)="change($event)">
+      <ng-template #errcontainer></ng-template>
+    </ng-container>
+  
+  <ng-container *ngIf="template == 'data'">
+      <input type="text" 
+        class="{{context.class}}" 
+        id="{{context.id}}" 
+        name="{{context.name || context.id}}" 
+        [(ngModel)]="data[context.value]"  
+        (input)="change($event)">
+        
+      <ng-template #errcontainer></ng-template>
+    </ng-container>
+  
   <!--<pre> {{context | json}} </pre>-->
     `
 })

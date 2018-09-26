@@ -1,6 +1,6 @@
 <!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
 
-<!--<pre>{{node | json}}</pre>-->
+
 <ul *ngFor="let o of node | keysToArray" class="browser-default">
 
 <!--<pre>{{o | json}}</pre>-->
@@ -8,17 +8,35 @@
 
     <ul>
       <li [ngClass]="getClases(node)">
-        <div class="row" (click)="titleClick(node)" (drop)="onDrop($event, dropData)" (dragover)="allowDrop($event)" >
+        <div class="row"  (drop)="onDrop($event, dropData)" (dragover)="allowDrop($event)" >
 
-          <div class="col">
-            {{o.value}}
+          <div class="col" (click)="titleClick(node)"
+               (dragstart)="onDragStartNode($event, option)" draggable="true"
+               (drop)="onDropNode($event, dropData)"
+               (dragover)="allowDropNode($event)">
+
+            <div class="row">
+              <div class="col s4">
+                <span (click)="moveUpNode(node)">move up</span>
+                </div>
+              <div class="col s4">
+                {{o.value}} {{node.key}}
+              </div>
+              <div class="col s4">
+                <span (click)="moveDownNode(node)">move down</span>
+              </div>
+
+              </div>
           </div>
 
-          <div class="col" [ngClass]="getPropClases(node)">
+          <div class="col" >
+
+            <span [ngClass]="getPropClases(node)">&nbsp;</span>
             <span (click)="toggleProp(node)">Properties</span>
           </div>
 
-          <div class="col" [ngClass]="getPropClases(node)" *ngIf="node.rowTemplate">
+          <div class="col" *ngIf="node.rowTemplate">
+            <span [ngClass]="getTemplateClases(node)">&nbsp;</span>
             <span (click)="toggleRowTemplate(node)">Row Template</span>
           </div>
 
@@ -44,7 +62,7 @@
       <app-prop-designer [data]="o" [str]="'bindValue'" [node]="node"></app-prop-designer>
       <app-prop-designer [data]="o" [str]="'checkedProperty'" [node]="node"></app-prop-designer>
       <app-prop-designer [data]="o" [str]="'controlType'" [node]="node"></app-prop-designer>
-      <app-prop-designer [data]="o" [str]="'btntype'" [node]="node"></app-prop-designer>
+      <app-prop-designer [data]="o" [str]="'compType'" [node]="node"></app-prop-designer>
 
       <div *ngIf="o.key == 'validation'">
         <div class="row">

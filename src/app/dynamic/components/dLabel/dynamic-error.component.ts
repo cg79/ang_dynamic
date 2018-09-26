@@ -1,5 +1,6 @@
 import {Component, ViewContainerRef, ViewChild, ComponentFactoryResolver} from '@angular/core';
 import {DynamicComponent} from "../../dynamic.component";
+import {HttpWrapperService} from "../../../services/http/httpService";
 
 @Component({
     selector: 'dynamic-error',
@@ -13,6 +14,7 @@ export class DynamicErrorComponent extends DynamicComponent {
 
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
+    private httpWrapperService: HttpWrapperService
     ) {
     super();
     // this.service = service;
@@ -24,7 +26,7 @@ export class DynamicErrorComponent extends DynamicComponent {
       return;
     }
     const { children } = this.context;
-
+    this.http(this.httpWrapperService);
 
     if (children) {
       this.addChild1(this.viewContainerRef, this.componentFactoryResolver, children);

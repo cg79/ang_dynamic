@@ -35,13 +35,22 @@ export class DynamicRepeaterComponent extends DynamicComponent {
     {
       return;
     }
-    for(var i=0;i<childrens.length;i++) {
-      const children = childrens[i];
-      for(var j=0; j < this.context.items.length; j++) {
-        const data = this.context.items[j];
+
+    for(var j=0; j < this.context.items.length; j++) {
+      const data = this.context.items[j];
+      for(var i=0;i<childrens.length;i++) {
+        const children = childrens[i];
         this.addChild2(this.viewContainerRef,this.componentFactoryResolver,children, data);
       }
     }
+
+    // for(var i=0;i<childrens.length;i++) {
+    //   const children = childrens[i];
+    //   for(var j=0; j < this.context.items.length; j++) {
+    //     const data = this.context.items[j];
+    //     this.addChild2(this.viewContainerRef,this.componentFactoryResolver,children, data);
+    //   }
+    // }
     // this.addChildrens(this.viewContainerRef, this.componentFactoryResolver);
   }
 

@@ -5,7 +5,6 @@ import { ModuleMapLoaderModule } from '@nguniversal/module-map-ngfactory-loader'
 
 import { AppComponent } from './app.component';
 import {DynamicContentComponent} from './dynamic/dynamic-content.component';
-import {DynamicSample1Component} from './dynamic/components/dynamic-sample1.component';
 import {RuntimeContentComponent} from './dynamic/runtime-content.component';
 import {DynamicContentComponentDemo} from './dynamic/components/dynamic-content.component.demo';
 import {FormsModule} from '@angular/forms';
@@ -45,6 +44,13 @@ import {DynamicButtonComponent} from "./dynamic/components/dLabel/dynamic-button
 import {DynamicFileUploadComponent} from "./dynamic/components/dLabel/dynamic-file-upload.component";
 import {DynamicDropDownTemplateComponent} from "./dynamic/components/dropdown/dynamic-dropdown-template.component";
 import {DynamicRepeaterComponent} from "./dynamic/components/repeater/dynamic-repeater.component";
+import {HttpWrapperService} from "./services/http/httpService";
+import {Http, ConnectionBackend, RequestOptions} from "@angular/http";
+import {HttpClientModule} from "@angular/common/http";
+import {HeaderComponent} from "./pages/components/header.component";
+import {SocketService} from "./services/socket/socketService";
+import {LoginComponent} from "./pages/login/login.component";
+import {CustomPageComponent} from "./dynamic/pages/custom-page/custom-page.component";
 
 const configSocket: SocketIoConfig = { url: 'http://localhost:6002', options: {} };
 
@@ -55,7 +61,6 @@ const configSocket: SocketIoConfig = { url: 'http://localhost:6002', options: {}
     NotFoundComponent,
     DynamicContentComponent,
     DynamicContentComponentDemo,
-    DynamicSample1Component,
     DynamicLabelComponent,
     DynamicDivComponent,
     RuntimeContentComponent,
@@ -85,21 +90,24 @@ const configSocket: SocketIoConfig = { url: 'http://localhost:6002', options: {}
     DynamicButtonComponent,
     DynamicFileUploadComponent,
     DynamicDropDownTemplateComponent,
-    DynamicRepeaterComponent
+    DynamicRepeaterComponent,
+    HeaderComponent,
+    LoginComponent,
+    CustomPageComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'anguynamic' }),
     FormsModule,
+    HttpClientModule,
     ModuleMapLoaderModule,
     WebStorageModule,
     AppRoutingModule,
     SocketIoModule.forRoot(configSocket)
   ],
-  providers: [ComponentInjectorService, PubSubService],
+  providers: [ComponentInjectorService, PubSubService,HttpWrapperService, SocketService],
   bootstrap: [AppComponent],
   entryComponents: [
     DynamicContentComponent,
-    DynamicSample1Component,
     DynamicLabelComponent,
     DynamicDivComponent,
     DynamicTextComponent,
