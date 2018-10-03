@@ -3,7 +3,7 @@ import {DynamicComponent} from "../../dynamic.component";
 import {ComponentInjectorService} from "../../component-injector.service";
 
 @Component({
-    selector: 'dynamic-chk-lbl-left',
+    selector: '[dynamic-chk-lbl-left]',
   template: `
     <p>
         <input type="checkbox" id="{{context.id}}"  [(ngModel)]="context.value"/>

@@ -1,122 +1,31 @@
 <!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
-
+<!--<pre>{{node | json}}</pre>-->
 
 <ul *ngFor="let o of node | keysToArray" class="browser-default">
 
 <!--<pre>{{o | json}}</pre>-->
-  <li *ngIf="o.key == 'type'"   >
+  <li>
 
-    <ul>
+    <div *ngIf="o.key !== 'key'" >
+      <label>{{o.key}} {{o.type}}</label>
+      <input *ngIf="o.type === 'number' || o.type === 'string'" type="text" [(ngModel)]="node[o.key]">
+    </div>
+    <ul *ngIf="o.type === 'object'" class="browser-default">
       <li>
-        <div class="row"  (drop)="onDrop($event, dropData)" (dragover)="allowDrop($event)" >
-
-          <div class="col">
-
-            <div class="row">
-              <div class="col">
-                <span [ngClass]="getClases(node)">&nbsp;</span>
-              </div>
-
-              <div class="col"
-                   (click)="titleClick(node)"
-                   (dragstart)="onDragStartNode($event, option)" draggable="true"
-                   (drop)="onDropNode($event, dropData)"
-                   (dragover)="allowDropNode($event)">
-                {{o.value}} {{node.key}}
-              </div>
-              <div class="col">
-                <span (click)="moveUpNode(node)">move up</span>
-              </div>
-              <div class="col">
-                <span (click)="moveDownNode(node)">move down</span>
-              </div>
-              <div class="col">
-                <span (click)="deleteNode(node)">delete</span>
-              </div>
-              <div class="col">
-                <span (click)="cutNode(node)">cut</span>
-              </div>
-              <div class="col">
-                <span (click)="copyNode(node)">copy</span>
-              </div>
-              <div class="col">
-                <span (click)="pasteNode(node)">paste</span>
-              </div>
-
-              </div>
-          </div>
-
-          <div class="col" >
-
-            <span [ngClass]="getPropClases(node)">&nbsp;</span>
-            <span (click)="toggleProp(node)">Properties</span>
-          </div>
-
-          <div class="col" *ngIf="node.rowTemplate">
-            <span [ngClass]="getTemplateClases(node)">&nbsp;</span>
-            <span (click)="toggleRowTemplate(node)">Row Template</span>
-          </div>
-
-        </div>
+        <button *ngIf="isArray" (click)="deleteParam(o.value)">delete param </button>
+        <app-actionnode [node]="o.value"></app-actionnode>
       </li>
     </ul>
 
+    <ul *ngIf="o.type === 'array'" class="browser-default">
+      <button (click)="addParam(node)">add param </button>
+      <li>
 
+        <app-actionnode [node]="o.value" [isArray]="true"></app-actionnode>
 
-
-  </li>
-
-  <ul>
-
-    <li *ngIf="node.prop">
-      <app-prop-designer [data]="o" [str]="'value'" [node]="node"></app-prop-designer>
-      <app-prop-designer [data]="o" [str]="'id'" [node]="node"></app-prop-designer>
-      <app-prop-designer [data]="o" [str]="'name'" [node]="node"></app-prop-designer>
-      <app-prop-designer [data]="o" [str]="'text'" [node]="node"></app-prop-designer>
-      <app-prop-designer [data]="o" [str]="'class'" [node]="node"></app-prop-designer>
-      <app-prop-designer [data]="o" [str]="'bindText'" [node]="node"></app-prop-designer>
-      <app-prop-designer [data]="o" [str]="'bindValue'" [node]="node"></app-prop-designer>
-      <app-prop-designer [data]="o" [str]="'checkedProperty'" [node]="node"></app-prop-designer>
-      <app-prop-designer [data]="o" [str]="'controlType'" [node]="node"></app-prop-designer>
-      <app-prop-designer [data]="o" [str]="'compType'" [node]="node"></app-prop-designer>
-
-      <div *ngIf="o.key == 'validation'">
-        <div class="row1">
-          <div class="col c1">
-            validation
-          </div>
-          <div class="col c1">
-            <ul *ngFor="let vProp of node.validation | keysToArray" class="browser-default">
-              <li>{{vProp.key}} <input type="text" [(ngModel)]="node.validation[vProp.key]"></li>
-            </ul>
-
-          </div>
-        </div>
-      </div>
-    </li>
-
-    <li *ngIf="node.showRowTemplate">
-      <!--{{o.key}}-->
-      <app-htmlnode  *ngIf="o.key == 'rowTemplate'" [node]="node.rowTemplate"></app-htmlnode>
-    </li>
-
-  </ul>
-
-
-  <li *ngIf="node.expanded" >
-    <ul *ngIf="o.key == 'children'" class="browser-default">
-      <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
-      <!--{{o.value}}-->
-        <app-htmlnode [node]=o.value></app-htmlnode>
-    </ul>
-
-    <ul *ngIf="o.key == 'childrens'" class="browser-default">
-      <li *ngFor="let el of o.value">
-        <app-htmlnode [node]=el></app-htmlnode>
       </li>
     </ul>
 
   </li>
-
 
 </ul>

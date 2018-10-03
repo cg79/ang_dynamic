@@ -2,7 +2,7 @@ import {Component, ViewContainerRef, ViewChild, ComponentFactoryResolver, Input}
 import {DynamicComponent} from "../../dynamic.component";
 
 @Component({
-    selector: 'dynamic-file-upload',
+    selector: '[dynamic-file-upload]',
   styleUrls: ['./dynamic-file-upload.component.scss'],
   template: `
 <label

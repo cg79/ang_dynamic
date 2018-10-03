@@ -2,13 +2,14 @@ import {Component, OnInit, Input, SimpleChanges, SimpleChange, OnChanges} from '
 import {PubSubService} from "../../../../services/pubSub/pubsub";
 
 @Component({
-  selector: 'app-htmlnode',
-  templateUrl: './htmlnode.component.html',
-  styleUrls: ['./htmlnode.component.css']
+  selector: 'app-actionnode',
+  templateUrl: './actionnode.component.html',
+  styleUrls: ['./actionnode.component.css']
 })
-  export class HtmlNodeComponent implements OnInit {
+  export class ActionnodeNodeComponent implements OnInit {
 
   @Input() node: any;
+  @Input() isArray : boolean;
 
 
   constructor(private pubSubService: PubSubService) { }
@@ -130,6 +131,22 @@ import {PubSubService} from "../../../../services/pubSub/pubsub";
   }
 
 
+  addParam(o){
+    const n = this.node;
+    n.controls.push({
+      id: '',
+      property: '',
+      key: this.newGuid()
+    });
+
+    var x = JSON.stringify(n);
+
+    this.node =JSON.parse(x);
+  }
+
+  deleteParam(v){
+    this.node = this.node.filter(el => el.key == v.key);
+  }
 
 
 

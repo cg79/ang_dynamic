@@ -2,29 +2,21 @@ import {Component, ViewContainerRef, ViewChild, ComponentFactoryResolver} from '
 import { DynamicComponent } from '../../dynamic.component';
 
 @Component({
-    selector: '[dynamic-text]',
+    selector: '[dynamicTextLabel]',
   template: `
-    <ng-container *ngIf="template == 'default'">
+      <div class="input-field col s6">
       <input type="{{context.compType || 'text'}}" class="{{context.class}}" id="{{context.id}}" name="{{context.name || context.id}}" [(ngModel)]="context.value"  (input)="change($event)">
+      <label for="{{context.id}}"> {{context.labelText}}</label>
       <ng-template #errcontainer></ng-template>
-    </ng-container>
+      </div>
   
-  <ng-container *ngIf="template == 'data'">
-      <input type="text" 
-        class="{{context.class}}" 
-        id="{{context.id}}" 
-        name="{{context.name || context.id}}" 
-        [(ngModel)]="data[context.value]"  
-        (input)="change($event)">
-        
-      <ng-template #errcontainer></ng-template>
-    </ng-container>
+ 
   
   <!--<pre> {{context | json}} </pre>-->
     `
 })
 
-export class DynamicTextComponent extends DynamicComponent {
+export class DynamicTextLabelComponent extends DynamicComponent {
   @ViewChild('errcontainer', { read: ViewContainerRef }) viewContainerRef: ViewContainerRef;
 
   constructor(

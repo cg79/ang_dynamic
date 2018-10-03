@@ -43,7 +43,6 @@ export class DynamicContentComponent extends DynamicComponent  {
 
   ngOnInit() {
 
-    debugger;
     const context = this.context;
     if(!context )
     {

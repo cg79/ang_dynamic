@@ -2,7 +2,7 @@ import {Component, ViewContainerRef, ViewChild, ComponentFactoryResolver} from '
 import {DynamicComponent} from "../../dynamic.component";
 
 @Component({
-    selector: 'dynamic-link',
+    selector: '[dynamic-link]',
   template: `
     <a class="{{context.class}}" href="{{context?.href}}">
     {{context.value}}

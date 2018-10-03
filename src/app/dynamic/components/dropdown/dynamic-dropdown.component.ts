@@ -3,7 +3,7 @@ import {DynamicComponent} from "../../dynamic.component";
 import {HttpWrapperService} from "../../../services/http/httpService";
 
 @Component({
-    selector: 'dynamic-dropdown',
+    selector: '[dynamic-dropdown]',
   template: `
     <select class="browser-default"
     (change)="onChange($event.target.value)" 
@@ -29,7 +29,6 @@ export class DynamicDropDownComponent extends DynamicComponent {
 
   onChange(data)
   {
-    debugger;
   }
   ngOnInit() {
     if(!this.context )

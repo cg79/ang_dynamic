@@ -3,7 +3,7 @@ import {DynamicComponent} from "../../dynamic.component";
 import {ComponentInjectorService} from "../../component-injector.service";
 
 @Component({
-    selector: 'dynamic-radio-lbl-left-list',
+    selector: '[dynamic-radio-lbl-left-list]',
   template: `
       <span>{{context?.text}}</span>
       

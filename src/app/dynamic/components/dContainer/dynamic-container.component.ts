@@ -59,7 +59,6 @@ export class DynamicContainerComponent extends DynamicComponent  {
   }
 
   renderComponets() {
-    debugger;
     if(!this.context )
     {
       return;

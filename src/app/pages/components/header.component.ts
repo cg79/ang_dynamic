@@ -48,7 +48,6 @@ export class HeaderComponent implements OnInit{
 
   msgReceive(msg){
 
-    debugger;
     this.userCount = msg.usersCount;
   }
 
@@ -57,7 +56,6 @@ export class HeaderComponent implements OnInit{
 
     const evt : ISocketEvent = {
       evtName: "welcome",
-      ctrlName:'header',
       executeFunction: this.msgReceive.bind(this)
     };
 

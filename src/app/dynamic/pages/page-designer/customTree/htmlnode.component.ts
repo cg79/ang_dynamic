@@ -21,6 +21,7 @@ import {PubSubService} from "../../../../services/pubSub/pubsub";
 
 
   onDrop(event) {
+    debugger;
     //let dataTransfer = event.dataTransfer.getData('data');
     var data0 = event.dataTransfer.getData("text/plain");
     const droppedData = JSON.parse(data0);
@@ -31,6 +32,25 @@ import {PubSubService} from "../../../../services/pubSub/pubsub";
       node.childrens = [];
     }
     node.childrens.push(droppedData.structure);
+    // debugger;
+
+    // this.tree.push(this.dragData);
+    this.pubSubService.publish('refreshJsonEditor',null);
+    // event.preventDefault();
+  }
+
+  onDropAction(event) {
+    debugger;
+    //let dataTransfer = event.dataTransfer.getData('data');
+    var data0 = event.dataTransfer.getData("text/plain");
+    const droppedData = JSON.parse(data0);
+    // const state = {...this.node};
+    // state.children = droppedData.structure;
+    const node = this.node;
+    if(!node.actions) {
+      node.actions = [];
+    }
+    node.actions.push(droppedData);
     // debugger;
 
     // this.tree.push(this.dragData);
@@ -60,8 +80,14 @@ import {PubSubService} from "../../../../services/pubSub/pubsub";
   {
     el.showRowTemplate = false;
     el.prop = !el.prop;
-
   }
+
+  toggleActions(el)
+  {
+    // el.showActions = false;
+    el.showActions = !el.showActions;
+  }
+
 
   toggleRowTemplate(el) {
     el.prop = false;
@@ -111,6 +137,22 @@ import {PubSubService} from "../../../../services/pubSub/pubsub";
 
   moveDownNode(node) {
     this.pubSubService.publish('moveDownNode', node.key);
+  }
+
+  deleteNode(node) {
+    this.pubSubService.publish('deleteNode', node.key);
+  }
+
+  copyNode(node) {
+    this.pubSubService.publish('copyNode', node.key);
+  }
+
+  cutNode(node) {
+    this.pubSubService.publish('cutNode', node.key);
+  }
+
+  pasteNode(node) {
+    this.pubSubService.publish('pasteNode', node.key);
   }
 
 

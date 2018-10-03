@@ -33,8 +33,16 @@
     </div>
   </div>
 
+  <div class="col s2">
+    <div *ngFor="let option of actions.operations; index as i;">
+      <div draggable="true"
+           [style.outlineColor]="dragging ? activeColor : baseColor"
+           (dragstart)="onDragStart($event, option)"
+      >{{getObjectName(option)}}</div>
+    </div>
+  </div>
 
-  <div class="col s5">
+  <div class="col ">
     <div class="row" (drop)="onDrop($event, dropData)" (dragover)="allowDrop($event)">
       <span [hidden]="droppedData">Drop here</span>
       <span [hidden]="!droppedData">{{ droppedData }}</span>

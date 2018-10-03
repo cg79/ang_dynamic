@@ -3,7 +3,7 @@ import {DynamicComponent} from "../../dynamic.component";
 import {HttpWrapperService} from "../../../services/http/httpService";
 
 @Component({
-    selector: 'dynamic-error',
+    selector: '[dynamic-error]',
   template: `
     <label class="has-error" id={{context?.id}}>
       {{context.errMessage}}

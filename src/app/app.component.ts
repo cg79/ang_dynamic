@@ -29,7 +29,6 @@ export class AppComponent implements OnInit{
     // );
 
     const data: any = await this.httpWrapperService.postJsonAsync('/api/pub/security/login', body);
-    debugger;
     this.pubSubService.setKeyValue('user', data.data);
   // .then(
   //     (data) =>this.pubSubService.setKeyValue('user', data), // success path

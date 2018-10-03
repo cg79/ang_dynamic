@@ -2,7 +2,7 @@ import {Component, ViewContainerRef, ViewChild, ComponentFactoryResolver} from '
 import { DynamicComponent } from '../../dynamic.component';
 
 @Component({
-    selector: 'dynamic-text',
+    selector: '[dynamic-text]',
   template: `
     <ng-container *ngIf="template == 'default'">
       <input type="{{context.compType || 'text'}}" class="{{context.class}}" id="{{context.id}}" name="{{context.name || context.id}}" [(ngModel)]="context.value"  (input)="change($event)">

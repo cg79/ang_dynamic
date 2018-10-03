@@ -51,6 +51,9 @@ import {HeaderComponent} from "./pages/components/header.component";
 import {SocketService} from "./services/socket/socketService";
 import {LoginComponent} from "./pages/login/login.component";
 import {CustomPageComponent} from "./dynamic/pages/custom-page/custom-page.component";
+import {ActionnodeNodeComponent} from "./dynamic/pages/page-designer/actions/actionnode.component";
+import {ActionService} from "./services/actions/actionService";
+import {DynamicTextLabelComponent} from "./dynamic/components/dInput/dynamic-text-label.component";
 
 const configSocket: SocketIoConfig = { url: 'http://localhost:6002', options: {} };
 
@@ -93,7 +96,9 @@ const configSocket: SocketIoConfig = { url: 'http://localhost:6002', options: {}
     DynamicRepeaterComponent,
     HeaderComponent,
     LoginComponent,
-    CustomPageComponent
+    CustomPageComponent,
+    ActionnodeNodeComponent,
+    DynamicTextLabelComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'anguynamic' }),
@@ -104,7 +109,7 @@ const configSocket: SocketIoConfig = { url: 'http://localhost:6002', options: {}
     AppRoutingModule,
     SocketIoModule.forRoot(configSocket)
   ],
-  providers: [ComponentInjectorService, PubSubService,HttpWrapperService, SocketService],
+  providers: [ComponentInjectorService, PubSubService,HttpWrapperService, SocketService, ActionService],
   bootstrap: [AppComponent],
   entryComponents: [
     DynamicContentComponent,
@@ -123,7 +128,8 @@ const configSocket: SocketIoConfig = { url: 'http://localhost:6002', options: {}
     DynamicButtonComponent,
     DynamicFileUploadComponent,
     DynamicDropDownTemplateComponent,
-    DynamicRepeaterComponent
+    DynamicRepeaterComponent,
+    DynamicTextLabelComponent
   ]
 })
 export class AppModule { }

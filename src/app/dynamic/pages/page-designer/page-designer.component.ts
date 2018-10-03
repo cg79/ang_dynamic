@@ -67,15 +67,12 @@ export class PageDesignerComponent implements OnInit {
     });
 
     this.pubSubService.subscribe('moveUpNode', (val) => {
-debugger;
       this.treeNode = null;
       this.searchTree(this.context, val);
       if(this.treeNode) {
         const { parentNode, element } = this.treeNode;
         this.moveUp(parentNode.childrens, element);
       }
-
-
     });
 
     this.pubSubService.subscribe('moveDownNode', (val) => {
@@ -85,8 +82,57 @@ debugger;
         const { parentNode, element } = this.treeNode;
         this.moveDown(parentNode.childrens, element);
       }
+    });
 
+    this.pubSubService.subscribe('deleteNode', (val) => {
+      this.treeNode = null;
+      this.searchTree(this.context, val);
+      if(this.treeNode) {
+        this.treeNode.parentNode.childrens = this.treeNode.parentNode.childrens.filter(el=> el.key !== val);
+        const sss = JSON.stringify(this.context.childrens);
+        const childrens = JSON.parse(sss);
+        this.context.childrens = childrens;
+      }
+    });
 
+    //-------------------------------
+    this.pubSubService.subscribe('copyNode', (val) => {
+      this.treeNode = null;
+      this.searchTree(this.context, val);
+      if(this.treeNode) {
+        const { parentNode, element } = this.treeNode;
+        const nasStr = JSON.stringify(element);//changeIds;
+        const n = JSON.parse(nasStr);
+        this.changeIds(n);
+        this.pubSubService.setKeyValue('clipboard', JSON.stringify(n));
+      }
+    });
+
+    this.pubSubService.subscribe('cutNode', (val) => {
+      this.treeNode = null;
+      this.searchTree(this.context, val);
+      if(this.treeNode) {
+        const { parentNode, element } = this.treeNode;
+        this.pubSubService.setKeyValue('clipboard', JSON.stringify(element));
+        this.treeNode.parentNode.childrens = this.treeNode.parentNode.childrens.filter(el=> el.key !== val);
+        const sss = JSON.stringify(this.context.childrens);
+        const childrens = JSON.parse(sss);
+        this.context.childrens = childrens;
+      }
+    });
+
+    this.pubSubService.subscribe('pasteNode', (val) => {
+      this.treeNode = null;
+      this.searchTree(this.context, val);
+      if(this.treeNode) {
+        const { parentNode, element } = this.treeNode;
+        const clipboard = this.pubSubService.getKeyValue('clipboard');
+        const clipboardNode = JSON.parse(clipboard);
+        if(!element.childrens) {
+          element.childrens = [];
+        }
+        element.childrens.push(clipboardNode);
+      }
     });
 
   }
@@ -109,7 +155,6 @@ debugger;
 
   getForms()
   {
-    debugger;
     const body = {
       data: {
       },
@@ -128,7 +173,6 @@ debugger;
   error: any = null;
   onChange(id)
   {
-    debugger;
     const body = {
         data: {
           _id: id,
@@ -199,7 +243,7 @@ debugger;
     );
   }
 
-  started: boolean = false;
+  started: boolean = true;
   start()
   {
     this.started = true;
@@ -207,6 +251,7 @@ debugger;
   }
 
   ngOnInit() {
+    this.getForms();
   }
 
   state = {
@@ -351,7 +396,7 @@ debugger;
           type:'button',
           class:'',
           compType:'link',
-          value:'paragraf'
+          value:'btn'
         }
       },
       {
@@ -371,9 +416,67 @@ debugger;
           value:'paragraf'
         }
       },
+      {
+        name: 'dynamicTextLabel',
+        structure: {
+          type:'dynamicTextLabel',
+          id:'',
+          class:'',
+          compType:'link',
+          value:'paragraf',
+          labelText:'zxc'
+        }
+      },
     ]
   };
 
+
+  actions = {
+    operations: [
+      {
+        http: {
+          url: '',
+          proxy: {
+            module: '',
+            method: ''
+          },
+          data: ''
+        }
+      },
+      {
+        getCtrValue: {
+          id: '',
+          property: ''
+        }
+      },
+      {
+        setCtrlValue: {
+          id: '',
+          value: ''
+        }
+      },
+      {
+        getCtrsValue:
+          {
+            name: '',
+            controls: []
+          }
+
+      },
+      {
+        setCtrlsValue: {
+          id: '',
+          value: ''
+        }
+      }
+    ]
+  };
+
+
+
+  getObjectName(obj) {
+    return Object.keys(obj)[0];
+  }
 
   radioLblLeftList
   tree = [];
@@ -478,6 +581,26 @@ debugger;
         } else {
           this.searchTree(childrens[i], nodeKey);
         }
+      }
+    }
+  }
+
+  newGuid = () => (((1+Math.random())*0x10000)|0).toString(16);
+
+  changeIds  =(node) =>{
+    if(node.id) {
+      node.id = this.newGuid();
+    }
+    const { childrens } = node;
+    if(childrens) {
+
+      for (let i = 0; i < childrens.length; i++) {
+        if (childrens[i].id) {
+          if(childrens[i].id) {
+            childrens[i].id = this.newGuid();
+          }
+        }
+        this.changeIds(childrens[i]);
       }
     }
   }

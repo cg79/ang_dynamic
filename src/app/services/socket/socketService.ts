@@ -49,12 +49,6 @@ export class SocketService {
 
     if (!subscribers[event.evtName]) {
       subscribers[event.evtName] = [];
-    } else {
-      var sub = subscribers[event.evtName].find(el=>el.evtName === event.evtName && el.ctrlName == event.ctrlName);
-      if (sub) {
-        //already registered
-        return;
-      }
     }
     subscribers[event.evtName].push(event);
   }
@@ -65,7 +59,7 @@ export class SocketService {
     if (!subscribers[event.evtName]) {
       return;
     }
-    var sub = subscribers[event.evtName].find(el=>el.evtName === event.evtName && el.ctrlName == event.ctrlName);
+    var sub = subscribers[event.evtName].find(el=>el.evtName === event.evtName);
     if (sub) {
       //not registered
       return;

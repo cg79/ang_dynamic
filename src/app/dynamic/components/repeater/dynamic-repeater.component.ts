@@ -2,7 +2,7 @@ import {Component, ViewContainerRef, ViewChild, ComponentFactoryResolver} from '
 import {DynamicComponent} from "../../dynamic.component";
 
 @Component({
-    selector: 'dynamic-repeater',
+    selector: '[dynamic-repeater]',
   template: `
       <ng-template #dynamic1></ng-template>
       <!--<div *ngFor="let item of context.items">-->

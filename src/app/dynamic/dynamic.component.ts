@@ -1,9 +1,10 @@
 
 import {
   ViewContainerRef, ComponentFactory, ComponentFactoryResolver, Type, Input, ComponentRef, OnInit, OnDestroy,
-  SimpleChanges
+  SimpleChanges, ViewChild, TemplateRef
 } from "@angular/core";
 import * as math from 'mathjs';
+import {PubSubService} from "../services/pubSub/pubsub";
 
 export class DynamicComponent implements OnDestroy {
     // @Input() context: any;
@@ -44,48 +45,62 @@ export class DynamicComponent implements OnDestroy {
   }
 
 
-
   private mappings = {
     'container':'dynamic-container',
-    'label': 'dynamic-label',
+    'label': '[dinamicLabel]',
     'dynamic-content':'dynamic-content',
-    'div': 'dynamic-div',
-    'text': 'dynamic-text',
-    'chkLblLeft': 'dynamic-chk-lbl-left',
-    'chkLblRight': 'dynamic-chk-lbl-right',
-    'chkLblLeftList':'dynamic-chk-lbl-left-list',
-    'radioLblLeftList':'dynamic-radio-lbl-left-list',
-    'error':'dynamic-error',
-    'paragraf':'dynamic-paragraf',
-    'dropdown': 'dynamic-dropdown',
-    'dropdowntemp': 'dynamic-dropdown-template',
-    'link':'dynamic-link',
-    'button': 'dynamic-button',
-    'fileUpload': 'dynamic-file-upload',
-    'repeater': 'dynamic-repeater'
+    'div': '[dynamic-div]',
+    'text': '[dynamic-text]',
+    'chkLblLeft': '[dynamic-chk-lbl-left]',
+    'chkLblRight': '[dynamic-chk-lbl-right]',
+    'chkLblLeftList':'[dynamic-chk-lbl-left-list]',
+    'radioLblLeftList':'[dynamic-radio-lbl-left-list]',
+    'error':'[dynamic-error]',
+    'paragraf':'[dynamic-paragraf]',
+    'dropdown': '[dynamic-dropdown]',
+    'dropdowntemp': '[dynamic-dropdown-template]',
+    'link':'[dynamic-link]',
+    'button': '[dynamic-button]',
+    'fileUpload': '[dynamic-file-upload]',
+    'repeater': '[dynamic-repeater]',
+    'dynamicTextLabel':'[dynamicTextLabel]'
 
   };
 
   protected componentRef: ComponentRef<{}> ;
 
 
+  // @ViewChild(TemplateRef) template;
+  //
+  // constructor(private vcRef:ViewContainerRef) {}
+
+  // ngOnInit() {
+  //   if(!this.vcRef) {
+  //     return;
+  //   }
+  //   this.vcRef.createEmbeddedView(this.template);
+  // }
+
+
 
   getComponentType(typeName: string, factoryResolver: ComponentFactoryResolver, container:ViewContainerRef, ) {
-    console.log('0000---------------');
+    // console.log('0000---------------');
     let type = this.mappings[typeName];
     console.log(typeName);
     console.log(type);
 
-    console.log('1111---------------');
 
 
     var factories = Array.from(factoryResolver['_factories'].values());
-    console.log(factories);
-    console.log('2222---------------');
-    console.log(factoryResolver['_factories']);
+    // console.log(factories);
+    // console.log('2222---------------');
+    // console.log(factoryResolver['_factories']);
 
     var factory = <ComponentFactory<{}>>factories.find((x: any) => x.selector === type);
 
+    // if(!factory) {
+    //   factory = <ComponentFactory<{}>>factories.find((x: any) => x.componentType.name === type);
+    // }
     // console.log(factoryClass);
     // console.log('3333---------------');
     // const factory = factoryResolver.resolveComponentFactory(factoryClass);
@@ -93,11 +108,20 @@ export class DynamicComponent implements OnDestroy {
     console.log(factory);
 
     console.log('container=============================================================');
-    console.log(container);
+    // console.log(container);
 
-    console.log('4444---------------');
+    // console.log('4444---------------');
     this.componentRef = container.createComponent(factory);
 
+    // const domElem = (this.componentRef.hostView as EmbeddedViewRef<any>)
+    //   .rootNodes[0];
+    // try {
+    //   (this.componentRef.hostView as EmbeddedViewRef<any>).rootNodes;
+    // }
+    // catch (ex) {
+    //
+    //   console.log(ex);
+    // }
     return this.componentRef;// || UnknownDynamicComponent;
   }
 
@@ -255,7 +279,6 @@ export class DynamicComponent implements OnDestroy {
 
   error: null;
   http(httpWrapperService) {
-    debugger;
     const { http } = this.context;
 
     if(http) {

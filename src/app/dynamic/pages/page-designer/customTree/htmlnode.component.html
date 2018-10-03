@@ -3,28 +3,46 @@
 
 <ul *ngFor="let o of node | keysToArray" class="browser-default">
 
+
 <!--<pre>{{o | json}}</pre>-->
   <li *ngIf="o.key == 'type'"   >
 
     <ul>
-      <li [ngClass]="getClases(node)">
-        <div class="row"  (drop)="onDrop($event, dropData)" (dragover)="allowDrop($event)" >
+      <li>
+        <div class="row"   >
 
-          <div class="col" (click)="titleClick(node)"
-               (dragstart)="onDragStartNode($event, option)" draggable="true"
-               (drop)="onDropNode($event, dropData)"
-               (dragover)="allowDropNode($event)">
+          <div class="col">
 
             <div class="row">
-              <div class="col s4">
-                <span (click)="moveUpNode(node)">move up</span>
-                </div>
-              <div class="col s4">
+              <div class="col">
+                <span [ngClass]="getClases(node)">&nbsp;</span>
+              </div>
+
+              <div class="col"
+                   (click)="titleClick(node)"
+                   (drop)="onDrop($event, dropData)" (dragover)="allowDrop($event)">
                 {{o.value}} {{node.key}}
               </div>
-              <div class="col s4">
+              <div class="col">
+                <span (click)="moveUpNode(node)">move up</span>
+              </div>
+              <div class="col">
                 <span (click)="moveDownNode(node)">move down</span>
               </div>
+              <div class="col">
+                <span (click)="deleteNode(node)">delete</span>
+              </div>
+              <div class="col">
+                <span (click)="cutNode(node)">cut</span>
+              </div>
+              <div class="col">
+                <span (click)="copyNode(node)">copy</span>
+              </div>
+              <div class="col">
+                <span (click)="pasteNode(node)">paste</span>
+              </div>
+
+              <app-actionnode [node]="node"></app-actionnode>
 
               </div>
           </div>
@@ -35,49 +53,69 @@
             <span (click)="toggleProp(node)">Properties</span>
           </div>
 
+          <div class="col" >
+
+            <span [ngClass]="getPropClases(node)">&nbsp;</span>
+            <span
+              (click)="toggleActions(node)"
+              (drop)="onDropAction($event, dropData)" (dragover)="allowDrop($event)"
+            >Actions</span>
+          </div>
+
           <div class="col" *ngIf="node.rowTemplate">
             <span [ngClass]="getTemplateClases(node)">&nbsp;</span>
             <span (click)="toggleRowTemplate(node)">Row Template</span>
           </div>
 
         </div>
-
       </li>
+
+
     </ul>
-
-
-
 
   </li>
 
   <ul>
 
-    <li *ngIf="node.prop">
-      <app-prop-designer [data]="o" [str]="'value'" [node]="node"></app-prop-designer>
-      <app-prop-designer [data]="o" [str]="'id'" [node]="node"></app-prop-designer>
-      <app-prop-designer [data]="o" [str]="'name'" [node]="node"></app-prop-designer>
-      <app-prop-designer [data]="o" [str]="'text'" [node]="node"></app-prop-designer>
-      <app-prop-designer [data]="o" [str]="'class'" [node]="node"></app-prop-designer>
-      <app-prop-designer [data]="o" [str]="'bindText'" [node]="node"></app-prop-designer>
-      <app-prop-designer [data]="o" [str]="'bindValue'" [node]="node"></app-prop-designer>
-      <app-prop-designer [data]="o" [str]="'checkedProperty'" [node]="node"></app-prop-designer>
-      <app-prop-designer [data]="o" [str]="'controlType'" [node]="node"></app-prop-designer>
-      <app-prop-designer [data]="o" [str]="'compType'" [node]="node"></app-prop-designer>
-
-      <div *ngIf="o.key == 'validation'">
-        <div class="row">
-          <div class="col c1">
-            validation
-          </div>
-          <div class="col c1">
-            <ul *ngFor="let vProp of node.validation | keysToArray" class="browser-default">
-              <li>{{vProp.key}} <input type="text" [(ngModel)]="node.validation[vProp.key]"></li>
-            </ul>
-
-          </div>
-        </div>
-      </div>
+    <li *ngIf="o.key == 'actions' && node.showActions">
+      <ul *ngFor="let x of node.actions" class="browser-default">
+        <li>
+          <app-actionnode [node]="x"></app-actionnode>
+        </li>
+      </ul>
     </li>
+
+
+    <li *ngIf="node.prop">
+      <!--<app-actionnode [node]="node"></app-actionnode>-->
+      <!--<app-prop-designer [data]="o" [str]="'value'" [node]="node"></app-prop-designer>-->
+      <!--<app-prop-designer [data]="o" [str]="'id'" [node]="node"></app-prop-designer>-->
+      <!--<app-prop-designer [data]="o" [str]="'name'" [node]="node"></app-prop-designer>-->
+      <!--<app-prop-designer [data]="o" [str]="'text'" [node]="node"></app-prop-designer>-->
+      <!--<app-prop-designer [data]="o" [str]="'class'" [node]="node"></app-prop-designer>-->
+      <!--<app-prop-designer [data]="o" [str]="'bindText'" [node]="node"></app-prop-designer>-->
+      <!--<app-prop-designer [data]="o" [str]="'bindValue'" [node]="node"></app-prop-designer>-->
+      <!--<app-prop-designer [data]="o" [str]="'checkedProperty'" [node]="node"></app-prop-designer>-->
+      <!--<app-prop-designer [data]="o" [str]="'controlType'" [node]="node"></app-prop-designer>-->
+      <!--<app-prop-designer [data]="o" [str]="'compType'" [node]="node"></app-prop-designer>-->
+
+      <!--<div *ngIf="o.key == 'validation'">-->
+        <!--<div class="row1">-->
+          <!--<div class="col c1">-->
+            <!--validation-->
+          <!--</div>-->
+          <!--<div class="col c1">-->
+            <!--<ul *ngFor="let vProp of node.validation | keysToArray" class="browser-default">-->
+              <!--<li>{{vProp.key}} <input type="text" [(ngModel)]="node.validation[vProp.key]"></li>-->
+            <!--</ul>-->
+
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    </li>
+
+
+
 
     <li *ngIf="node.showRowTemplate">
       <!--{{o.key}}-->
@@ -104,3 +142,6 @@
 
 
 </ul>
+
+
+

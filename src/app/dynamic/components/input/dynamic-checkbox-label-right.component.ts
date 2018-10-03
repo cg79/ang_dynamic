@@ -3,7 +3,7 @@ import {DynamicComponent} from "../../dynamic.component";
 import {ComponentInjectorService} from "../../component-injector.service";
 
 @Component({
-    selector: 'dynamic-chk-lbl-right',
+    selector: '[dynamic-chk-lbl-right]',
   template: `
     <label  id={{context?.id}}>
       <input type="checkbox" [checked]="context.val"/>

@@ -2,7 +2,7 @@ import {Component, ViewContainerRef, ViewChild, ComponentFactoryResolver} from '
 import {DynamicComponent} from "../../dynamic.component";
 
 @Component({
-    selector: 'dynamic-dropdown-template',
+    selector: '[dynamic-dropdown-template]',
   template: `
     <select class="browser-default"
     (change)="onSelect($event.target.value)" 

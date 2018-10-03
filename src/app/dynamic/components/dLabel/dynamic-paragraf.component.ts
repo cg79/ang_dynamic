@@ -2,7 +2,7 @@ import {Component, ViewContainerRef, ViewChild, ComponentFactoryResolver} from '
 import {DynamicComponent} from "../../dynamic.component";
 
 @Component({
-    selector: 'dynamic-paragraf',
+    selector: '[dynamic-paragraf]',
   template: `
     <p>
       {{context?.value}}
