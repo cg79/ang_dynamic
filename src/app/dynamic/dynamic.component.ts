@@ -63,7 +63,18 @@ export class DynamicComponent implements OnDestroy {
     'button': '[dynamic-button]',
     'fileUpload': '[dynamic-file-upload]',
     'repeater': '[dynamic-repeater]',
-    'dynamicTextLabel':'[dynamicTextLabel]'
+    'dynamicTextLabel':'[dynamicTextLabel]',
+    'accordion':'[dynamicAccordion]',
+    'autocomplete': '[dynamicAutocomplete]',
+    'carousel': '[dynamicCarousel]',
+    'chart': '[dynamicChart]',
+    'collapse': '[dynamicCollapse]',
+    'date': '[dynamicDate]',
+    'map': '[dynamicMap]',
+    'modal': '[dynamicModal]',
+    'tabs': '[dynamicTabs]',
+    'time': '[dynamicTime]',
+    'tooltip': '[dynamicTooltip]'
 
   };
 

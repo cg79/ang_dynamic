@@ -1,8 +1,8 @@
 import {Component, ViewContainerRef, ViewChild, ComponentFactoryResolver} from '@angular/core';
-import {DynamicComponent} from "../../dynamic.component";
+import {DynamicComponent} from "../../../dynamic.component";
 
 @Component({
-    selector: 'dynamic-label',
+    selector: '[dynamicChart]',
   template: `
 {{template}}
     <!--<ng-container *ngIf="template == 'default'">-->
@@ -22,7 +22,7 @@ import {DynamicComponent} from "../../dynamic.component";
     
   `
 })
-export class DynamicLabelComponent extends DynamicComponent {
+export class DynamicChartsComponent extends DynamicComponent {
   @ViewChild('dynamic1', { read: ViewContainerRef }) viewContainerRef: ViewContainerRef;
 
   constructor(

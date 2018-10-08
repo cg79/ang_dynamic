@@ -54,6 +54,17 @@ import {CustomPageComponent} from "./dynamic/pages/custom-page/custom-page.compo
 import {ActionnodeNodeComponent} from "./dynamic/pages/page-designer/actions/actionnode.component";
 import {ActionService} from "./services/actions/actionService";
 import {DynamicTextLabelComponent} from "./dynamic/components/dInput/dynamic-text-label.component";
+import {DynamicAccordionComponent} from "./dynamic/components/mdb/accordion/dynamic-accordion.component";
+import {DynamicAutocompleteComponent} from "./dynamic/components/mdb/autocomplete/dynamic-autocomplete.component";
+import {DynamicCarouselComponent} from "./dynamic/components/mdb/carousel/dynamic-carousel.component";
+import {DynamicChartsComponent} from "./dynamic/components/mdb/charts/dynamic-charts.component";
+import {DynamicCollapseComponent} from "./dynamic/components/mdb/collapse/dynamic-collapse.component";
+import {DynamicDateComponent} from "./dynamic/components/mdb/date/dynamic-date.component";
+import {DynamicMapComponent} from "./dynamic/components/mdb/maps/dynamic-map.component";
+import {DynamicModalComponent} from "./dynamic/components/mdb/modal/dynamic-modal.component";
+import {DynamicTabsComponent} from "./dynamic/components/mdb/tabs/dynamic-tabs.component";
+import {DynamicTimeComponent} from "./dynamic/components/mdb/time/dynamic-time.component";
+import {DynamicTooltipComponent} from "./dynamic/components/mdb/tooltip/dynamic-tooltip.component";
 
 const configSocket: SocketIoConfig = { url: 'http://localhost:6002', options: {} };
 
@@ -98,7 +109,18 @@ const configSocket: SocketIoConfig = { url: 'http://localhost:6002', options: {}
     LoginComponent,
     CustomPageComponent,
     ActionnodeNodeComponent,
-    DynamicTextLabelComponent
+    DynamicTextLabelComponent,
+    DynamicAccordionComponent,
+    DynamicAutocompleteComponent,
+    DynamicCarouselComponent,
+    DynamicChartsComponent,
+    DynamicCollapseComponent,
+    DynamicDateComponent,
+    DynamicMapComponent,
+    DynamicModalComponent,
+    DynamicTabsComponent,
+    DynamicTimeComponent,
+    DynamicTooltipComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'anguynamic' }),
@@ -129,7 +151,18 @@ const configSocket: SocketIoConfig = { url: 'http://localhost:6002', options: {}
     DynamicFileUploadComponent,
     DynamicDropDownTemplateComponent,
     DynamicRepeaterComponent,
-    DynamicTextLabelComponent
+    DynamicTextLabelComponent,
+    DynamicAccordionComponent,
+    DynamicAutocompleteComponent,
+    DynamicCarouselComponent,
+    DynamicChartsComponent,
+    DynamicCollapseComponent,
+    DynamicDateComponent,
+    DynamicMapComponent,
+    DynamicModalComponent,
+    DynamicTabsComponent,
+    DynamicTimeComponent,
+    DynamicTooltipComponent
   ]
 })
 export class AppModule { }
