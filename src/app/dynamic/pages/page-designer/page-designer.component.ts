@@ -135,7 +135,13 @@ export class PageDesignerComponent implements OnInit {
       }
     });
 
+    this.pubSubService.subscribe('componentSelected', (val) => {
+      this.selectedComponent = val;
+    });
+
   }
+
+  selectedComponent : any = null;
 
   move = function(array, element, delta) {
     var index = array.indexOf(element);

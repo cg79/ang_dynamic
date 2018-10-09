@@ -21,6 +21,7 @@
 
 
   <pre>{{ context.childrens | json}} </pre>
+<input type="button" (click)="refreshContext()" value="Refresf">
 
 <div class="row">
 
@@ -38,19 +39,40 @@
       <div draggable="true"
            [style.outlineColor]="dragging ? activeColor : baseColor"
            (dragstart)="onDragStart($event, option)"
-      >{{getObjectName(option)}}</div>
+      >{{getObjectName(option)}}
+      </div>
     </div>
   </div>
 
-  <div class="col ">
+  <div class="col s8">
     <div class="row" (drop)="onDrop($event, dropData)" (dragover)="allowDrop($event)">
       <span [hidden]="droppedData">Drop here</span>
       <span [hidden]="!droppedData">{{ droppedData }}</span>
     </div>
 
 
-    <div>
-    <app-tree-designer [tree]="context.childrens"></app-tree-designer>
+    <div class="row">
+      <div class="col s6 d1">
+        <!--<app-tree-designer [tree]="context.childrens"></app-tree-designer>-->
+        <div *ngFor="let tItem of context.childrens; index as i;">
+          <app-htmlnode [node]="tItem"></app-htmlnode>
+        </div>
+      </div>
+
+      <div class="col s6 d2">
+
+        <div *ngIf="selectedComponent">
+          <app-actionnode [node]="selectedComponent"></app-actionnode>
+
+          <ul  *ngFor="let x of selectedComponent.actions" class="browser-default">
+            <li>
+              <app-actionnode [node]="x"></app-actionnode>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
     </div>
 
     <!--<div *ngFor="let tItem of tree; index as i;">-->
@@ -60,17 +82,17 @@
 
   </div>
 
-  <div class="col s5">
+  <!--<div class="col s5">-->
 
 
 
-    <!--<pre> {{ renderContext | json }} </pre>-->
-    <!--<json-editor [options]="editorOptions" [data]="context"></json-editor>-->
+    <!--&lt;!&ndash;<pre> {{ renderContext | json }} </pre>&ndash;&gt;-->
+    <!--&lt;!&ndash;<json-editor [options]="editorOptions" [data]="context"></json-editor>&ndash;&gt;-->
 
-    <!--<json-editor [config]="config" [schema]="mySchema" [(record)]="context""></json-editor>-->
-    <input type="button" (click)="refreshContext()" value="Refresf">
+    <!--&lt;!&ndash;<json-editor [config]="config" [schema]="mySchema" [(record)]="context""></json-editor>&ndash;&gt;-->
+    <!---->
 
-  </div>
+  <!--</div>-->
   <!--<div class="col s1">3</div>-->
   <!--<div class="col s1">4</div>-->
   <!--<div class="col s1">5</div>-->

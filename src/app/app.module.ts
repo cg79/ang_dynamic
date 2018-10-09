@@ -65,6 +65,9 @@ import {DynamicModalComponent} from "./dynamic/components/mdb/modal/dynamic-moda
 import {DynamicTabsComponent} from "./dynamic/components/mdb/tabs/dynamic-tabs.component";
 import {DynamicTimeComponent} from "./dynamic/components/mdb/time/dynamic-time.component";
 import {DynamicTooltipComponent} from "./dynamic/components/mdb/tooltip/dynamic-tooltip.component";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {ShContextMenuModule} from 'ng2-right-click-menu';
+
 
 const configSocket: SocketIoConfig = { url: 'http://localhost:6002', options: {} };
 
@@ -129,7 +132,9 @@ const configSocket: SocketIoConfig = { url: 'http://localhost:6002', options: {}
     ModuleMapLoaderModule,
     WebStorageModule,
     AppRoutingModule,
-    SocketIoModule.forRoot(configSocket)
+    SocketIoModule.forRoot(configSocket),
+    BrowserAnimationsModule,
+    ShContextMenuModule
   ],
   providers: [ComponentInjectorService, PubSubService,HttpWrapperService, SocketService, ActionService],
   bootstrap: [AppComponent],

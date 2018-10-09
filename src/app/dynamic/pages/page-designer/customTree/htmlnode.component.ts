@@ -69,6 +69,7 @@ import {PubSubService} from "../../../../services/pubSub/pubsub";
 
   titleClick(el)
   {
+
     el.expanded = !el.expanded;
   }
   getClases(el)
@@ -78,6 +79,7 @@ import {PubSubService} from "../../../../services/pubSub/pubsub";
 
   toggleProp(el)
   {
+    this.pubSubService.publish('componentSelected', el);
     el.showRowTemplate = false;
     el.prop = !el.prop;
   }

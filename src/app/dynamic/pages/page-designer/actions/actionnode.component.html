@@ -6,7 +6,7 @@
 <!--<pre>{{o | json}}</pre>-->
   <li>
 
-    <div *ngIf="o.key !== 'key'" >
+    <div *ngIf="o.key !== 'key' && o.key != 'childrens'" >
       <label>{{o.key}} {{o.type}}</label>
       <input *ngIf="o.type === 'number' || o.type === 'string'" type="text" [(ngModel)]="node[o.key]">
     </div>
@@ -17,7 +17,7 @@
       </li>
     </ul>
 
-    <ul *ngIf="o.type === 'array'" class="browser-default">
+    <ul *ngIf="o.type === 'array' && o.key != 'childrens'" class="browser-default">
       <button (click)="addParam(node)">add param </button>
       <li>
 

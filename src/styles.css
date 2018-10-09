@@ -1,2 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
-:host { display: contents; }
+/*@import "~bootstrap/dist/css/bootstrap.css";*/
+/*@import "~font-awesome/css/font-awesome.css";*/
+
+@import "~@angular/cdk/overlay-prebuilt.css";
+
+/*html, body { height: 100%; }*/
+/*body { margin: 0; font-family: 'Roboto', sans-serif; }*/

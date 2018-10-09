@@ -37,6 +37,7 @@ ul li span.pexp
   /*font-family: Verdana,Geneva,Tahoma,Arial,Helvetica,sans-serif;*/
   background-repeat: no-repeat;
   padding-left: 5px;
+  font-weight: bold;
 }
 
 ul li span.notrexp

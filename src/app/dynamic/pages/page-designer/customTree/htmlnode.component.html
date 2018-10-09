@@ -1,5 +1,46 @@
 <!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
-
+<sh-context-menu #menu>
+  <ng-template shContextMenuItem let-data (click)="toggleProp(node)">
+    <div>
+      Toggle Properties
+    </div>
+  </ng-template>
+  <ng-template shContextMenuItem let-data (click)="toggleActions(node)">
+    <div>
+      Toggle Actions
+    </div>
+  </ng-template>
+  <ng-template shContextMenuItem let-data (click)="moveUpNode(node)">
+    <div>
+      Move Up
+    </div>
+  </ng-template>
+  <ng-template shContextMenuItem let-data (click)="moveDownNode(node)">
+    <div>
+      Move Down
+    </div>
+  </ng-template>
+  <ng-template shContextMenuItem let-data (click)="cutNode(node)">
+    <div>
+      Cut
+    </div>
+  </ng-template>
+  <ng-template shContextMenuItem let-data (click)="copyNode(node)">
+    <div>
+      Copy
+    </div>
+  </ng-template>
+  <ng-template shContextMenuItem let-data (click)="pasteNode(node)">
+    <div>
+      Paste
+    </div>
+  </ng-template>
+  <ng-template shContextMenuItem let-data (click)="deleteNode(node)">
+    <div>
+      Delete
+    </div>
+  </ng-template>
+</sh-context-menu>
 
 <ul *ngFor="let o of node | keysToArray" class="browser-default">
 
@@ -20,47 +61,53 @@
 
               <div class="col"
                    (click)="titleClick(node)"
-                   (drop)="onDrop($event, dropData)" (dragover)="allowDrop($event)">
+                   (drop)="onDrop($event, dropData)" (dragover)="allowDrop($event)"
+                   [shAttachMenu]="menu" [shMenuData]="node"
+              >
                 {{o.value}} {{node.key}}
               </div>
-              <div class="col">
-                <span (click)="moveUpNode(node)">move up</span>
-              </div>
-              <div class="col">
-                <span (click)="moveDownNode(node)">move down</span>
-              </div>
-              <div class="col">
-                <span (click)="deleteNode(node)">delete</span>
-              </div>
-              <div class="col">
-                <span (click)="cutNode(node)">cut</span>
-              </div>
-              <div class="col">
-                <span (click)="copyNode(node)">copy</span>
-              </div>
-              <div class="col">
-                <span (click)="pasteNode(node)">paste</span>
-              </div>
+              <!--<div class="col">-->
+                <!--<span (click)="moveUpNode(node)">move up</span>-->
+              <!--</div>-->
+              <!--<div class="col">-->
+                <!--<span (click)="moveDownNode(node)">move down</span>-->
+              <!--</div>-->
+              <!--<div class="col">-->
+                <!--<span (click)="deleteNode(node)">delete</span>-->
+              <!--</div>-->
+              <!--<div class="col">-->
+                <!--<span (click)="cutNode(node)">cut</span>-->
+              <!--</div>-->
+              <!--<div class="col">-->
+                <!--<span (click)="copyNode(node)">copy</span>-->
+              <!--</div>-->
+              <!--<div class="col">-->
+                <!--<span (click)="pasteNode(node)">paste</span>-->
+              <!--</div>-->
 
-              <app-actionnode [node]="node"></app-actionnode>
+              <!--<app-actionnode [node]="node"></app-actionnode>-->
 
               </div>
           </div>
 
           <div class="col" >
 
-            <span [ngClass]="getPropClases(node)">&nbsp;</span>
-            <span (click)="toggleProp(node)">Properties</span>
-          </div>
-
-          <div class="col" >
-
-            <span [ngClass]="getPropClases(node)">&nbsp;</span>
+            <!--<span [ngClass]="getPropClases(node)">&nbsp;</span>-->
             <span
-              (click)="toggleActions(node)"
-              (drop)="onDropAction($event, dropData)" (dragover)="allowDrop($event)"
-            >Actions</span>
+              [ngClass]="getPropClases(node)"
+              (click)="toggleProp(node)"
+                  (drop)="onDropAction($event, dropData)" (dragover)="allowDrop($event)"
+            >Properties</span>
           </div>
+
+          <!--<div class="col" >-->
+
+            <!--<span [ngClass]="getPropClases(node)">&nbsp;</span>-->
+            <!--<span-->
+              <!--(click)="toggleActions(node)"-->
+              <!--(drop)="onDropAction($event, dropData)" (dragover)="allowDrop($event)"-->
+            <!--&gt;Actions</span>-->
+          <!--</div>-->
 
           <div class="col" *ngIf="node.rowTemplate">
             <span [ngClass]="getTemplateClases(node)">&nbsp;</span>
@@ -77,13 +124,13 @@
 
   <ul>
 
-    <li *ngIf="o.key == 'actions' && node.showActions">
-      <ul *ngFor="let x of node.actions" class="browser-default">
-        <li>
-          <app-actionnode [node]="x"></app-actionnode>
-        </li>
-      </ul>
-    </li>
+    <!--<li *ngIf="o.key == 'actions' && node.showActions">-->
+      <!--<ul *ngFor="let x of node.actions" class="browser-default">-->
+        <!--<li>-->
+          <!--<app-actionnode [node]="x"></app-actionnode>-->
+        <!--</li>-->
+      <!--</ul>-->
+    <!--</li>-->
 
 
     <li *ngIf="node.prop">
