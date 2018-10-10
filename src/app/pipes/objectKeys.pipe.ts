@@ -1,7 +1,11 @@
 
 import {Pipe, PipeTransform} from '@angular/core';
 
-  @Pipe({name: 'keysToArray'})
+  @Pipe(
+    {
+      name: 'keysToArray',
+      pure: true
+    })
 
   export class ObjectKeysPipe implements PipeTransform {
     transform(map: { [key: string]: any }, ...parameters: any[]) {

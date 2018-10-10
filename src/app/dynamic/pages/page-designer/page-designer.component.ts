@@ -135,7 +135,28 @@ export class PageDesignerComponent implements OnInit {
       }
     });
 
+    this.pubSubService.subscribe('refreshTree', (val) => {
+      if(!val) {
+        return;
+      }
+      debugger;
+      var x = JSON.stringify(this.context.childrens);
+
+      // this.treeNode = null;
+      this.context.childrens = null;
+      this.context.childrens = JSON.parse(x);
+    });
+
+
     this.pubSubService.subscribe('componentSelected', (val) => {
+      if(this.selectedComponent ) {
+        this.selectedComponent.prop = false;
+        // this.treeNode = null;
+        // this.searchTree(this.context, val);
+      }
+
+      
+      
       this.selectedComponent = val;
     });
 
@@ -296,8 +317,9 @@ export class PageDesignerComponent implements OnInit {
         name: 'div',
         structure: {
           type:'div',
-          id:'l2',
-          class:"row"
+          id:'',
+          class:"row",
+          cols: 0
         }
       },
       {
@@ -433,6 +455,19 @@ export class PageDesignerComponent implements OnInit {
           labelText:'zxc'
         }
       },
+      {
+        name: 'number',
+        structure: {
+          type:'number',
+          value: '',
+          id:'',
+          class:"",
+          compType: 'text',
+          validation:{
+            required: "introdu ceva la container"
+          }
+        }
+      },
     ]
   };
 
@@ -474,7 +509,29 @@ export class PageDesignerComponent implements OnInit {
           id: '',
           value: ''
         }
-      }
+      },
+      {
+        setLocalStorage: {
+          key: '',
+          value: ''
+        }
+      },
+      {
+        getLocalStorage: {
+          key: ''
+        }
+      },
+      {
+        throw: {
+          message: ''
+        }
+      },
+      {
+        if: {
+          cond: '',
+          actions: []
+        }
+      },
     ]
   };
 
@@ -510,23 +567,21 @@ export class PageDesignerComponent implements OnInit {
 
 
   onDragStart(event, data) {
-    this.dragData = data;
-     event.dataTransfer.setData("text/plain",JSON.stringify(data));
+    this.dragData = JSON.stringify(data);
+       event.dataTransfer.setData("text/plain",this.dragData);
 
-    event.dataTransfer.data = data;
+    // event.dataTransfer.data = data;
 
   }
   onDrop(event, data) {
   //let dataTransfer = event.dataTransfer.getData('data');
 
-    console.log(this.dragData);
+    let obj = JSON.parse(this.dragData);
+    // console.log(this.dragData);
+    obj.structure.key = this.newGuid();
     const state = [ ...this.context.childrens];
-    state.push(this.dragData.structure);
+    state.push(obj.structure);
     this.context.childrens = state;
-
-    this.pubSubService.publish('refreshJsonEditor',null);
-
-
     this.pubSubService.publish('datachanged', this.renderContext);
     event.preventDefault();
   }

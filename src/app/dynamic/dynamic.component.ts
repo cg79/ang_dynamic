@@ -74,7 +74,8 @@ export class DynamicComponent implements OnDestroy {
     'modal': '[dynamicModal]',
     'tabs': '[dynamicTabs]',
     'time': '[dynamicTime]',
-    'tooltip': '[dynamicTooltip]'
+    'tooltip': '[dynamicTooltip]',
+    'number': '[dynamicTextNumber]'
 
   };
 

@@ -31,6 +31,7 @@ import {PubSubService} from "../../../../services/pubSub/pubsub";
     if(!node.childrens) {
       node.childrens = [];
     }
+    droppedData.structure.key = this.newGuid();
     node.childrens.push(droppedData.structure);
     // debugger;
 
@@ -51,10 +52,10 @@ import {PubSubService} from "../../../../services/pubSub/pubsub";
       node.actions = [];
     }
     node.actions.push(droppedData);
+    // this.pubSubService.publish('refreshTree', null);
     // debugger;
 
     // this.tree.push(this.dragData);
-    this.pubSubService.publish('refreshJsonEditor',null);
     // event.preventDefault();
   }
 
@@ -79,9 +80,10 @@ import {PubSubService} from "../../../../services/pubSub/pubsub";
 
   toggleProp(el)
   {
-    this.pubSubService.publish('componentSelected', el);
     el.showRowTemplate = false;
     el.prop = !el.prop;
+    this.pubSubService.publish('componentSelected', el);
+
   }
 
   toggleActions(el)
@@ -121,7 +123,6 @@ import {PubSubService} from "../../../../services/pubSub/pubsub";
     // state.push(this.dragData.structure);
     // this.context.childrens = state;
     //
-    // this.pubSubService.publish('refreshJsonEditor',null);
     //
     //
     // this.pubSubService.publish('datachanged', this.renderContext);

@@ -67,6 +67,8 @@ import {DynamicTimeComponent} from "./dynamic/components/mdb/time/dynamic-time.c
 import {DynamicTooltipComponent} from "./dynamic/components/mdb/tooltip/dynamic-tooltip.component";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ShContextMenuModule} from 'ng2-right-click-menu';
+import {DynamicTextNumberComponent} from "./dynamic/components/dInput/dynamic-text-number.component";
+import {NumberOnlyDirective} from "./directives/number";
 
 
 const configSocket: SocketIoConfig = { url: 'http://localhost:6002', options: {} };
@@ -123,7 +125,9 @@ const configSocket: SocketIoConfig = { url: 'http://localhost:6002', options: {}
     DynamicModalComponent,
     DynamicTabsComponent,
     DynamicTimeComponent,
-    DynamicTooltipComponent
+    DynamicTooltipComponent,
+    DynamicTextNumberComponent,
+    NumberOnlyDirective
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'anguynamic' }),
@@ -167,7 +171,8 @@ const configSocket: SocketIoConfig = { url: 'http://localhost:6002', options: {}
     DynamicModalComponent,
     DynamicTabsComponent,
     DynamicTimeComponent,
-    DynamicTooltipComponent
+    DynamicTooltipComponent,
+    DynamicTextNumberComponent,
   ]
 })
 export class AppModule { }

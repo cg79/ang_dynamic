@@ -13,7 +13,6 @@ export class TreeDesignerComponent implements OnInit {
 
 
   constructor(pubSubService: PubSubService) {
-    // pubSubService.subscribe('refreshJsonEditor', (val) => {
     //   const aaa = JSON.stringify(this.data);
     //   this.data = JSON.parse(aaa);
     //   console.log(this.tree);

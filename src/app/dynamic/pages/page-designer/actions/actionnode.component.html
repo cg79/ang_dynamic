@@ -1,31 +1,64 @@
 <!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
 <!--<pre>{{node | json}}</pre>-->
 
-<ul *ngFor="let o of node | keysToArray" class="browser-default">
+<ul *ngFor="let o of keys" class="browser-default xxx">
 
-<!--<pre>{{o | json}}</pre>-->
+  <!--<pre>{{o | json}}</pre>-->
   <li>
 
-    <div *ngIf="o.key !== 'key' && o.key != 'childrens'" >
-      <label>{{o.key}} {{o.type}}</label>
+    <div *ngIf="o.key !== 'key' && o.key !== 'expanded' && o.key !== 'childrens' && o.key !== 'prop' && o.key !== 'showRowTemplate' " >
+      <span *ngIf="o.key !== 'actions' && (o.type !== 'object' && o.type !== 'array')">
+        <label>{{o.key}} {{o.type}}</label>
+      </span>
+
+
+      <span *ngIf="o.type === 'object' || o.type === 'array'">
+
+        <div *ngIf="o.key === 'actions'" (click)="hideShowObject(o.value)" >
+          <label (drop)="onDropAction($event, dropData)" (dragover)="allowDrop($event)">{{o.key}} {{o.type}}</label>
+        </div>
+
+        <div *ngIf="o.key !== 'actions'" (click)="hideShowObject(o.value)" >
+          <!--llllllllll-->
+          <label>{{o.key}} {{o.type}}</label>
+        </div>
+      </span>
       <input *ngIf="o.type === 'number' || o.type === 'string'" type="text" [(ngModel)]="node[o.key]">
+
+
+    <div *ngIf="o.type == 'boolean'">
+      <!--<pre>{{node | json}} </pre>-->
+      <input type="checkbox" [(ngModel)]="node[o.key]" id="{{o.key}}"/>
+      <label for="{{o.key}}">
+        {{o.key}}
+      </label>
+
     </div>
-    <ul *ngIf="o.type === 'object'" class="browser-default">
-      <li>
-        <button *ngIf="isArray" (click)="deleteParam(o.value)">delete param </button>
-        <app-actionnode [node]="o.value"></app-actionnode>
-      </li>
-    </ul>
 
-    <ul *ngIf="o.type === 'array' && o.key != 'childrens'" class="browser-default">
-      <button (click)="addParam(node)">add param </button>
-      <li>
+    <div *ngIf="o.value.expanded">
+      <ul *ngIf="o.type === 'object'" class="browser-default">
+        <!--{{node | json}}-->
+        <li>
+          <button *ngIf="o.value.key" (click)="deleteParam(parent, o.value)">delete param </button>
+          <app-actionnode [node]="o.value"></app-actionnode>
+        </li>
+      </ul>
 
-        <app-actionnode [node]="o.value" [isArray]="true"></app-actionnode>
+      <ul *ngIf="o.key !== 'childrens' && o.type === 'array'" class="browser-default">
+        <!--{{o | json}}-->
+        <button  *ngIf="o.key === 'actions'"(click)="addParam(node, $event)">add param </button>
 
-      </li>
-    </ul>
+        <li *ngFor="let el of o.value" class="browser-default">
+          <app-actionnode [node]="el" [parent]="node" ></app-actionnode>
+        </li>
+        <!--<li>-->
 
+        <!--<app-actionnode [node]="o.value" [parent]="node" ></app-actionnode>-->
+
+        <!--</li>-->
+      </ul>
+    </div>
+    </div>
   </li>
 
 </ul>

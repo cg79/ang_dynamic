@@ -20,7 +20,9 @@
 <input type="button" value="Delete" (click)="deleteForm()"/>
 
 
-  <pre>{{ context.childrens | json}} </pre>
+  <!--<pre>{{ context.childrens | json}} </pre>-->
+<!--<pre>{{ selectedComponent | json}} </pre>-->
+
 <input type="button" (click)="refreshContext()" value="Refresf">
 
 <div class="row">
@@ -62,13 +64,16 @@
       <div class="col s6 d2">
 
         <div *ngIf="selectedComponent">
-          <app-actionnode [node]="selectedComponent"></app-actionnode>
 
-          <ul  *ngFor="let x of selectedComponent.actions" class="browser-default">
-            <li>
-              <app-actionnode [node]="x"></app-actionnode>
-            </li>
-          </ul>
+          <div *ngIf="selectedComponent.prop">
+          <app-actionnode [node]="selectedComponent"></app-actionnode>
+            </div>
+
+          <!--<ul  *ngFor="let x of selectedComponent.actions" class="browser-default yyy">-->
+            <!--<li>-->
+              <!--<app-actionnode [node]="x"></app-actionnode>-->
+            <!--</li>-->
+          <!--</ul>-->
         </div>
 
       </div>

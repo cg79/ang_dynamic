@@ -12,7 +12,7 @@ import { ComponentInjectorService } from '../../component-injector.service';
 @Component({
     selector: '[dynamic-div]',
     template: `
-    <div  id="{{context?.id}}" class="{{context?.class}}">
+    <div  id="{{context?.id}}" class="{{context?.class}}" [ngClass]="getClass()">
       <ng-template #dynamic></ng-template>
     </div>`
 })
@@ -36,6 +36,13 @@ export class DynamicDivComponent extends DynamicComponent {
 
   }
 
+  getClass() {
+    const { cols } = this.context;
+    if (cols) {
+      return `col s${cols}`;
+    }
+    return '';
+  }
 
   // constructor(private componentFactoryResolver: ComponentFactoryResolver,
   //             private viewContainerRef: ViewContainerRef) {
