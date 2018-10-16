@@ -190,28 +190,33 @@ import {PubSubService} from "../../../../services/pubSub/pubsub";
   }
 
   moveUpNode(node) {
-    // this.moveUp(, node)
-    this.pubSubService.publish('moveUpNode', node.key);
+    const {data} = node;
+    this.pubSubService.publish('moveUpNode', data.key);
   }
 
   moveDownNode(node) {
-    this.pubSubService.publish('moveDownNode', node.key);
+    const {data} = node;
+    this.pubSubService.publish('moveDownNode', data.key);
   }
 
   deleteNode(node) {
-    this.pubSubService.publish('deleteNode', node.key);
+    const {data} = node;
+    this.pubSubService.publish('deleteNode', data.key);
   }
 
   copyNode(node) {
-    this.pubSubService.publish('copyNode', node.key);
+    const {data} = node;
+    this.pubSubService.publish('copyNode', data.key);
   }
 
   cutNode(node) {
-    this.pubSubService.publish('cutNode', node.key);
+    const {data} = node;
+    this.pubSubService.publish('cutNode', data.key);
   }
 
   pasteNode(node) {
-    this.pubSubService.publish('pasteNode', node.key);
+    const {data} = node;
+    this.pubSubService.publish('pasteNode', data.key);
   }
 
 

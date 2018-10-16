@@ -139,7 +139,7 @@ const configSocket: SocketIoConfig = { url: 'http://localhost:6002', options: {}
     SocketIoModule.forRoot(configSocket),
     BrowserAnimationsModule,
     ShContextMenuModule,
-    MDBBootstrapModule.forRoot()
+    MDBBootstrapModule.forRoot(),
   ],
   providers: [ComponentInjectorService, PubSubService,HttpWrapperService, SocketService, ActionService],
   schemas: [ NO_ERRORS_SCHEMA ],

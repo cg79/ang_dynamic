@@ -34,6 +34,7 @@
     "core-js": "^2.5.4",
     "hammerjs": "^2.0.8",
     "materialize-css": "^0.100.2",
+    "ngx-draggable-widget": "^1.0.7",
     "ngx-socket-io": "^1.1.1",
     "ngx-store": "^2.0.0",
     "rxjs": "^6.3.2",

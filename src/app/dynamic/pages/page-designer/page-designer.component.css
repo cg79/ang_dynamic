@@ -15,10 +15,19 @@
 .scroll {
   height: 400px;
   overflow: auto;
-  border-left: 1px solid grey;
+  /*border-left: 1px solid grey;*/
 }
 .scroll2{
   height: 400px;
   overflow: auto;
-  border-left: 1px solid grey;
+  /*border-left: 1px solid grey;*/
+}
+
+
+.widget-container {
+  /*background-color: #282828;*/
+}
+
+.hidden {
+  display: none;
 }

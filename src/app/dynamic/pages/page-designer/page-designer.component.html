@@ -1,3 +1,5 @@
+
+
 <p>
   page-designer works!
 
@@ -28,64 +30,74 @@
 
 </p>
 
+<!--<div class="widget-container" [ngWidgetContainer]>-->
+  <!--&lt;!&ndash;https://www.npmjs.com/package/ngx-draggable-widget&ndash;&gt;-->
+  <!--<label [ngWidget]>sdsdf</label>-->
+<!--</div>-->
+
 <div class="row">
 
   <!--https://www.tutorialspoint.com/materialize/materialize_tabs.htm-->
-  <div class = "row">
-    <div class = "col s12">
+
+
+
+  <div class="col s2 scroll">
+    <div class = "row">
       <ul class = "tabs">
-        <li class = "tab col s3"><a href = "#inbox">Inbox</a></li>
-        <li class = "tab col s3"><a class = "active" href = "#unread">
-          Unread</a></li>
-        <li class = "tab col s3 disabled"><a href = "#outbox">
-          Outbox (Disabled)</a></li>
-        <li class = "tab col s3"><a href = "#sent">Sent</a></li>
+        <li class = "tab col"><span (click)="showTabPage(null)">Components</span></li>
+        <li class = "tab col"><span (click)="showTabPage(2)"> Actions</span></li>
       </ul>
     </div>
-
-    <div id = "inbox" class = "col s12">Inbox</div>
-    <div id = "unread" class = "col s12">Unread</div>
-    <div id = "outbox" class = "col s12">Outbox (Disabled)</div>
-    <div id = "sent" class = "col s12">Sent</div>
-  </div>
-
-
-  <div class="col s2 scroll">
-    <div *ngFor="let option of state.components; index as i;">
-      <div draggable="true"
-        [style.outlineColor]="dragging ? activeColor : baseColor"
-           (dragstart)="onDragStart($event, option)"
-      >{{option.name}}</div>
-    </div>
-  </div>
-
-  <div class="col s2 scroll">
-    <div *ngFor="let option of actions.operations; index as i;">
-      <div draggable="true"
-           [style.outlineColor]="dragging ? activeColor : baseColor"
-           (dragstart)="onDragStart($event, option)"
-      >{{getObjectName(option)}}
+    <div class = "row">
+    <div *ngIf="!tabPage" id = "componets" class = "">
+      <div *ngFor="let option of state.components; index as i;">
+        <div draggable="true"
+             [style.outlineColor]="dragging ? activeColor : baseColor"
+             (dragstart)="onDragStart($event, option)"
+        >{{option.name}}</div>
       </div>
     </div>
+    <div *ngIf="tabPage==2" id = "actions" class = "">
+      <div *ngFor="let option of actions.operations; index as i;">
+        <div draggable="true"
+             [style.outlineColor]="dragging ? activeColor : baseColor"
+             (dragstart)="onDragStart($event, option)"
+        >{{getObjectName(option)}}
+        </div>
+      </div>
+    </div>
+    </div>
   </div>
 
-  <div class="col s8">
+  <!--<div class="col s2 scroll">-->
+    <!---->
+  <!--</div>-->
+
+  <div class="col s10">
 
     <div class="row" (drop)="onDrop($event, dropData)" (dragover)="allowDrop($event)">
-      <span [hidden]="droppedData">Drop here</span>
-      <span [hidden]="!droppedData">{{ droppedData }}</span>
+      <div class="col">
+        <span [hidden]="droppedData">Drop here</span>
+        <span [hidden]="!droppedData">{{ droppedData }}</span>
+      </div>
+
+      <div class="col">
+        <span (click)="toggleComponents()">{{hideShowComponents.text}}</span>
+      </div>
+
+
     </div>
 
     <div class="row">
 
-      <div class="col s6 d1 scroll">
+      <div [ngClass]="hideShowComponents.css1">
         <!--<app-tree-designer [tree]="context.childrens"></app-tree-designer>-->
         <div *ngFor="let tItem of context.childrens; index as i;">
           <app-htmlnode [node]="tItem"></app-htmlnode>
         </div>
       </div>
 
-      <div class="col s6 d2 scroll2">
+      <div [ngClass]="hideShowComponents.css2">
 
         <div *ngIf="selectedComponent">
 

@@ -2,42 +2,42 @@
 <!--<pre>{{node | json}}</pre>-->
 
 <sh-context-menu #menu>
-  <ng-template shContextMenuItem let-data (click)="toggleProp(el)">
+  <ng-template shContextMenuItem let-data (click)="toggleProp($event)">
     <div>
       Toggle Properties
     </div>
   </ng-template>
-  <ng-template shContextMenuItem let-data (click)="toggleActions(node)">
+  <ng-template shContextMenuItem let-data (click)="toggleActions($event)">
     <div>
       Toggle Actions
     </div>
   </ng-template>
-  <ng-template shContextMenuItem let-data (click)="moveUpNode(node)">
+  <ng-template shContextMenuItem let-data (click)="moveUpNode($event)">
     <div>
       Move Up
     </div>
   </ng-template>
-  <ng-template shContextMenuItem let-data (click)="moveDownNode(node)">
+  <ng-template shContextMenuItem let-data (click)="moveDownNode($event)">
     <div>
       Move Down
     </div>
   </ng-template>
-  <ng-template shContextMenuItem let-data (click)="cutNode(el)">
+  <ng-template shContextMenuItem let-data (click)="cutNode($event)">
     <div>
       Cut
     </div>
   </ng-template>
-  <ng-template shContextMenuItem let-data (click)="copyNode(node)">
+  <ng-template shContextMenuItem let-data (click)="copyNode($event)">
     <div>
       Copy
     </div>
   </ng-template>
-  <ng-template shContextMenuItem let-data (click)="pasteNode(node)">
+  <ng-template shContextMenuItem let-data (click)="pasteNode($event)">
     <div>
       Paste
     </div>
   </ng-template>
-  <ng-template shContextMenuItem let-data (click)="deleteNode(node)">
+  <ng-template shContextMenuItem let-data (click)="deleteNode($event)">
     <div>
       Delete
     </div>

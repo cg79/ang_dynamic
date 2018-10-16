@@ -48,7 +48,29 @@ export class PageDesignerComponent implements OnInit {
     }
   };
 
+  hideShowComponents ={
+    text: "Hide",
+    visible: true,
+    css1: "col s6 d1 scroll",
+    css2: "col s6 d1 scroll"
+  };
 
+  tabPage: any = null;
+  showTabPage(val) {
+    this.tabPage = val;
+  }
+  toggleComponents() {
+    this.hideShowComponents.visible = !this.hideShowComponents.visible;
+    if(this.hideShowComponents.visible) {
+      this.hideShowComponents.css1 = "col s6 d1 scroll";
+      this.hideShowComponents.css2 = "col s6 d1 scroll";
+      this.hideShowComponents.text = "Hide";
+    }else{
+      this.hideShowComponents.css1 = "hidden";
+      this.hideShowComponents.css2 = "col s12 d1 scroll";
+      this.hideShowComponents.text = "Show";
+    }
+  }
 
   constructor( private pubSubService: PubSubService, private httpWrapperService: HttpWrapperService,
                private zone: NgZone
