@@ -3,7 +3,7 @@ import {
   ViewContainerRef, ComponentFactory, ComponentFactoryResolver, Type, Input, ComponentRef, OnInit, OnDestroy,
   SimpleChanges, ViewChild, TemplateRef
 } from "@angular/core";
-import * as math from 'mathjs';
+
 import {PubSubService} from "../services/pubSub/pubsub";
 
 export class DynamicComponent implements OnDestroy {
@@ -84,7 +84,11 @@ export class DynamicComponent implements OnDestroy {
 
   // @ViewChild(TemplateRef) template;
   //
-  // constructor(private vcRef:ViewContainerRef) {}
+
+
+  constructor(public pubSubService: PubSubService) {
+    this.pubSubService = pubSubService;
+  }
 
   // ngOnInit() {
   //   if(!this.vcRef) {
@@ -168,7 +172,7 @@ export class DynamicComponent implements OnDestroy {
     return component;
   }
 
-  addChild2(container:ViewContainerRef, factoryResolver: ComponentFactoryResolver, context, data) {
+  addChild2(container:ViewContainerRef, factoryResolver: ComponentFactoryResolver, context, data, compId) {
     let component = this.getComponentType(context.type, factoryResolver, container);
 
     // const factory = factoryResolver.resolveComponentFactory(componentType);
@@ -177,8 +181,17 @@ export class DynamicComponent implements OnDestroy {
     // let componentRef = this.rootViewContainer.createComponent(component);
     // (<AdComponent>componentRef.instance).data = adItem.data;
 
+    const componentFromRepeaterContext = JSON.parse(context.asString);
+    componentFromRepeaterContext.id = compId;
+
+    const { value } = componentFromRepeaterContext;
+    if(value.startsWith('[')) {
+      const newv = value.replace('[','').replace(']','');
+      componentFromRepeaterContext.value = data[newv];
+    }
+
     const inst = <DynamicComponent>component.instance;
-    inst.context = context;
+    inst.context = componentFromRepeaterContext;
     inst.data = data;
     // container.insert(component.hostView);
     return component;
@@ -210,22 +223,28 @@ export class DynamicComponent implements OnDestroy {
   }
 
   afterInit() {
-    const { obs, subscribeEvents } = this.context;
-    if (!obs || !subscribeEvents) {
+    const { obs, subscribeEvents, validation } = this.context;
+    if (obs || subscribeEvents) {
+
+      for(var i=0;i<subscribeEvents.length;i++)
+      {
+        const eventName = subscribeEvents[i];
+        obs.subscribe(eventName, (val) => {
+          this.context.obsdata = val;
+
+        });
+      }
+    }
+
+
+
+    //create validation expression
+      if(!validation) {
       return;
     }
 
-    for(var i=0;i<subscribeEvents.length;i++)
-    {
-      const eventName = subscribeEvents[i];
-      obs.subscribe(eventName, (val) => {
-        this.context.obsdata = val;
-
-      });
-
-    }
-
-
+    const validationExpressions =this.createValidationExpressions();
+    validation.expressions = validationExpressions;
   }
 
 
@@ -243,21 +262,60 @@ export class DynamicComponent implements OnDestroy {
   validate()
   {
     let { validation, value } = this.context;
-    if(this.data) {
-      value = this.data[this.context.value];
-    }
+    // if(this.data) {
+    //   value = this.data[this.context.value];
+    // }
 
     if(validation) {
       this.setError(false, null);
-      if(validation["required"]) {
+      if(validation.required && validation.required.active) {
         if(!value) {
-          this.setError(true, validation["required"]);
+          this.setError(true, validation.required["message"]);
           return;
         }
+        // const { equalWith } = validation;
+        // if(equalWith && equalWith.active) {
+        //   if(!value) {
+        //     this.setError(true, validation["message"]);
+        //     return;
+        //   }
+        //
+        // }
+        const validationExpressions =this.createValidationExpressions();
+        validation.expressions = validationExpressions;
+
+        this.pubSubService.publish('validate', validation);
+
       }
     }
   }
 
+  createValidationExpressions()
+  {
+    const expressions = [];
+
+    let { validation, value } = this.context;
+    if (!validation) {
+      return;
+    }
+
+    const { equalWith } = validation;
+    if(equalWith && equalWith.active) {
+      expressions.push({
+        // equalWith: {
+        //   id: this.context.id,
+        //   expr: `[${this.context.id}] == [${equalWith.ctrlId}]`
+        // }
+          name: 'equalWith',
+          id: this.context.id,
+          expr: `[${this.context.id}] == [${equalWith.ctrlId}]`,
+          message: equalWith.message,
+          setError: this.setError.bind(this)
+      });
+    }
+
+    return expressions;
+  }
 
   setError(isError, message){
     if(!isError) {

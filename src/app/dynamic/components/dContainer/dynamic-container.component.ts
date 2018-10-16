@@ -18,8 +18,6 @@ import {PubSubService} from "../../../services/pubSub/pubsub";
 export class DynamicContainerComponent extends DynamicComponent  {
   @ViewChild('container', { read: ViewContainerRef }) viewContainerRef: ViewContainerRef;
 
-  // private _context: any;
-
   get context(): any {
     return this._context;
   }
@@ -34,20 +32,15 @@ export class DynamicContainerComponent extends DynamicComponent  {
   }
 
 
-
-
-
-
   modelChanged() {
     this.renderComponets();
   }
 
-  pubSubService: PubSubService;
-  constructor(
-    private componentFactoryResolver: ComponentFactoryResolver,
-) {
-    super();
-    this.pubSubService = new PubSubService();
+
+  constructor(pubSubService: PubSubService,
+              private componentFactoryResolver: ComponentFactoryResolver
+  ) {
+    super(pubSubService);
     this.pubSubService.subscribe('datachanged', (val) => {
       this.context = val;
       this.renderComponets();

@@ -25,19 +25,20 @@ import {PubSubService} from "../../../../services/pubSub/pubsub";
     //let dataTransfer = event.dataTransfer.getData('data');
     var data0 = event.dataTransfer.getData("text/plain");
     const droppedData = JSON.parse(data0);
-    // const state = {...this.node};
-    // state.children = droppedData.structure;
     const node = this.node;
     if(!node.childrens) {
       node.childrens = [];
     }
-    droppedData.structure.key = this.newGuid();
-    node.childrens.push(droppedData.structure);
-    // debugger;
-
-    // this.tree.push(this.dragData);
+    if(droppedData.structure) {
+      droppedData.structure.key = this.newGuid();
+      node.childrens.push(droppedData.structure);
+    }else{
+      if(!node.actions) {
+        node.actions = [];
+      }
+      node.actions.push(droppedData);
+    }
     this.pubSubService.publish('refreshJsonEditor',null);
-    // event.preventDefault();
   }
 
   onDropAction(event) {
@@ -45,18 +46,12 @@ import {PubSubService} from "../../../../services/pubSub/pubsub";
     //let dataTransfer = event.dataTransfer.getData('data');
     var data0 = event.dataTransfer.getData("text/plain");
     const droppedData = JSON.parse(data0);
-    // const state = {...this.node};
-    // state.children = droppedData.structure;
     const node = this.node;
     if(!node.actions) {
       node.actions = [];
     }
     node.actions.push(droppedData);
-    // this.pubSubService.publish('refreshTree', null);
-    // debugger;
 
-    // this.tree.push(this.dragData);
-    // event.preventDefault();
   }
 
 
@@ -72,6 +67,8 @@ import {PubSubService} from "../../../../services/pubSub/pubsub";
   {
 
     el.expanded = !el.expanded;
+    // el.prop = !el.prop;
+    this.pubSubService.publish('componentSelected', el);
   }
   getClases(el)
   {

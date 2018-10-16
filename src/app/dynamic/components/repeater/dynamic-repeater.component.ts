@@ -1,5 +1,6 @@
 import {Component, ViewContainerRef, ViewChild, ComponentFactoryResolver} from '@angular/core';
 import {DynamicComponent} from "../../dynamic.component";
+import {PubSubService} from "../../../services/pubSub/pubsub";
 
 @Component({
     selector: '[dynamic-repeater]',
@@ -15,9 +16,10 @@ export class DynamicRepeaterComponent extends DynamicComponent {
   @ViewChild('dynamic1', { read: ViewContainerRef }) viewContainerRef: ViewContainerRef;
 
   constructor(
+    pubSubService: PubSubService,
     private componentFactoryResolver: ComponentFactoryResolver,
     ) {
-    super();
+    super(pubSubService);
     // this.service = service;
   }
 
@@ -36,11 +38,22 @@ export class DynamicRepeaterComponent extends DynamicComponent {
       return;
     }
 
+    if (!this.context.id) {
+      this.context.id = this.newGuid();
+    }
+
+    const { id } = this.context;
+    let counter = 0;
+    let compId = '';
+
     for(var j=0; j < this.context.items.length; j++) {
       const data = this.context.items[j];
       for(var i=0;i<childrens.length;i++) {
+        counter ++;
+        compId = `${id}${counter}`;
         const children = childrens[i];
-        this.addChild2(this.viewContainerRef,this.componentFactoryResolver,children, data);
+        children.asString = JSON.stringify(children);
+        this.addChild2(this.viewContainerRef,this.componentFactoryResolver, children, data, compId);
       }
     }
 

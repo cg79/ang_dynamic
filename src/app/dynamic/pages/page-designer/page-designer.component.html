@@ -21,13 +21,16 @@
 
 
   <!--<pre>{{ context.childrens | json}} </pre>-->
-<!--<pre>{{ selectedComponent | json}} </pre>-->
+<!---->
 
+<!--<pre>{{ selectedComponent | json}} </pre>-->
 <input type="button" (click)="refreshContext()" value="Refresf">
+
+</p>
 
 <div class="row">
 
-  <div class="col s2">
+  <div class="col s2 scroll">
     <div *ngFor="let option of state.components; index as i;">
       <div draggable="true"
         [style.outlineColor]="dragging ? activeColor : baseColor"
@@ -36,7 +39,7 @@
     </div>
   </div>
 
-  <div class="col s2">
+  <div class="col s2 scroll">
     <div *ngFor="let option of actions.operations; index as i;">
       <div draggable="true"
            [style.outlineColor]="dragging ? activeColor : baseColor"
@@ -47,6 +50,7 @@
   </div>
 
   <div class="col s8">
+
     <div class="row" (drop)="onDrop($event, dropData)" (dragover)="allowDrop($event)">
       <span [hidden]="droppedData">Drop here</span>
       <span [hidden]="!droppedData">{{ droppedData }}</span>
@@ -54,14 +58,15 @@
 
 
     <div class="row">
-      <div class="col s6 d1">
+
+      <div class="col s6 d1 scroll">
         <!--<app-tree-designer [tree]="context.childrens"></app-tree-designer>-->
         <div *ngFor="let tItem of context.childrens; index as i;">
           <app-htmlnode [node]="tItem"></app-htmlnode>
         </div>
       </div>
 
-      <div class="col s6 d2">
+      <div class="col s6 d2 scroll2">
 
         <div *ngIf="selectedComponent">
 
@@ -87,33 +92,15 @@
 
   </div>
 
-  <!--<div class="col s5">-->
 
-
-
-    <!--&lt;!&ndash;<pre> {{ renderContext | json }} </pre>&ndash;&gt;-->
-    <!--&lt;!&ndash;<json-editor [options]="editorOptions" [data]="context"></json-editor>&ndash;&gt;-->
-
-    <!--&lt;!&ndash;<json-editor [config]="config" [schema]="mySchema" [(record)]="context""></json-editor>&ndash;&gt;-->
-    <!---->
-
-  <!--</div>-->
-  <!--<div class="col s1">3</div>-->
-  <!--<div class="col s1">4</div>-->
-  <!--<div class="col s1">5</div>-->
-  <!--<div class="col s1">6</div>-->
-  <!--<div class="col s1">7</div>-->
-  <!--<div class="col s1">8</div>-->
-  <!--<div class="col s1">9</div>-->
-  <!--<div class="col s1">10</div>-->
-  <!--<div class="col s1">11</div>-->
-  <!--<div class="col s1">12</div>-->
 </div>
 
 
 <div class="row">
   <div class="col s12">
-    <dynamic-content [context]="context"></dynamic-content>
+    <!--<dynamic-content [context]="context"></dynamic-content>-->
+
+    <app-custom-page [data]="context"></app-custom-page>
     </div>
   </div>
 

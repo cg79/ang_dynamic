@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, SimpleChanges} from '@angular/core';
+import {Component, OnInit, ViewChild, SimpleChanges, NgZone} from '@angular/core';
 import {PubSubService} from "../../../services/pubSub/pubsub";
 import {HttpWrapperService} from "../../../services/http/httpService";
 
@@ -50,7 +50,9 @@ export class PageDesignerComponent implements OnInit {
 
 
 
-  constructor( private pubSubService: PubSubService, private httpWrapperService: HttpWrapperService) {
+  constructor( private pubSubService: PubSubService, private httpWrapperService: HttpWrapperService,
+               private zone: NgZone
+  ) {
 
 
 
@@ -132,6 +134,8 @@ export class PageDesignerComponent implements OnInit {
           element.childrens = [];
         }
         element.childrens.push(clipboardNode);
+
+        this.refreshTree();
       }
     });
 
@@ -154,12 +158,33 @@ export class PageDesignerComponent implements OnInit {
         // this.treeNode = null;
         // this.searchTree(this.context, val);
       }
+      // this.selectedComponent = null;
 
-      
-      
-      this.selectedComponent = val;
+
+      this.zone.run(() => {
+        if(!val.prop)
+        {
+          this.selectedComponent = null;
+        }else{
+          this.selectedComponent = val;
+        }
+
+      });
+
+      // setTimeout( () => {
+      //   this.selectedComponent = val;
+      // }, 1);
+
     });
 
+  }
+
+  refreshTree() {
+    var x = JSON.stringify(this.context.childrens);
+
+    // this.treeNode = null;
+    this.context.childrens = null;
+    this.context.childrens = JSON.parse(x);
   }
 
   selectedComponent : any = null;
@@ -292,8 +317,105 @@ export class PageDesignerComponent implements OnInit {
           class:'label',
           items:[{a:1, text:"ion", checked:true},{a:2, text:"Maria"}],
           rowTemplate: {
-            type:'container'
+            type:'container',
+            childrens: []
           }
+        }
+      },
+      {
+        name: 'accordion',
+        structure: {
+          type:'accordion',
+          id:'',
+          class:"",
+        }
+      },
+      {
+        name: 'autocomplete',
+        structure: {
+          type:'autocomplete',
+          id:'',
+          class:"",
+        }
+      },
+      {
+        name: 'carousel',
+        structure: {
+          type:'carousel',
+          id:'',
+          class:"",
+        }
+      },
+      {
+        name: 'charts',
+        structure: {
+          type:'charts',
+          id:'',
+          class:"",
+        }
+      },
+      {
+        name: 'collapse',
+        structure: {
+          type:'collapse',
+          id:'',
+          class:"",
+        }
+      },
+      {
+        name: 'date',
+        structure: {
+          type:'date',
+          id:'',
+          class:"",
+        }
+      },
+      {
+        name: 'maps',
+        structure: {
+          type:'maps',
+          id:'',
+          class:"",
+        }
+      },
+      {
+        name: 'modal',
+        structure: {
+          type:'modal',
+          id:'',
+          class:"",
+        }
+      },
+      {
+        name: 'tabs',
+        structure: {
+          type:'tabs',
+          id:'',
+          class:"",
+        }
+      },
+      {
+        name: 'time',
+        structure: {
+          type:'time',
+          id:'',
+          class:"",
+        }
+      },
+      {
+        name: 'tooltip',
+        structure: {
+          type:'tooltip',
+          id:'',
+          class:"",
+        }
+      },
+      {
+        name: 'video',
+        structure: {
+          type:'video',
+          id:'',
+          class:"",
         }
       },
       {
@@ -310,7 +432,7 @@ export class PageDesignerComponent implements OnInit {
         name: 'container',
         structure: {
           type:'container',
-         childrens: []
+         childrens: [{a:1}]
         }
       },
       {
@@ -327,11 +449,21 @@ export class PageDesignerComponent implements OnInit {
         structure: {
           type:'text',
           value: 'label1',
-          id:'l2',
+          id:'',
           class:"",
           compType: 'text',
+          placeholder:'',
           validation:{
-            required: "introdu ceva la container"
+            required: {
+              active: false,
+              message: "introdu ceva",
+            },
+            equalWith: {
+              active: false,
+              ctrlId: "",
+              message: "not equal with"
+            },
+
           }
         }
       },
@@ -406,7 +538,8 @@ export class PageDesignerComponent implements OnInit {
           onchangeEvent:'bbb',
           subscribeEvents:['aaa'],
           rowTemplate: {
-            type:'container'
+            type:'container',
+            childrens: []
           }
         }
       },
@@ -464,7 +597,8 @@ export class PageDesignerComponent implements OnInit {
           class:"",
           compType: 'text',
           validation:{
-            required: "introdu ceva la container"
+            required: true,
+            requiredMessage: "introdu ceva"
           }
         }
       },
@@ -475,13 +609,26 @@ export class PageDesignerComponent implements OnInit {
   actions = {
     operations: [
       {
-        http: {
+        httpPost: {
           url: '',
           proxy: {
+            collection: '',
             module: '',
             method: ''
           },
-          data: ''
+          body: '',
+        }
+      },
+      {
+        httpGet: {
+          url: '',
+          proxy: {
+            collection: '',
+            module: '',
+            method: ''
+          },
+          queryParams: '',
+          parameters:[]
         }
       },
       {
@@ -529,7 +676,13 @@ export class PageDesignerComponent implements OnInit {
       {
         if: {
           cond: '',
-          actions: []
+          yes: {
+            actions: []
+          },
+          no: {
+            actions: []
+          }
+
         }
       },
     ]

@@ -1,13 +1,59 @@
 <!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
 <!--<pre>{{node | json}}</pre>-->
 
+<sh-context-menu #menu>
+  <ng-template shContextMenuItem let-data (click)="toggleProp(el)">
+    <div>
+      Toggle Properties
+    </div>
+  </ng-template>
+  <ng-template shContextMenuItem let-data (click)="toggleActions(node)">
+    <div>
+      Toggle Actions
+    </div>
+  </ng-template>
+  <ng-template shContextMenuItem let-data (click)="moveUpNode(node)">
+    <div>
+      Move Up
+    </div>
+  </ng-template>
+  <ng-template shContextMenuItem let-data (click)="moveDownNode(node)">
+    <div>
+      Move Down
+    </div>
+  </ng-template>
+  <ng-template shContextMenuItem let-data (click)="cutNode(el)">
+    <div>
+      Cut
+    </div>
+  </ng-template>
+  <ng-template shContextMenuItem let-data (click)="copyNode(node)">
+    <div>
+      Copy
+    </div>
+  </ng-template>
+  <ng-template shContextMenuItem let-data (click)="pasteNode(node)">
+    <div>
+      Paste
+    </div>
+  </ng-template>
+  <ng-template shContextMenuItem let-data (click)="deleteNode(node)">
+    <div>
+      Delete
+    </div>
+  </ng-template>
+</sh-context-menu>
+
 <ul *ngFor="let o of keys" class="browser-default xxx">
 
   <!--<pre>{{o | json}}</pre>-->
+
   <li>
 
-    <div *ngIf="o.key !== 'key' && o.key !== 'expanded' && o.key !== 'childrens' && o.key !== 'prop' && o.key !== 'showRowTemplate' " >
-      <span *ngIf="o.key !== 'actions' && (o.type !== 'object' && o.type !== 'array')">
+    <!--&& o.key !== 'childrens'-->
+
+    <div *ngIf="o.key !== 'key' && o.key !== 'expanded'  && o.key !== 'prop' && o.key !== 'showRowTemplate' " >
+      <span *ngIf="o.key !== 'actions' && o.key !== 'rowTemplate' && (o.type !== 'object' && o.type !== 'array')">
         <label>{{o.key}} {{o.type}}</label>
       </span>
 
@@ -18,7 +64,11 @@
           <label (drop)="onDropAction($event, dropData)" (dragover)="allowDrop($event)">{{o.key}} {{o.type}}</label>
         </div>
 
-        <div *ngIf="o.key !== 'actions'" (click)="hideShowObject(o.value)" >
+        <div *ngIf="o.key === 'rowTemplate'" (click)="hideShowObject(o.value)" >
+          <label (drop)="onDropRowTemplate($event, dropData)" (dragover)="allowDrop($event)">{{o.key}} {{o.type}}</label>
+        </div>
+
+        <div *ngIf="o.key !== 'actions' && o.key !== 'rowTemplate'" (click)="hideShowObject(o.value)" >
           <!--llllllllll-->
           <label>{{o.key}} {{o.type}}</label>
         </div>
@@ -27,9 +77,10 @@
 
 
     <div *ngIf="o.type == 'boolean'">
-      <!--<pre>{{node | json}} </pre>-->
-      <input type="checkbox" [(ngModel)]="node[o.key]" id="{{o.key}}"/>
-      <label for="{{o.key}}">
+      <!--<pre>{{parent | json}} </pre>-->
+      {{nodeid}}
+      <input type="checkbox" [(ngModel)]="node[o.key]" id="{{nodeid}}"/>
+      <label for="{{nodeid}}">
         {{o.key}}
       </label>
 
@@ -40,17 +91,26 @@
         <!--{{node | json}}-->
         <li>
           <button *ngIf="o.value.key" (click)="deleteParam(parent, o.value)">delete param </button>
-          <app-actionnode [node]="o.value"></app-actionnode>
+          <app-actionnode [node]="o.value" [parent]="node"></app-actionnode>
         </li>
       </ul>
 
-      <ul *ngIf="o.key !== 'childrens' && o.type === 'array'" class="browser-default">
+      <!--o.key !== 'childrens'-->
+      <ul *ngIf="o.type === 'array'" class="browser-default">
         <!--{{o | json}}-->
         <button  *ngIf="o.key === 'actions'"(click)="addParam(node, $event)">add param </button>
 
-        <li *ngFor="let el of o.value" class="browser-default">
-          <app-actionnode [node]="el" [parent]="node" ></app-actionnode>
-        </li>
+        <li *ngFor="let el of o.value;index as i;" class="browser-default1">
+          <ul>
+           <div
+             [shAttachMenu]="menu" [shMenuData]="el"
+             (click)="hideShowObject(el)">
+                {{index}} -  {{el.type}}
+           </div>
+            <app-actionnode *ngIf="el.expanded" [node]="el" [parent]="node" ></app-actionnode>
+          </ul>
+            </li>
+
         <!--<li>-->
 
         <!--<app-actionnode [node]="o.value" [parent]="node" ></app-actionnode>-->

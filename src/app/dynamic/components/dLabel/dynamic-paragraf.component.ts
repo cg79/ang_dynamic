@@ -1,5 +1,6 @@
 import {Component, ViewContainerRef, ViewChild, ComponentFactoryResolver} from '@angular/core';
 import {DynamicComponent} from "../../dynamic.component";
+import {PubSubService} from "../../../services/pubSub/pubsub";
 
 @Component({
     selector: '[dynamic-paragraf]',
@@ -13,9 +14,10 @@ export class DynamicParagrafComponent extends DynamicComponent {
   @ViewChild('dynamic1', { read: ViewContainerRef }) viewContainerRef: ViewContainerRef;
 
   constructor(
+    pubSubService: PubSubService,
     private componentFactoryResolver: ComponentFactoryResolver,
   ) {
-    super();
+    super(pubSubService);
     // this.service = service;
   }
 

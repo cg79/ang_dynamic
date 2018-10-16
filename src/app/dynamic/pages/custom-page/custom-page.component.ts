@@ -3,6 +3,7 @@ import {PubSubService} from "../../../services/pubSub/pubsub";
 import {SocketService} from "../../../services/socket/socketService";
 import {HttpWrapperService} from "../../../services/http/httpService";
 import {ActionService} from "../../../services/actions/actionService";
+// import * as math from 'mathjs';
 
 @Component({
   selector: 'app-custom-page',
@@ -12,12 +13,15 @@ import {ActionService} from "../../../services/actions/actionService";
 export class CustomPageComponent implements OnInit {
 
   @Input() pageName: string = null;
+  @Input() data: any = null;
+
   context: any = {
     id:'asf1',
     type:'container',
     childrens: []
   };
   error: any = null;
+  formValues = {};
 
   constructor(
     private pubSubService: PubSubService,
@@ -39,11 +43,58 @@ export class CustomPageComponent implements OnInit {
       if(! actions) {
         return;
       }
-
       await this.executeActions(actions);
+    });
+
+    this.pubSubService.subscribe("validate", async (validation)=>{
+      debugger;
+      // let { validation, value } = ctrlCtx;
+      this.createFormValues(this.context);
+
+      const {expressions} = validation;
+      if(expressions && expressions.length) {
+        let expr = null;
+        let expression = null;
+        for(var i=0;i<expressions.length;i++) {
+          expression = expressions[i];
+          expr = expression.expr;
+
+          const controls = expr.match(/\[.*?\]/g);
+
+          for(var j=0;j<controls.length;j++) {
+             let ctrl = controls[j]; //ctrl is [ctrlId]
+            const ctrlId = ctrl.replace('[','').replace(']','');
+            expr = expr.replace(ctrl, `params.${ctrlId}` );
+          }
+
+          let result = this.executeCode(this.formValues, expr);
+          if (result == false) {
+              // validation.errMessage = expression.message;
+            expression.setError(true, expression.message);
+          }
+        }
+      }
+
 
     });
   }
+
+    executeCode(params, code){
+    //https://www.npmjs.com/package/angular-expressions  ???
+    try {
+      code = 'return ' + code;
+      var func = new Function('params', code);
+
+      const funcResult = func(params);
+      return funcResult;
+    }
+    catch (e) {
+      console.log(e);
+      return null;
+    }
+  }
+
+
 
   responseActions : any = {
 
@@ -140,10 +191,16 @@ export class CustomPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getFormByName(this.pageName);
+    if(this.pageName) {
+      this.getFormByName(this.pageName);
+    }
+    if(this.data) {
+      this.context = this.data;
+    }
+
   }
 
-  formValues = {};
+
   createFormValues  =(node) =>{
     if(node.id) {
       this.formValues[node.id] = node.value;

@@ -1,5 +1,6 @@
 import {Component, ViewContainerRef, ViewChild, ComponentFactoryResolver} from '@angular/core';
 import { DynamicComponent } from '../../dynamic.component';
+import {PubSubService} from "../../../services/pubSub/pubsub";
 
 @Component({
     selector: '[dynamicTextLabel]',
@@ -20,9 +21,10 @@ export class DynamicTextLabelComponent extends DynamicComponent {
   @ViewChild('errcontainer', { read: ViewContainerRef }) viewContainerRef: ViewContainerRef;
 
   constructor(
+    pubSubService: PubSubService,
     private componentFactoryResolver: ComponentFactoryResolver,
     ) {
-    super();
+    super(pubSubService);
   }
 
   ngOnInit() {

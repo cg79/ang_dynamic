@@ -8,6 +8,7 @@ import {
 
 import {DynamicComponent} from '../../dynamic.component';
 import { ComponentInjectorService } from '../../component-injector.service';
+import {PubSubService} from "../../../services/pubSub/pubsub";
 
 @Component({
     selector: '[dynamic-div]',
@@ -21,9 +22,10 @@ export class DynamicDivComponent extends DynamicComponent {
   @ViewChild('dynamic', { read: ViewContainerRef }) viewContainerRef: ViewContainerRef;
 
   constructor(
+    pubSubService: PubSubService,
     private componentFactoryResolver: ComponentFactoryResolver,
     ) {
-    super();
+    super(pubSubService);
     // this.service = service;
   }
 

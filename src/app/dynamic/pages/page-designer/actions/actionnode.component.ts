@@ -12,6 +12,10 @@ import {PubSubService} from "../../../../services/pubSub/pubsub";
   @Input() isArray : boolean;
   @Input() parent : any;
 
+  newGuid = () => (((1+Math.random())*0x10000)|0).toString(16);
+
+  nodeid : string = this.newGuid();
+
   private _node: any;
   get node(): any {
     return this._node;
@@ -47,7 +51,7 @@ import {PubSubService} from "../../../../services/pubSub/pubsub";
 }
 
 
-  newGuid = () => (((1+Math.random())*0x10000)|0).toString(16);
+
 
   hideShowObject(el) {
     el.expanded = !el.expanded;
@@ -71,6 +75,35 @@ import {PubSubService} from "../../../../services/pubSub/pubsub";
     // this.tree.push(this.dragData);
     // event.preventDefault();
   }
+
+  onDropRowTemplate(event) {
+    debugger;
+    //let dataTransfer = event.dataTransfer.getData('data');
+    var data0 = event.dataTransfer.getData("text/plain");
+    const droppedData = JSON.parse(data0);
+    // const state = {...this.node};
+    // state.children = droppedData.structure;
+    const node = this.node;
+
+    if(droppedData.structure && node.rowTemplate) {
+      droppedData.structure.key = this.newGuid();
+      node.rowTemplate.childrens.push(droppedData.structure);
+    }
+
+
+
+    // if(!node.actions) {
+    //   node.actions = [];
+    // }
+    // node.actions.push(droppedData);
+    // this.node.prop = false;
+    // this.node.prop = true;
+    // debugger;
+    // this.tree.push(this.dragData);
+    // event.preventDefault();
+  }
+
+
 
 
   onDrop(event) {

@@ -16,9 +16,9 @@ export class DynamicButtonComponent extends DynamicComponent {
 
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
-    private pubSub: PubSubService
+    pubSubService: PubSubService,
   ) {
-    super();
+    super(pubSubService);
     // this.service = service;
   }
 
@@ -32,7 +32,7 @@ export class DynamicButtonComponent extends DynamicComponent {
 
   exec() {
     debugger;
-    this.pubSub.publish('exec', this.context);
+    this.pubSubService.publish('exec', this.context);
   }
 
 }

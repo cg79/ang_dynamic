@@ -1,6 +1,7 @@
 import {Component, ViewContainerRef, ViewChild, ComponentFactoryResolver} from '@angular/core';
 import {DynamicComponent} from "../../dynamic.component";
 import {HttpWrapperService} from "../../../services/http/httpService";
+import {PubSubService} from "../../../services/pubSub/pubsub";
 
 @Component({
     selector: '[dynamic-dropdown]',
@@ -20,10 +21,11 @@ export class DynamicDropDownComponent extends DynamicComponent {
   @ViewChild('dynamic1', { read: ViewContainerRef }) viewContainerRef: ViewContainerRef;
 
   constructor(
+    pubSubService: PubSubService,
     private componentFactoryResolver: ComponentFactoryResolver,
     private httpWrapperService: HttpWrapperService
     ) {
-    super();
+    super(pubSubService);
     // this.service = service;
   }
 

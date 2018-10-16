@@ -1,5 +1,6 @@
 import {Component, ViewContainerRef, ViewChild, ComponentFactoryResolver, Input} from '@angular/core';
 import {DynamicComponent} from "../../dynamic.component";
+import {PubSubService} from "../../../services/pubSub/pubsub";
 
 @Component({
     selector: '[dynamic-file-upload]',
@@ -50,9 +51,10 @@ export class DynamicFileUploadComponent extends DynamicComponent {
 
 
   constructor(
+    pubSubService: PubSubService,
     private componentFactoryResolver: ComponentFactoryResolver,
   ) {
-    super();
+    super(pubSubService);
     // this.service = service;
   }
 

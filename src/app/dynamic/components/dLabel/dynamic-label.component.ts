@@ -2,6 +2,7 @@
   Component, ViewContainerRef, ViewChild, ComponentFactoryResolver, Renderer2, ElementRef
 } from '@angular/core';
 import {DynamicComponent} from "../../dynamic.component";
+ import {PubSubService} from "../../../services/pubSub/pubsub";
 
 @Component({
   selector:'[dinamicLabel]',
@@ -10,6 +11,7 @@ import {DynamicComponent} from "../../dynamic.component";
      <label id="{{context?.id}}" class="{{context?.class}}">
       {{context?.value}}
        <ng-template #dynamic1></ng-template>
+       <pre>{{data | json}} </pre>
     </label>
     
   <!--</ng-container>-->
@@ -30,9 +32,10 @@ export class DynamicLabelComponent extends DynamicComponent {
   constructor(
     private el: ElementRef,
     private componentFactoryResolver: ComponentFactoryResolver,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    pubSubService: PubSubService,
     ) {
-    super();
+    super(pubSubService);
     // this.service = service;
 //https://github.com/angular/angular/issues/18877
   }

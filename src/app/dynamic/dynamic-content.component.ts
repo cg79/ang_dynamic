@@ -5,6 +5,7 @@ import {
 } from '@angular/core';
 import {DynamicComponent} from "./dynamic.component";
 import {container} from "@angular/core/src/render3/instructions";
+import {PubSubService} from "../services/pubSub/pubsub";
 
 @Component({
     selector: 'dynamic-content',
@@ -30,9 +31,10 @@ export class DynamicContentComponent extends DynamicComponent  {
     // private componentRef: ComponentRef<{}>;
 
   constructor(
+    pubSubService: PubSubService,
     private componentFactoryResolver: ComponentFactoryResolver,
 ) {
-    super();
+    super(pubSubService);
     // this.service = service;
   }
 
