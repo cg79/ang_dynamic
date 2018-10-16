@@ -214,7 +214,7 @@ export class DynamicComponent implements OnDestroy {
         children.key = this.newGuid();
       }
       if(this.data) {
-        this.addChild2(container, factoryResolver, children, this.data);
+        this.addChild2(container, factoryResolver, children, this.data , 'kkk');
       }else{
         this.addChild1(container, factoryResolver, children);
       }

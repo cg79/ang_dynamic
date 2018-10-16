@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ModuleMapLoaderModule } from '@nguniversal/module-map-ngfactory-loader';
-
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 import { AppComponent } from './app.component';
 import {DynamicContentComponent} from './dynamic/dynamic-content.component';
@@ -138,9 +138,11 @@ const configSocket: SocketIoConfig = { url: 'http://localhost:6002', options: {}
     AppRoutingModule,
     SocketIoModule.forRoot(configSocket),
     BrowserAnimationsModule,
-    ShContextMenuModule
+    ShContextMenuModule,
+    MDBBootstrapModule.forRoot()
   ],
   providers: [ComponentInjectorService, PubSubService,HttpWrapperService, SocketService, ActionService],
+  schemas: [ NO_ERRORS_SCHEMA ],
   bootstrap: [AppComponent],
   entryComponents: [
     DynamicContentComponent,
