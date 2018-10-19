@@ -29,7 +29,7 @@ import {PageLabelComponent} from './dynamic/pages/page-label/page-label.componen
 import {PageDesignerComponent} from './dynamic/pages/page-designer/page-designer.component';
 import {HtmlNodeComponent} from "./dynamic/pages/page-designer/customTree/htmlnode.component";
 import {ObjectKeysPipe} from "./pipes/objectKeys.pipe";
-import {EscapeHtmlPipe} from "./pipes/keep-html.pipe";
+// import {EscapeHtmlPipe} from "./pipes/keep-html.pipe";
 import {TreeDesignerComponent} from "./dynamic/pages/page-designer/designerComponent/tree-designer.component";
 import {DynamicParagrafComponent} from "./dynamic/components/dLabel/dynamic-paragraf.component";
 import {PropDesignerComponent} from "./dynamic/pages/page-designer/customTree/prop/prop-designer.component";
@@ -47,7 +47,7 @@ import {DynamicRepeaterComponent} from "./dynamic/components/repeater/dynamic-re
 import {HttpWrapperService} from "./services/http/httpService";
 import {Http, ConnectionBackend, RequestOptions} from "@angular/http";
 import {HttpClientModule} from "@angular/common/http";
-import {HeaderComponent} from "./pages/components/header.component";
+import {HeaderComponent} from "./pages/header/header.component";
 import {SocketService} from "./services/socket/socketService";
 import {CustomPageComponent} from "./dynamic/pages/custom-page/custom-page.component";
 import {ActionnodeNodeComponent} from "./dynamic/pages/page-designer/actions/actionnode.component";
@@ -70,7 +70,6 @@ import {DynamicTextNumberComponent} from "./dynamic/components/dInput/dynamic-te
 import {NumberOnlyDirective} from "./directives/number";
 import {CustomPageRendererComponent} from "./pages/customPageRenderer/customPageRenderer.component";
 import {CustomPageRendererResolve} from "./pages/customPageRenderer/customPageRendererResolve";
-import {UserModule} from "./pages/user/user-module";
 import {
   SocialLoginModule,
   AuthServiceConfig,
@@ -80,6 +79,7 @@ import {
   VkontakteLoginProvider,
 } from "angular-6-social-login-v2";
 import {getAuthServiceConfigs} from "./app.configs";
+import {LocalizationService} from "./services/localization/localization.service";
 
 const configSocket: SocketIoConfig = { url: 'http://localhost:6002', options: {} };
 
@@ -111,7 +111,7 @@ const configSocket: SocketIoConfig = { url: 'http://localhost:6002', options: {}
     TreeDesignerComponent,
     HtmlNodeComponent,
     ObjectKeysPipe,
-    EscapeHtmlPipe,
+    // EscapeHtmlPipe,
     DynamicParagrafComponent,
     PropDesignerComponent,
     DynamicDropDownComponent,
@@ -151,13 +151,13 @@ const configSocket: SocketIoConfig = { url: 'http://localhost:6002', options: {}
     ShContextMenuModule,
     MDBBootstrapModule.forRoot(),
     SocialLoginModule,
-    UserModule
   ],
   providers: [ComponentInjectorService,
     PubSubService,
     HttpWrapperService,
     SocketService,
     ActionService,
+    LocalizationService
     // CustomPageRendererResolve,
     // {
     //   provide: AuthServiceConfig,

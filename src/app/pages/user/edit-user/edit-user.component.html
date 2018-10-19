@@ -87,7 +87,6 @@
                    name="phone"
                    required
                    id="phone"
-                   [textMask]="{mask: mask}"
                    pattern="\(\d{4}\) \d{3}-\d{3}"
                    [(ngModel)]="user.phone"
             >
@@ -160,14 +159,6 @@
                 > <label for="allowLogo"> Logo-ul poate sa apara pe site</label>
               </div>
 
-            </div>
-
-            <div class="col-md-6">
-              <label>Logo firma</label>
-              <div class="logo">
-                <app-file-component [(obj)]="user" prop="companyLogo" extraClass="small"
-                                    isDisabled="{{user.userOrCompany == 0}}"></app-file-component>
-              </div>
             </div>
 
           </div>

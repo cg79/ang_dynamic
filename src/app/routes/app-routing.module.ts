@@ -28,6 +28,7 @@ const appRoutes: Routes = [
     component: NotFoundComponent
   },
   { path: '',   redirectTo: '/home', pathMatch: 'full' },
+  { path: 'user', loadChildren: '../pages/user/user-module#UserModule'},
   { path: '**', component: CustomPageRendererComponent,
     resolve: {
       hero: CustomPageRendererResolve
@@ -40,7 +41,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(
       appRoutes,
       {
-        enableTracing: false, // <-- debugging purposes only
+        enableTracing: true, // <-- debugging purposes only
         // preloadingStrategy: SelectivePreloadingStrategy,
 
       }

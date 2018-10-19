@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {PubSubService} from "../../../../../../../../07_angular2/cli/fullsd/src/app/services/pubsub/pubsub";
-import language from '../../../../../../../../07_angular2/cli/fullsd/src/app/facade/language';
+import {PubSubService} from "../pubSub/pubsub";
+import language from '../../facade/language';
 
 @Injectable()
 export class LocalizationService {
