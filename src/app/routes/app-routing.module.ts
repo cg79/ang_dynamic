@@ -7,6 +7,8 @@ import {HomeComponent} from "../pages/home/home.component";
 import {NotFoundComponent} from "../pages/not-found/notfound.component";
 import {PageDesignerComponent} from "../dynamic/pages/page-designer/page-designer.component";
 import {LoginComponent} from "../pages/login/login.component";
+import {CustomPageRendererComponent} from "../pages/customPageRenderer/customPageRenderer.component";
+import {CustomPageRendererResolve} from "../pages/customPageRenderer/customPageRendererResolve";
 
 const appRoutes: Routes = [
   {
@@ -21,9 +23,16 @@ const appRoutes: Routes = [
     path: 'designer',
     component: PageDesignerComponent
   },
-
+  {
+    path: 'notfound',
+    component: NotFoundComponent
+  },
   { path: '',   redirectTo: '/home', pathMatch: 'full' },
-  { path: '**', component: NotFoundComponent }
+  { path: '**', component: CustomPageRendererComponent,
+    resolve: {
+      hero: CustomPageRendererResolve
+    },
+  }
 ];
 
 @NgModule({

@@ -27,7 +27,7 @@ export class HttpWrapperService {
 
   }
 
-  postJson(url, body): Observable<any> {
+  postJson(url, body): any {
     try {
       let user : any = null;
       // console.log(user);
@@ -39,26 +39,27 @@ export class HttpWrapperService {
         })
       };
 
-      // let headers = new Headers({'Content-Type': 'application/json'});
-      // headers.append('Authorization', user == null ? "" : user.token);
-      // let options = new RequestOptions({headers: headers});
       const apiUrl = this.serverUrl + url;
-      // console.log(apiUrl);
-      // console.log(body);
 
+      return this.http.post(apiUrl, body, httpOptions);
 
-      const response = this.http.post(apiUrl, body, httpOptions);
-      return response;
-      // return {
-      //   data: response.json(),
-      //   success: true
-      // };
+      // const response = this.http.post(apiUrl, body, httpOptions)
+      //   .then(data =>  data)
+      //   .catch(err => {
+      //       console.error(err); // deal with API error (eg not found)
+      //     return {
+      //       data: null,
+      //       success: false
+      //     };
+      //     });
+      // return response;
+
     }
     catch (e) {
-      // return {
-      //   data: null,
-      //   success: false
-      // };
+      return {
+        data: null,
+        success: false
+      };
     }
   }
 
@@ -117,4 +118,55 @@ export class HttpWrapperService {
   }
 
 
+  postJsonObs(url, body): Observable<any> {
+    try {
+      let user : any = null;
+      // console.log(user);
+      user = this.pubSubService.getKeyValue('user');
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type':  'application/json',
+          'Authorization': user == null ? '' : user.token
+        })
+      };
+
+      // let headers = new Headers({'Content-Type': 'application/json'});
+      // headers.append('Authorization', user == null ? "" : user.token);
+      // let options = new RequestOptions({headers: headers});
+      const apiUrl = this.serverUrl + url;
+      // console.log(apiUrl);
+      // console.log(body);
+
+
+      return this.http.post(apiUrl, body, httpOptions);
+    }
+    catch (e) {
+      return null;
+    }
+  }
+
+  async postFormData(url, formData) : Promise<any> {
+    // try {
+    //   let user : any = this.localStorageService.get('user');
+    //   console.log(user);
+    //
+    //   const apiUrl = this.serverUrl + url;
+    //   let headers = new Headers();
+    //   headers.append('Authorization', user == null ? "" : user.token);
+    //
+    //   let options = new RequestOptions({ headers: headers });
+    //   const response = await this.http.post(apiUrl, formData, options).toPromise();
+    //   return {
+    //     data: response.json(),
+    //     success: true
+    //   };
+    //
+    // }
+    // catch (ex) {
+    //   return {
+    //     data: ex,
+    //     success: false
+    //   };
+    // }
+  }
 }

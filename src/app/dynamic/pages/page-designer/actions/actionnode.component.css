@@ -1,73 +1,96 @@
 ul {list-style-type: none;}
 
-ul li.notexpanded
-{
-  list-style-image: url(./../Content/images/arw1.png);
-  /*font-family: Verdana,Geneva,Tahoma,Arial,Helvetica,sans-serif;*/
-  /*font-size: 15px;*/
-  /*color: #494949;*/
-  /*line-height: 2;*/
-  /*text-align: justify;*/
-  /*cursor: pointer;*/
-}
+/*ul li.notexpanded*/
+/*{*/
+  /*list-style-image: url(./../Content/images/arw1.png);*/
+  /*!*font-family: Verdana,Geneva,Tahoma,Arial,Helvetica,sans-serif;*!*/
+  /*!*font-size: 15px;*!*/
+  /*!*color: #494949;*!*/
+  /*!*line-height: 2;*!*/
+  /*!*text-align: justify;*!*/
+  /*!*cursor: pointer;*!*/
+/*}*/
 
-ul li.expanded
-{
-  list-style-image: url(./../Content/images/arw2.png);
-  /*font-family: Verdana,Geneva,Tahoma,Arial,Helvetica,sans-serif;*/
-  /*font-size: 15px;*/
-  /*color: #494949;*/
-  /*line-height: 2;*/
-  /*text-align: justify;*/
-  /*cursor: pointer;*/
-}
+/*ul li.expanded*/
+/*{*/
+  /*list-style-image: url(./../Content/images/arw2.png);*/
+  /*!*font-family: Verdana,Geneva,Tahoma,Arial,Helvetica,sans-serif;*!*/
+  /*!*font-size: 15px;*!*/
+  /*!*color: #494949;*!*/
+  /*!*line-height: 2;*!*/
+  /*!*text-align: justify;*!*/
+  /*!*cursor: pointer;*!*/
+/*}*/
 
 
-ul li span.notpexp
-{
-  background-image: url(./../Content/images/arw1.png);
-  /*font-family: Verdana,Geneva,Tahoma,Arial,Helvetica,sans-serif;*/
+/*ul li span.notpexp*/
+/*{*/
+  /*background-image: url(./../Content/images/arw1.png);*/
+  /*!*font-family: Verdana,Geneva,Tahoma,Arial,Helvetica,sans-serif;*!*/
+  /*background-repeat: no-repeat;*/
+  /*padding-left: 5px;*/
+/*}*/
+
+/*ul li span.pexp*/
+/*{*/
+  /*background-image: url(./../Content/images/arw2.png);*/
+  /*!*font-family: Verdana,Geneva,Tahoma,Arial,Helvetica,sans-serif;*!*/
+  /*background-repeat: no-repeat;*/
+  /*padding-left: 5px;*/
+/*}*/
+
+/*ul li span.notrexp*/
+/*{*/
+  /*background-image: url(./../Content/images/arw1.png);*/
+  /*!*font-family: Verdana,Geneva,Tahoma,Arial,Helvetica,sans-serif;*!*/
+  /*background-repeat: no-repeat;*/
+  /*padding-left: 5px;*/
+/*}*/
+
+/*ul li span.rexp*/
+/*{*/
+  /*background-image: url(./../Content/images/arw2.png);*/
+  /*!*font-family: Verdana,Geneva,Tahoma,Arial,Helvetica,sans-serif;*!*/
+  /*background-repeat: no-repeat;*/
+  /*padding-left: 5px;*/
+/*}*/
+
+
+/*ul li span.expanded*/
+/*{*/
+  /*background-image: url(./../Content/images/arw2.png);*/
+  /*!*font-family: Verdana,Geneva,Tahoma,Arial,Helvetica,sans-serif;*!*/
+  /*background-repeat: no-repeat;*/
+  /*padding-left: 5px;*/
+/*}*/
+
+/*ul li span.notexpanded*/
+/*{*/
+  /*background-image: url(./../Content/images/arw1.png);*/
+  /*!*font-family: Verdana,Geneva,Tahoma,Arial,Helvetica,sans-serif;*!*/
+  /*background-repeat: no-repeat;*/
+  /*padding-left: 5px;*/
+/*}*/
+
+span.expanded {
+  background-image: url(./../Content/images/minus32.png);
   background-repeat: no-repeat;
-  padding-left: 5px;
+  padding-left: 35px;
+  background-position-y: center;
 }
 
-ul li span.pexp
-{
-  background-image: url(./../Content/images/arw2.png);
-  /*font-family: Verdana,Geneva,Tahoma,Arial,Helvetica,sans-serif;*/
+span.notexpanded {
+  background-image: url(./../Content/images/plus32.png);
   background-repeat: no-repeat;
-  padding-left: 5px;
+  padding-left: 35px;
+  background-position-y: center;
 }
 
-ul li span.notrexp
-{
-  background-image: url(./../Content/images/arw1.png);
-  /*font-family: Verdana,Geneva,Tahoma,Arial,Helvetica,sans-serif;*/
-  background-repeat: no-repeat;
-  padding-left: 5px;
+.dropable {
+  font-weight: bold;
+  color: #d82a2a;
 }
 
-ul li span.rexp
-{
-  background-image: url(./../Content/images/arw2.png);
-  /*font-family: Verdana,Geneva,Tahoma,Arial,Helvetica,sans-serif;*/
-  background-repeat: no-repeat;
-  padding-left: 5px;
-}
-
-
-ul li span.expanded
-{
-  background-image: url(./../Content/images/arw2.png);
-  /*font-family: Verdana,Geneva,Tahoma,Arial,Helvetica,sans-serif;*/
-  background-repeat: no-repeat;
-  padding-left: 5px;
-}
-
-ul li span.notexpanded
-{
-  background-image: url(./../Content/images/arw1.png);
-  /*font-family: Verdana,Geneva,Tahoma,Arial,Helvetica,sans-serif;*/
-  background-repeat: no-repeat;
-  padding-left: 5px;
+.desc {
+  color: gray;
 }

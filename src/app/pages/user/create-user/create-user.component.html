@@ -1,0 +1,281 @@
+<div class="container1">
+
+  <div class="row">
+    <div class="col-md-5">
+
+    </div>
+    <div class="col-md-4">
+      <!---->
+
+
+      <form class="form-signin mg-btm" #createUserForm="ngForm" (ngSubmit)="submitForm()" autocomplete="false">
+
+        <div class="text-center">
+          <div class="icon-object border-slate-300 text-slate-300"><i class="icon-reading"></i></div>
+          <h5 class="content-group">{{localizationService.language.create_user_screen.title}}
+            <!--<small class="display-block">Your credentials</small>-->
+          </h5>
+        </div>
+
+
+        <div class="main">
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="firstName">{{localizationService.language.create_user_screen.fname}}</label>
+                <input type="text"
+                       class="form-control"
+                       placeholder="Nume" autofocus required
+                       name="firstName"
+                       id="firstName"
+                       [(ngModel)]="ui.firstName"
+                       maxlength="50"
+                >
+
+                <div class="row col-md-12 error">
+                  <!--{{ currentForm.form.controls.firstName.errors | json}}-->
+                  <div class="form-control-feedback1"
+                       *ngIf="currentForm && currentForm.form.controls.firstName && currentForm.form.controls.firstName.errors &&
+              (currentForm.form.controls.firstName.dirty)">
+
+                    <p *ngIf="currentForm.form.controls.firstName.errors.required">Introduceti numele</p>
+                    <p *ngIf="currentForm.form.controls.firstName.errors.maxLength">Lungimea numelui este prea mare</p>
+                  </div>
+                </div>
+
+
+              </div>
+              </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="lastName">{{localizationService.language.create_user_screen.lName}}</label>
+                <input type="text"
+                       class="form-control"
+                       placeholder="Prenume" required
+                       name="lastName"
+                       id="lastName"
+                       [(ngModel)]="ui.lastName"
+                       maxlength="50"
+                >
+                <div class="row col-md-12 error">
+                  <!--{{ currentForm.form.controls.firstName.errors | json}}-->
+                  <div class="form-control-feedback1"  *ngIf="currentForm && currentForm.form.controls.lastName && currentForm.form.controls.lastName.errors &&
+              (currentForm.form.controls.lastName.dirty)">
+
+                    <p *ngIf="currentForm.form.controls.lastName.errors.required">Introduceti prenumele</p>
+                    <p *ngIf="currentForm.form.controls.lastName.errors.maxLength">Lungimea numelui este prea mare</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="form-group">
+            <label for="phone">{{localizationService.language.create_user_screen.phone}}</label>
+            <input type="text"
+                   class="form-control"
+                     name="phone"
+                   required
+                   id="phone"
+                   [textMask]="{mask: mask}"
+                   pattern="\(\d{4}\) \d{3}-\d{3}"
+                   [(ngModel)]="ui.phone"
+            >
+            <div class="row1 col-mdt-12 error">
+              <div class="form-control-feedback1"  *ngIf="currentForm && currentForm.form.controls.phone && currentForm.form.controls.phone.errors &&
+              (currentForm.form.controls.phone.dirty)">
+
+                <p *ngIf="currentForm.form.controls.phone.errors.required">Introduceti telefonul</p>
+                <p *ngIf="currentForm.form.controls.phone.errors.pattern">Telefonul nu este complet</p>
+                <!--<p *ngIf="currentForm.form.controls.phone.errors.required">Lungimea numelui este prea mare</p>-->
+              </div>
+            </div>
+          </div>
+
+          <!--<pre>{{ui | json}}</pre>-->
+          <div class="form-group">
+          <section class="customRadio">
+            <div>
+              <input type="radio" id="control_01" name="select"
+                     [value]=0
+                     [(ngModel)]=ui.userOrCompany>
+              <label for="control_01">
+                <h2>{{localizationService.language.create_user_screen.pf}}</h2>
+                <!--<p>Inregistrare cu scopul de a participa la cursuri.</p>-->
+              </label>
+            </div>
+            <div>
+              <input type="radio" id="control_02" name="select" [value]=1
+                     [(ngModel)]=ui.userOrCompany>
+              <label for="control_02">
+                <h2>{{localizationService.language.create_user_screen.company}}</h2>
+                <!--<p>Inregistare ca reprezentant a unei firme IT.</p>-->
+              </label>
+            </div>
+          </section>
+          </div>
+
+          <div class="form-group" >
+              <div class="col-md-6">
+                <div class="row">
+              <label for="numeFirma">{{localizationService.language.create_user_screen.cmpName}}</label>
+              <input type="text"
+                     name="numeFirma"
+                     id="numeFirma"
+                     disabled="{{ui.userOrCompany == 0}}"
+                     class="form-control"
+                     placeholder={{localizationService.language.create_user_screen.cmpName}}
+                     required
+                     [(ngModel)]="ui.companyName"
+              >
+              <div class="row col-md-12 error">
+                <!--{{currentForm.form.controls.numeFirma.errors | json}}-->
+                <div class="form-control-feedback1"  *ngIf="currentForm && currentForm.form.controls.numeFirma && currentForm.form.controls.numeFirma.errors &&
+              (currentForm.form.controls.numeFirma.dirty)">
+
+                  <p *ngIf="currentForm.form.controls.numeFirma.errors.required">Introduceti numele</p>
+                  <p *ngIf="currentForm.form.controls.numeFirma.errors.maxLength">Lungimea numelui este prea mare</p>
+                </div>
+              </div>
+
+              </div>
+
+              <!--<div class="row">-->
+              <!--<input type="checkbox"-->
+                     <!--name="allowLogo"-->
+                     <!--class="mychk"-->
+                     <!--id="allowLogo"-->
+                     <!--[(ngModel)]="ui.allowLogo"-->
+                     <!--disabled="{{ui.userOrCompany == 0}}"-->
+              <!--&gt; <label for="allowLogo"> Logo-ul poate sa apara pe site</label>-->
+              <!--</div>-->
+
+            </div>
+
+            <!--<div class="col-md-6">-->
+              <!--<label>Logo firma</label>-->
+              <!--<div class="logo">-->
+                <!--<app-file-component [(obj)]="ui" prop="companyLogo" extraClass="small"-->
+                                    <!--isDisabled="{{ui.userOrCompany == 0}}"></app-file-component>-->
+              <!--</div>-->
+            <!--</div>-->
+
+          </div>
+
+          <div class="clearfix"></div>
+          <div class="row">
+            <hr>
+          </div>
+
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="email">{{localizationService.language.login_screen.email}}</label>
+                <input type="text"
+                       class="form-control"
+                       placeholder="Email" autofocus required
+                       name="email"
+                       id="email"
+                       [(ngModel)]="ui.email"
+                       pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$"
+                       maxlength="50"
+                >
+
+                <div class="row col-md-12 error">
+                  <!--{{ currentForm.form.controls.firstName.errors | json}}-->
+                  <div class="form-control-feedback1"  *ngIf="currentForm && currentForm.form.controls.email && currentForm.form.controls.email.errors &&
+              (currentForm.form.controls.email.dirty)">
+
+                    <p *ngIf="currentForm.form.controls.email.errors.required">Introduceti email-ul</p>
+                    <p *ngIf="currentForm.form.controls.email.errors.maxLength">Lungimea numelui este prea mare</p>
+                    <small [hidden]="!currentForm.form.controls.email.errors.pattern">Emailul este incorect</small>
+                  </div>
+                </div>
+
+
+              </div>
+              </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="password">{{localizationService.language.login_screen.password}}</label>
+                <input type="password" class="form-control" placeholder="Password" required name="password" id="password"
+                       maxlength="50"
+                       required
+                       [(ngModel)]="ui.password" >
+
+                <div class="row" *ngIf="currentForm && currentForm.controls.password && currentForm.controls.password.errors &&
+              (currentForm.controls.password.dirty)">
+                  <p *ngIf="currentForm.form.controls.password.errors.required">{{localizationService.language.login_screen.notp}}</p>
+                  <p *ngIf="currentForm.form.controls.password.errors.maxLength">{{localizationService.language.login_screen.pLength}}</p>
+                </div>
+              </div>
+              </div>
+          </div>
+
+
+
+
+
+          <div class="form-group login-options">
+            <div class="row">
+              <div class="col-sm-6">
+                <!--<label class="checkbox-inline">-->
+                <!--<div class="checker"><span class="checked"><input type="checkbox" class="styled" checked="checked"></span></div>-->
+                <!--Remember-->
+                <!--</label>-->
+              </div>
+
+              <div class="col-sm-6 text-right">
+                <!--<a href="#" (click)="gotoResetPassword()">Resetare parola?</a>-->
+                <a [routerLink]="['/user/forgotPassword']">{{localizationService.language.login_screen.resetP}}</a>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row center">
+            <button type="submit" class="btn btn-primary btn-block">{{localizationService.language.login_screen.createU}}
+            </button>
+            <span class="error"> {{uiMessage}}</span>
+          </div>
+
+          <!--#######################################-->
+
+
+          <!--<span class="clearfix"></span>-->
+          <!--Are you a business? <a href=""> Get started here</a>-->
+          <!--<span class="clearfix"></span>-->
+        </div>
+        <!--<div class="login-footer">-->
+        <!--<div class="row">-->
+        <!--<div class="col-xs-7 col-md-7">-->
+        <!--<div class="left-section">-->
+        <!--<a href="#" (click)="gotoResetPassword()">Resetare parola?</a>-->
+        <!--<span class="clearfix"></span>-->
+        <!--&lt;!&ndash;<a href="">Sign up now</a>&ndash;&gt;-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="col-xs-5 col-md-5 pull-right">-->
+        <!--<button type="submit" class="btn1 btn-large btn-danger pull-right">Login</button>-->
+        <!--</div>-->
+        <!--</div>-->
+
+        <!--</div>-->
+      </form>
+    </div>
+
+    <div class="col-md-3">
+    </div>
+  </div>
+
+
+</div>
+
+<!--style="visibility: hidden"-->
+
+<app-filler></app-filler>

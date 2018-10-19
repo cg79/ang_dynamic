@@ -69,7 +69,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ShContextMenuModule} from 'ng2-right-click-menu';
 import {DynamicTextNumberComponent} from "./dynamic/components/dInput/dynamic-text-number.component";
 import {NumberOnlyDirective} from "./directives/number";
-
+import {CustomPageRendererComponent} from "./pages/customPageRenderer/customPageRenderer.component";
+import {CustomPageRendererResolve} from "./pages/customPageRenderer/customPageRendererResolve";
+import {UserModule} from "./pages/user/user-module";
+import {
+  SocialLoginModule,
+  AuthServiceConfig,
+  GoogleLoginProvider,
+  FacebookLoginProvider,
+  LinkedinLoginProvider,
+  VkontakteLoginProvider,
+} from "angular-6-social-login-v2";
+import {getAuthServiceConfigs} from "./app.configs";
 
 const configSocket: SocketIoConfig = { url: 'http://localhost:6002', options: {} };
 
@@ -127,7 +138,8 @@ const configSocket: SocketIoConfig = { url: 'http://localhost:6002', options: {}
     DynamicTimeComponent,
     DynamicTooltipComponent,
     DynamicTextNumberComponent,
-    NumberOnlyDirective
+    NumberOnlyDirective,
+    CustomPageRendererComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'anguynamic' }),
@@ -140,8 +152,20 @@ const configSocket: SocketIoConfig = { url: 'http://localhost:6002', options: {}
     BrowserAnimationsModule,
     ShContextMenuModule,
     MDBBootstrapModule.forRoot(),
+    SocialLoginModule,
+    UserModule
   ],
-  providers: [ComponentInjectorService, PubSubService,HttpWrapperService, SocketService, ActionService],
+  providers: [ComponentInjectorService,
+    PubSubService,
+    HttpWrapperService,
+    SocketService,
+    ActionService,
+    CustomPageRendererResolve,
+    {
+      provide: AuthServiceConfig,
+      useFactory: getAuthServiceConfigs
+    }
+  ],
   schemas: [ NO_ERRORS_SCHEMA ],
   bootstrap: [AppComponent],
   entryComponents: [

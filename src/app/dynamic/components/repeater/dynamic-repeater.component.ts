@@ -6,10 +6,7 @@ import {PubSubService} from "../../../services/pubSub/pubsub";
     selector: '[dynamic-repeater]',
   template: `
       <ng-template #dynamic1></ng-template>
-      <!--<div *ngFor="let item of context.items">-->
-         <!--<dynamic-content [context]="context.rowTemplate" [data]="item"></dynamic-content>-->
-      <!--</div>-->
-`
+  `
 })
 
 export class DynamicRepeaterComponent extends DynamicComponent {
@@ -32,7 +29,7 @@ export class DynamicRepeaterComponent extends DynamicComponent {
     {
       return;
     }
-    const { childrens } = this.context.rowTemplate;
+    const { childrens } = this.context;
     if(!childrens)
     {
       return;

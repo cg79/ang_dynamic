@@ -85,9 +85,9 @@ import {PubSubService} from "../../../../services/pubSub/pubsub";
     // state.children = droppedData.structure;
     const node = this.node;
 
-    if(droppedData.structure && node.rowTemplate) {
+    if(droppedData.structure && node.childrens) {
       droppedData.structure.key = this.newGuid();
-      node.rowTemplate.childrens.push(droppedData.structure);
+      node.childrens.push(droppedData.structure);
     }
 
 
@@ -144,14 +144,8 @@ import {PubSubService} from "../../../../services/pubSub/pubsub";
 
   toggleProp(el)
   {
-    el.showRowTemplate = false;
     el.prop = !el.prop;
 
-  }
-
-  toggleRowTemplate(el) {
-    el.prop = false;
-    el.showRowTemplate = !el.showRowTemplate;
   }
 
 
@@ -160,10 +154,6 @@ import {PubSubService} from "../../../../services/pubSub/pubsub";
     return el.prop? "pexp":"notpexp";
   }
 
-  getTemplateClases(el)
-  {
-    return el.showRowTemplate? "rexp":"notrexp";
-  }
 
   dragData: any = null;
   onDragStartNode(event, data) {
@@ -217,6 +207,19 @@ import {PubSubService} from "../../../../services/pubSub/pubsub";
   pasteNode(node) {
     const {data} = node;
     this.pubSubService.publish('pasteNode', data.key);
+  }
+
+  pasteToChildrens(node) {
+    const {data} = node;
+
+    const clipboard = this.pubSubService.getKeyValue('clipboard');
+    if(!clipboard) {
+      return;
+    }
+    const clipboardNode = JSON.parse(clipboard);
+
+    data.push(clipboardNode);
+    //this.pubSubService.publish('pasteNode', data.key);
   }
 
 

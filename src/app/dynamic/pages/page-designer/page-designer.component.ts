@@ -96,6 +96,7 @@ export class PageDesignerComponent implements OnInit {
       if(this.treeNode) {
         const { parentNode, element } = this.treeNode;
         this.moveUp(parentNode.childrens, element);
+        // this.refreshTree();
       }
     });
 
@@ -105,6 +106,7 @@ export class PageDesignerComponent implements OnInit {
       if(this.treeNode) {
         const { parentNode, element } = this.treeNode;
         this.moveDown(parentNode.childrens, element);
+        // this.refreshTree();
       }
     });
 
@@ -116,6 +118,7 @@ export class PageDesignerComponent implements OnInit {
         const sss = JSON.stringify(this.context.childrens);
         const childrens = JSON.parse(sss);
         this.context.childrens = childrens;
+        this.refreshTree();
       }
     });
 
@@ -129,6 +132,7 @@ export class PageDesignerComponent implements OnInit {
         const n = JSON.parse(nasStr);
         this.changeIds(n);
         this.pubSubService.setKeyValue('clipboard', JSON.stringify(n));
+
       }
     });
 
@@ -142,6 +146,7 @@ export class PageDesignerComponent implements OnInit {
         const sss = JSON.stringify(this.context.childrens);
         const childrens = JSON.parse(sss);
         this.context.childrens = childrens;
+        // this.refreshTree();
       }
     });
 
@@ -207,6 +212,15 @@ export class PageDesignerComponent implements OnInit {
     // this.treeNode = null;
     this.context.childrens = null;
     this.context.childrens = JSON.parse(x);
+
+    if(this.selectedComponent) {
+      var y = JSON.stringify(this.selectedComponent);
+
+      // this.treeNode = null;
+      this.selectedComponent = null;
+      this.selectedComponent = JSON.parse(y);
+
+    }
   }
 
   selectedComponent : any = null;
@@ -338,10 +352,7 @@ export class PageDesignerComponent implements OnInit {
           id:'l1',
           class:'label',
           items:[{a:1, text:"ion", checked:true},{a:2, text:"Maria"}],
-          rowTemplate: {
-            type:'container',
-            childrens: []
-          }
+          childrens: []
         }
       },
       {
@@ -559,10 +570,7 @@ export class PageDesignerComponent implements OnInit {
           value:"1",
           onchangeEvent:'bbb',
           subscribeEvents:['aaa'],
-          rowTemplate: {
-            type:'container',
-            childrens: []
-          }
+          childrens: []
         }
       },
       {
@@ -579,7 +587,8 @@ export class PageDesignerComponent implements OnInit {
           type:'button',
           class:'',
           compType:'link',
-          value:'btn'
+          value:'btn',
+          actions: []
         }
       },
       {

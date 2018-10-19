@@ -13,12 +13,12 @@
 
 
 .scroll {
-  height: 400px;
+  height: 600px;
   overflow: auto;
   /*border-left: 1px solid grey;*/
 }
 .scroll2{
-  height: 400px;
+  height: 600px;
   overflow: auto;
   /*border-left: 1px solid grey;*/
 }

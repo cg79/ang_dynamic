@@ -52,32 +52,34 @@ ul li span.pexp
 ul li span.notrexp
 {
   background-image: url(./../Content/images/arw1.png);
-  /*font-family: Verdana,Geneva,Tahoma,Arial,Helvetica,sans-serif;*/
   background-repeat: no-repeat;
   padding-left: 5px;
 }
 
-ul li span.rexp
-{
-  background-image: url(./../Content/images/arw2.png);
-  /*font-family: Verdana,Geneva,Tahoma,Arial,Helvetica,sans-serif;*/
-  background-repeat: no-repeat;
-  padding-left: 5px;
-}
+/*ul li span.rexp*/
+/*{*/
+  /*!*background-image: url(./../Content/images/arw2.png);*!*/
+  /*!*font-family: Verdana,Geneva,Tahoma,Arial,Helvetica,sans-serif;*!*/
+  /*background-repeat: no-repeat;*/
+  /*padding-left: 35px;*/
+  /*background-position-y: center;*/
+/*}*/
 
 
 ul li span.expanded
 {
-  background-image: url(./../Content/images/arw2.png);
+  background-image: url(./../Content/images/minus32.png);
   /*font-family: Verdana,Geneva,Tahoma,Arial,Helvetica,sans-serif;*/
   background-repeat: no-repeat;
-  padding-left: 5px;
+  padding-left: 35px;
+  background-position-y: center;
 }
 
 ul li span.notexpanded
 {
-  background-image: url(./../Content/images/arw1.png);
+  background-image: url(./../Content/images/plus32.png);
   /*font-family: Verdana,Geneva,Tahoma,Arial,Helvetica,sans-serif;*/
   background-repeat: no-repeat;
-  padding-left: 5px;
+  padding-left: 35px;
+  background-position-y: center;
 }

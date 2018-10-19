@@ -44,6 +44,19 @@
   </ng-template>
 </sh-context-menu>
 
+<sh-context-menu #menuch>
+  <ng-template shContextMenuItem let-data (click)="copyNode($event)">
+    <div>
+      Copy
+    </div>
+  </ng-template>
+  <ng-template shContextMenuItem let-data (click)="pasteToChildrens($event)">
+    <div>
+      Paste
+    </div>
+  </ng-template>
+</sh-context-menu>
+
 <ul *ngFor="let o of keys" class="browser-default xxx">
 
   <!--<pre>{{o | json}}</pre>-->
@@ -52,9 +65,11 @@
 
     <!--&& o.key !== 'childrens'-->
 
-    <div *ngIf="o.key !== 'key' && o.key !== 'expanded'  && o.key !== 'prop' && o.key !== 'showRowTemplate' " >
-      <span *ngIf="o.key !== 'actions' && o.key !== 'rowTemplate' && (o.type !== 'object' && o.type !== 'array')">
-        <label>{{o.key}} {{o.type}}</label>
+    <div *ngIf="o.key !== 'key' && o.key !== 'expanded'  && o.key !== 'prop' " >
+      <span class="desc" *ngIf="o.key !== 'actions'  && (o.type !== 'object' && o.type !== 'array')">
+        <!--aaaaaaaa-->
+        <!--<label>{{o.key}} {{o.type}}</label>-->
+        {{o.key}}
       </span>
 
 
@@ -64,13 +79,18 @@
           <label (drop)="onDropAction($event, dropData)" (dragover)="allowDrop($event)">{{o.key}} {{o.type}}</label>
         </div>
 
-        <div *ngIf="o.key === 'rowTemplate'" (click)="hideShowObject(o.value)" >
-          <label (drop)="onDropRowTemplate($event, dropData)" (dragover)="allowDrop($event)">{{o.key}} {{o.type}}</label>
+        <div *ngIf="o.key === 'childrens'"
+             (click)="hideShowObject(o.value)"
+             [shAttachMenu]="menuch" [shMenuData]="o.value"
+        >
+          <label (drop)="onDropRowTemplate($event, dropData)" (dragover)="allowDrop($event)">
+            <span class="dropable" [ngClass]="getClases(o.value)">{{o.key}} {{o.type}}</span>
+          </label>
         </div>
 
-        <div *ngIf="o.key !== 'actions' && o.key !== 'rowTemplate'" (click)="hideShowObject(o.value)" >
+        <div *ngIf="o.key !== 'actions' && o.key !== 'childrens'" (click)="hideShowObject(o.value)" >
           <!--llllllllll-->
-          <label>{{o.key}} {{o.type}}</label>
+          <span [ngClass]="getClases(o.value)">{{o.key}} {{o.type}}</span>
         </div>
       </span>
       <input *ngIf="o.type === 'number' || o.type === 'string'" type="text" [(ngModel)]="node[o.key]">
@@ -78,7 +98,7 @@
 
     <div *ngIf="o.type == 'boolean'">
       <!--<pre>{{parent | json}} </pre>-->
-      {{nodeid}}
+      <!--{{nodeid}}-->
       <input type="checkbox" [(ngModel)]="node[o.key]" id="{{nodeid}}"/>
       <label for="{{nodeid}}">
         {{o.key}}
@@ -105,7 +125,8 @@
            <div
              [shAttachMenu]="menu" [shMenuData]="el"
              (click)="hideShowObject(el)">
-                {{index}} -  {{el.type}}
+             <span [ngClass]="getClases(el)"> {{i}} {{el.type}}</span>
+                <!--index -  {{el.type}}-->
            </div>
             <app-actionnode *ngIf="el.expanded" [node]="el" [parent]="node" ></app-actionnode>
           </ul>

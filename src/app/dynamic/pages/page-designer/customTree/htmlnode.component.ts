@@ -77,7 +77,6 @@ import {PubSubService} from "../../../../services/pubSub/pubsub";
 
   toggleProp(el)
   {
-    el.showRowTemplate = false;
     el.prop = !el.prop;
     this.pubSubService.publish('componentSelected', el);
 
@@ -90,21 +89,12 @@ import {PubSubService} from "../../../../services/pubSub/pubsub";
   }
 
 
-  toggleRowTemplate(el) {
-    el.prop = false;
-    el.showRowTemplate = !el.showRowTemplate;
-  }
-
 
   getPropClases(el)
   {
     return el.prop? "pexp":"notpexp";
   }
 
-  getTemplateClases(el)
-  {
-    return el.showRowTemplate? "rexp":"notrexp";
-  }
 
   dragData: any = null;
   onDragStartNode(event, data) {

@@ -75,10 +75,6 @@
             <!--&gt;Actions</span>-->
           <!--</div>-->
 
-          <!--<div class="col" *ngIf="node.rowTemplate">-->
-            <!--<span [ngClass]="getTemplateClases(node)">&nbsp;</span>-->
-            <!--<span (click)="toggleRowTemplate(node)">Row Template</span>-->
-          <!--</div>-->
 
         </div>
       </li>
@@ -94,16 +90,6 @@
         <!--</li>-->
       <!--</ul>-->
     <!--</li>-->
-
-
-
-
-
-
-    <li *ngIf="node.showRowTemplate">
-      <!--{{o.key}}-->
-      <app-htmlnode  *ngIf="o.key == 'rowTemplate'" [node]="node.rowTemplate"></app-htmlnode>
-    </li>
 
   </ul>
 

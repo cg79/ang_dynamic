@@ -1,0 +1,235 @@
+<div class="container1">
+
+  <!--<pre>{{user | json}}</pre>-->
+  <div class="row">
+    <div class="col-md-4">
+
+    </div>
+    <div class="col-md-4">
+      <!---->
+
+      <!--<pre>{{user | json}} </pre>-->
+
+      <form class="form-signin mg-btm" #createUserForm="ngForm" (ngSubmit)="submitForm()" autocomplete="false">
+
+        <div class="text-center">
+          <div class="icon-object border-slate-300 text-slate-300"><i class="icon-reading"></i></div>
+          <h5 class="content-group">Modificare date utilizator
+            <!--<small class="display-block">Your credentials</small>-->
+          </h5>
+        </div>
+
+
+        <div class="main">
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="firstName">Nume</label>
+                <input type="text"
+                       class="form-control"
+                       placeholder="Nume" autofocus required
+                       name="firstName"
+                       id="firstName"
+                       [(ngModel)]="user.firstName"
+                       maxlength="50"
+                >
+
+                <div class="row col-md-12 error">
+                  <!--{{ currentForm.form.controls.firstName.errors | json}}-->
+                  <div class="form-control-feedback1"
+                       *ngIf="currentForm && currentForm.form.controls.firstName && currentForm.form.controls.firstName.errors &&
+              (currentForm.form.controls.firstName.dirty)">
+
+                    <p *ngIf="currentForm.form.controls.firstName.errors.required">Introduceti numele</p>
+                    <p *ngIf="currentForm.form.controls.firstName.errors.maxLength">Lungimea numelui este prea mare</p>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="lastName">Prenume</label>
+                <input type="text"
+                       class="form-control"
+                       placeholder="Prenume" required
+                       name="lastName"
+                       id="lastName"
+                       [(ngModel)]="user.lastName"
+                       maxlength="50"
+                >
+                <div class="row col-md-12 error">
+                  <!--{{ currentForm.form.controls.firstName.errors | json}}-->
+                  <div class="form-control-feedback1"  *ngIf="currentForm && currentForm.form.controls.lastName && currentForm.form.controls.lastName.errors &&
+              (currentForm.form.controls.lastName.dirty)">
+
+                    <p *ngIf="currentForm.form.controls.lastName.errors.required">Introduceti prenumele</p>
+                    <p *ngIf="currentForm.form.controls.lastName.errors.maxLength">Lungimea numelui este prea mare</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+
+
+
+
+          <div class="form-group">
+            <label for="phone">Telefon</label>
+            <input type="text"
+                   class="form-control"
+                   name="phone"
+                   required
+                   id="phone"
+                   [textMask]="{mask: mask}"
+                   pattern="\(\d{4}\) \d{3}-\d{3}"
+                   [(ngModel)]="user.phone"
+            >
+            <div class="row1 col-mdt-12 error">
+              <div class="form-control-feedback1"  *ngIf="currentForm && currentForm.form.controls.phone && currentForm.form.controls.phone.errors &&
+              (currentForm.form.controls.phone.dirty)">
+
+                <p *ngIf="currentForm.form.controls.phone.errors.required">Introduceti telefonul</p>
+                <p *ngIf="currentForm.form.controls.phone.errors.pattern">Telefonul nu este complet</p>
+                <!--<p *ngIf="currentForm.form.controls.phone.errors.required">Lungimea numelui este prea mare</p>-->
+              </div>
+            </div>
+          </div>
+
+          <!--<pre>{{ui | json}}</pre>-->
+          <div class="form-group">
+            <section class="customRadio">
+              <div>
+                <input type="radio" id="control_01" name="select"
+                       [value]=0
+                       [(ngModel)]=user.userOrCompany>
+                <label for="control_01">
+                  <h2>Persoana fizica</h2>
+                  <p>Inregistrare cu scopul de a participa la cursuri.</p>
+                </label>
+              </div>
+              <div>
+                <input type="radio" id="control_02" name="select" [value]=1
+                       [(ngModel)]=user.userOrCompany>
+                <label for="control_02">
+                  <h2>Firma</h2>
+                  <p>Inregistare ca reprezentant a unei firme IT.</p>
+                </label>
+              </div>
+            </section>
+          </div>
+
+          <div class="form-group" >
+            <div class="col-md-6">
+              <div class="row">
+                <label for="numeFirma">Nume firma</label>
+                <input type="text"
+                       name="numeFirma"
+                       id="numeFirma"
+                       disabled="{{user.userOrCompany == 0}}"
+                       class="form-control"
+                       placeholder="Nume firma"
+                       required
+                       [(ngModel)]="user.companyName"
+                >
+                <div class="row col-md-12 error">
+                  <!--{{currentForm.form.controls.numeFirma.errors | json}}-->
+                  <div class="form-control-feedback1"  *ngIf="currentForm && currentForm.form.controls.numeFirma && currentForm.form.controls.numeFirma.errors &&
+              (currentForm.form.controls.numeFirma.dirty)">
+
+                    <p *ngIf="currentForm.form.controls.numeFirma.errors.required">Introduceti numele</p>
+                    <p *ngIf="currentForm.form.controls.numeFirma.errors.maxLength">Lungimea numelui este prea mare</p>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="row">
+                <input type="checkbox"
+                       name="allowLogo"
+                       class="mychk"
+                       id="allowLogo"
+                       [(ngModel)]="user.allowLogo"
+                       disabled="{{user.userOrCompany == 0}}"
+                > <label for="allowLogo"> Logo-ul poate sa apara pe site</label>
+              </div>
+
+            </div>
+
+            <div class="col-md-6">
+              <label>Logo firma</label>
+              <div class="logo">
+                <app-file-component [(obj)]="user" prop="companyLogo" extraClass="small"
+                                    isDisabled="{{user.userOrCompany == 0}}"></app-file-component>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="clearfix"></div>
+          <div class="row">
+            <hr>
+          </div>
+
+
+
+          <!--<div class="form-group login-options">-->
+            <!--<div class="row">-->
+              <!--<div class="col-sm-6">-->
+                <!--&lt;!&ndash;<label class="checkbox-inline">&ndash;&gt;-->
+                <!--&lt;!&ndash;<div class="checker"><span class="checked"><input type="checkbox" class="styled" checked="checked"></span></div>&ndash;&gt;-->
+                <!--&lt;!&ndash;Remember&ndash;&gt;-->
+                <!--&lt;!&ndash;</label>&ndash;&gt;-->
+              <!--</div>-->
+
+              <!--<div class="col-sm-6 text-right">-->
+                <!--&lt;!&ndash;<a href="#" (click)="gotoResetPassword()">Resetare parola?</a>&ndash;&gt;-->
+                <!--<a [routerLink]="['/forgotPassword']">Resetare Parola</a>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+
+
+          <div class="row center">
+            <button type="submit" class="btn1 btn-primary">Modifica
+            </button>
+            <span class="error"> {{uiMessage}}</span>
+          </div>
+
+          <!--#######################################-->
+
+
+          <!--<span class="clearfix"></span>-->
+          <!--Are you a business? <a href=""> Get started here</a>-->
+          <!--<span class="clearfix"></span>-->
+        </div>
+        <!--<div class="login-footer">-->
+        <!--<div class="row">-->
+        <!--<div class="col-xs-7 col-md-7">-->
+        <!--<div class="left-section">-->
+        <!--<a href="#" (click)="gotoResetPassword()">Resetare parola?</a>-->
+        <!--<span class="clearfix"></span>-->
+        <!--&lt;!&ndash;<a href="">Sign up now</a>&ndash;&gt;-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="col-xs-5 col-md-5 pull-right">-->
+        <!--<button type="submit" class="btn1 btn-large btn-danger pull-right">Login</button>-->
+        <!--</div>-->
+        <!--</div>-->
+
+        <!--</div>-->
+      </form>
+    </div>
+
+    <div class="col-md-4">
+    </div>
+  </div>
+
+
+</div>

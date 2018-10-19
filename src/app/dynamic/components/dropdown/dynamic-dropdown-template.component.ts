@@ -11,7 +11,7 @@ import {PubSubService} from "../../../services/pubSub/pubsub";
       <option *ngFor="let item of context.items"
         [value]=item[context.bindValue]>
          {{item[context.bindText]}}
-         <dynamic-content [context]="context.rowTemplate"></dynamic-content>
+         <dynamic-content [context]="context.childrens"></dynamic-content>
       </option>
     </select>
 `
