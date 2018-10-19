@@ -49,7 +49,6 @@ import {Http, ConnectionBackend, RequestOptions} from "@angular/http";
 import {HttpClientModule} from "@angular/common/http";
 import {HeaderComponent} from "./pages/components/header.component";
 import {SocketService} from "./services/socket/socketService";
-import {LoginComponent} from "./pages/login/login.component";
 import {CustomPageComponent} from "./dynamic/pages/custom-page/custom-page.component";
 import {ActionnodeNodeComponent} from "./dynamic/pages/page-designer/actions/actionnode.component";
 import {ActionService} from "./services/actions/actionService";
@@ -122,7 +121,6 @@ const configSocket: SocketIoConfig = { url: 'http://localhost:6002', options: {}
     DynamicDropDownTemplateComponent,
     DynamicRepeaterComponent,
     HeaderComponent,
-    LoginComponent,
     CustomPageComponent,
     ActionnodeNodeComponent,
     DynamicTextLabelComponent,
@@ -160,11 +158,11 @@ const configSocket: SocketIoConfig = { url: 'http://localhost:6002', options: {}
     HttpWrapperService,
     SocketService,
     ActionService,
-    CustomPageRendererResolve,
-    {
-      provide: AuthServiceConfig,
-      useFactory: getAuthServiceConfigs
-    }
+    // CustomPageRendererResolve,
+    // {
+    //   provide: AuthServiceConfig,
+    //   useFactory: getAuthServiceConfigs
+    // }
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
   bootstrap: [AppComponent],

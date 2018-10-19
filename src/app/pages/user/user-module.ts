@@ -17,7 +17,6 @@ import {SharedModule} from "../footer/shared-module";
   imports: [CommonModule,FormsModule,SharedModule,userRouter],
   declarations: [
     CreateUserComponent,
-    // ConfirmEmailComponent,
     ChangePasswordComponent,
     EditUserComponent,
     ForgotPasswordComponent,
