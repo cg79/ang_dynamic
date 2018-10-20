@@ -78,9 +78,10 @@ export class LoginComponent implements OnDestroy  {
 
   loginOk(resp)
   {
-   //  this.localStorageService.add('user',resp.data);
-   // this.pubSubService.publish("login", resp.data);
-   //  this.router.navigate(['/home']);
+    const {data} = resp;
+    this.localStorageService.set('user',data);
+   this.pubSubService.publish("login", data);
+    this.router.navigate(['/home']);
     // this.router.navigate(['/home'], { queryParams: { returnUrl: 'sd' }});
   }
 
@@ -154,7 +155,7 @@ export class LoginComponent implements OnDestroy  {
       password: this.password
     };
 
-    const loginResponse  = await this.httpService.postJson("api/pub/security/login",loginRequest);
+    const loginResponse  = await this.httpService.postJsonAsync("api/pub/security/login",loginRequest);
 
     if(loginResponse.success === false)
     {

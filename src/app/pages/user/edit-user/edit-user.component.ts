@@ -96,7 +96,7 @@ export class EditUserComponent implements OnInit {
 
   createUserOk(resp)
   {
-    // this.localStorageService.add('user',resp.data);
+    // this.localStorageService.set('user',resp.data);
     // this.pubSubService.publish("login", resp.data);
     // this.router.navigate(['/home']);
     // this.router.navigate(['/home'], { queryParams: { returnUrl: 'sd' }});

@@ -123,7 +123,7 @@ export class ResetPasswordComponent implements OnDestroy  {
 
     const loginResponse  = await this.httpService.postJson("login",loginRequest);
 
-    // this.localStorageService.add('user',loginResponse);
+    // this.localStorageService.set('user',loginResponse);
     // this.router.navigate(['/home'], { queryParams: { returnUrl: 'sd' }});
 
   }

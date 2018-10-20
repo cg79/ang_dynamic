@@ -2,7 +2,11 @@ import {Injectable} from '@angular/core';
 // import {Http, Headers, Response, RequestOptions} from '@angular/http';
 import {HttpClient} from "@angular/common/http";
 import { HttpHeaders } from '@angular/common/http';
+
 import {Observable} from "rxjs";
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+
 import {PubSubService} from "../pubSub/pubsub";
 
 @Injectable()
@@ -18,7 +22,7 @@ export class HttpWrapperService {
 
 
   // serverUrl = '/';
-  serverUrl = 'http://localhost:6002';
+  serverUrl = 'http://localhost:6002/';
 
 
   //http://www.angulartypescript.com/angular-2-http-example-typescript/
@@ -41,7 +45,30 @@ export class HttpWrapperService {
 
       const apiUrl = this.serverUrl + url;
 
-      return this.http.post(apiUrl, body, httpOptions);
+       this.http.post(apiUrl, body, httpOptions)
+      .subscribe(
+        (data: any) => data, // success path
+        error => {
+          console.log('error');
+          return {
+            data: null,
+            success: false
+          };
+        } // error path
+      );
+    //     .map(response => response.json())
+    //     .catch((e: any) => {
+    //       debugger;
+    //       console.log('fffffffffffffffffffffffffffffffffff');
+    //   return {a:1};
+    // )});
+        // .catch(err => {
+        //         console.error(err); // deal with API error (eg not found)
+        //       return {
+        //         data: null,
+        //         success: false
+        //       };
+        // });
 
       // const response = this.http.post(apiUrl, body, httpOptions)
       //   .then(data =>  data)
@@ -112,7 +139,8 @@ export class HttpWrapperService {
     catch (e) {
       return {
         data: null,
-        success: false
+        success: false,
+        e
       };
     }
   }
