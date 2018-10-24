@@ -29,7 +29,13 @@ import {PubSubService} from "../../../../services/pubSub/pubsub";
 
   keys : any = null;
 
-  constructor(private pubSubService: PubSubService) { }
+  constructor(private pubSubService: PubSubService) {
+    this.pubSubService.subscribe('getComponentTYpeResult', (val) => {
+      debugger;
+      val.add.bind(this.node);
+      this.node.add();
+    });
+  }
 
   ngOnInit() {
   }
@@ -50,7 +56,12 @@ import {PubSubService} from "../../../../services/pubSub/pubsub";
     return typeOf;
 }
 
+  callAddFunction() {
+    // this.node.items
+    this.pubSubService.publish('getComponentTYpe', this.node.type);
 
+
+  }
 
 
   hideShowObject(el) {

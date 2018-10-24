@@ -60,7 +60,7 @@
 <ul *ngFor="let o of keys" class="browser-default xxx">
 
   <!--<pre>{{o | json}}</pre>-->
-
+  <label>{{o.key}} {{o.type}}</label>
   <li>
 
     <!--&& o.key !== 'childrens'-->
@@ -84,13 +84,14 @@
              [shAttachMenu]="menuch" [shMenuData]="o.value"
         >
           <label (drop)="onDropRowTemplate($event, dropData)" (dragover)="allowDrop($event)">
-            <span class="dropable" [ngClass]="getClases(o.value)">{{o.key}} {{o.type}}</span>
+            <span class="dropable" [ngClass]="getClases(o.value)">{{o.key}} {{o.type}} --</span>
           </label>
         </div>
 
         <div *ngIf="o.key !== 'actions' && o.key !== 'childrens'" (click)="hideShowObject(o.value)" >
-          <!--llllllllll-->
+          llllllllll
           <span [ngClass]="getClases(o.value)">{{o.key}} {{o.type}}</span>
+          <span *ngIf="node.da" (click)="callAddFunction()"> + </span>
         </div>
       </span>
       <input *ngIf="o.type === 'number' || o.type === 'string'" type="text" [(ngModel)]="node[o.key]">
