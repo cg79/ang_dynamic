@@ -78,15 +78,11 @@ export class DashboardComponent implements OnInit {
 
 
   appSearchDb() {
-    this.formsService.appSearchDb({
-      name: this.formsService.appData.name
-    });
+    this.formsService.appSearchDb();
   }
 
   appCreate() {
-    this.formsService.appCreate({
-      name: this.formsService.appData.name
-    })
+    this.formsService.appCreate()
   }
 
   appGetAll()
@@ -115,6 +111,10 @@ export class DashboardComponent implements OnInit {
 
   controlCreate() {
     this.formsService.controlCreate();
+  }
+
+  controlDelete(ctrl) {
+    this.formsService.controlDelete(ctrl);
   }
 
   controlGetAll()
