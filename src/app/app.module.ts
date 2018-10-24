@@ -80,6 +80,10 @@ import {
 } from "angular-6-social-login-v2";
 import {getAuthServiceConfigs} from "./app.configs";
 import {LocalizationService} from "./services/localization/localization.service";
+import {DashboardComponent} from "./pages/dashboard/dashboard.component";
+import {AppControlComponent} from "./pages/app-controls/appcontrol.component";
+import {DynamicNavigationComponent} from "./dynamic/navigation/dynamic-navigation.component";
+import {FormsService} from "./pages/dashboard/forms.service";
 
 const configSocket: SocketIoConfig = { url: 'http://localhost:6002', options: {} };
 
@@ -137,7 +141,10 @@ const configSocket: SocketIoConfig = { url: 'http://localhost:6002', options: {}
     DynamicTooltipComponent,
     DynamicTextNumberComponent,
     NumberOnlyDirective,
-    CustomPageRendererComponent
+    CustomPageRendererComponent,
+    DashboardComponent,
+    AppControlComponent,
+    DynamicNavigationComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'anguynamic' }),
@@ -157,7 +164,8 @@ const configSocket: SocketIoConfig = { url: 'http://localhost:6002', options: {}
     HttpWrapperService,
     SocketService,
     ActionService,
-    LocalizationService
+    LocalizationService,
+    FormsService
     // CustomPageRendererResolve,
     // {
     //   provide: AuthServiceConfig,
@@ -197,6 +205,7 @@ const configSocket: SocketIoConfig = { url: 'http://localhost:6002', options: {}
     DynamicTimeComponent,
     DynamicTooltipComponent,
     DynamicTextNumberComponent,
+    DynamicNavigationComponent
   ]
 })
 export class AppModule { }

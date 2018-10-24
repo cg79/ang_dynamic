@@ -1,13 +1,15 @@
 
-{{user | json}}
+<!--{{user | json}}-->
 
 <nav>
   <div class="nav-wrapper">
     <a href="#" class="brand-logo">Logo</a>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li><a href="#" routerLink="/user/login" routerLinkActive="active">Login</a></li>
+      <li *ngIf="user" (click)="logout()"><a href="#" routerLink="/user/login" routerLinkActive="active">Logout</a></li>
+      <li *ngIf="!user" ><a href="#" routerLink="/user/login" routerLinkActive="active">Login</a></li>
       <li><a  href="#" routerLink="/designer" routerLinkActive="active">Designer</a></li>
-      <li><a  href="#" routerLink="/designeqqqr" routerLinkActive="active">test</a></li>
+      <li><a  href="#" routerLink="/designer" routerLinkActive="active">test</a></li>
+      <li><a  href="#" routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
     </ul>
   </div>
 </nav>

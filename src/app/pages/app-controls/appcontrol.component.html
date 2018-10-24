@@ -1,0 +1,41 @@
+
+{{error | json}}
+
+controls
+
+
+<div class="row icon-container fv-invalid-row">
+
+  <div class="input-field col s12">
+    <input type="text" name="price" class="validate valid" [(ngModel)]="form.name" (input)="inputChanged($event)">
+    <i data-field="price" class="{{form.icon}}"></i>
+  <label class="active">Application Name</label>
+
+  </div>
+</div>
+
+
+<input type="button" value="new COntrol" (click)="createControl()"/>
+
+
+<div class="container">
+
+  <div class="row">
+    <div *ngFor="let control of form.forms" class="col s12 m6">
+      <!--<pre>{{app | json}} </pre>-->
+      <div class="card blue-grey darken-1">
+        <div class="card-content white-text">
+          <span class="card-title">{{control.name}}</span>
+          <!--<p>I am a very simple card. I am good at containing small bits of information.-->
+            <!--I am convenient because I require little markup to use effectively.</p>-->
+        </div>
+        <div class="card-action">
+          <a (click)="goToControlDesigner(control)">Details</a>
+          <a (click)="delete(control)">Delete</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>

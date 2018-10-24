@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import {LocalStorageService} from "ngx-store";
 import {PubSubService} from "../../../services/pubSub/pubsub";
 import {LocalizationService} from "../../../services/localization/localization.service";
+import {IHttpResponse} from "../../../facade/IHttpResponse";
 
 @Component({
   selector: 'app-login',
@@ -155,7 +156,8 @@ export class LoginComponent implements OnDestroy  {
       password: this.password
     };
 
-    const loginResponse  = await this.httpService.postJsonAsync("api/pub/security/login",loginRequest);
+    let loginResponse : IHttpResponse = null;
+    loginResponse = await this.httpService.postJsonAsync("/api/pub/security/login",loginRequest);
 
     if(loginResponse.success === false)
     {

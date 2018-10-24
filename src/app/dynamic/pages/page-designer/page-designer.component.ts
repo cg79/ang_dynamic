@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewChild, SimpleChanges, NgZone} from '@angular/core';
 import {PubSubService} from "../../../services/pubSub/pubsub";
 import {HttpWrapperService} from "../../../services/http/httpService";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-page-designer',
@@ -9,12 +10,16 @@ import {HttpWrapperService} from "../../../services/http/httpService";
 })
 export class PageDesignerComponent implements OnInit {
 
-  activeColor: string = 'green';
-  baseColor: string = '#ccc';
-  overlayColor: string = 'rgba(255,255,255,0.5)';
-  dragging: boolean = false;
-  loaded: boolean = false;
+  activeColor = 'green';
+  baseColor = '#ccc';
+  overlayColor = 'rgba(255,255,255,0.5)';
+  dragging = false;
+  loaded = false;
   dragData: any = null;
+
+  appId: '';
+  ctrlName: '';
+  ctrlId: '';
 
   formsDropDown = {
     "text": "ccccccccccccc",
@@ -73,6 +78,7 @@ export class PageDesignerComponent implements OnInit {
   }
 
   constructor( private pubSubService: PubSubService, private httpWrapperService: HttpWrapperService,
+               private route: ActivatedRoute,
                private zone: NgZone
   ) {
 
@@ -206,6 +212,20 @@ export class PageDesignerComponent implements OnInit {
 
   }
 
+
+  ngOnInit() {
+    this.route.queryParams
+      .subscribe(params => {
+        console.log(params); // {order: "popular"}
+        const {app, name, id} = params;
+        this.appId = app;
+        this.ctrlId = id;
+        this.ctrlName = name;
+
+        this.getFormByName(name);
+      });
+  }
+
   refreshTree() {
     var x = JSON.stringify(this.context.childrens);
 
@@ -259,24 +279,31 @@ export class PageDesignerComponent implements OnInit {
 
 
   error: any = null;
-  onChange(id)
+  currentForm: any = null;
+
+  getFormByName(name)
   {
     const body = {
-        data: {
-          _id: id,
-          name: 'f2'
-        },
-        proxy: {
-          module: "form",
-          method: "getForm"
+      data: {
+        _id: this.ctrlId,
+      },
+      proxy: {
+        module: 'generic',
+        method: 'findOne',
+        info: {
+          collection: 'controls'
         }
-      };
-      this.httpWrapperService.postJson('/api/private', body)
-        .subscribe(data =>{
-          this.context.childrens = data.data.structure || [];
+      }
+    };
+    this.httpWrapperService.postJson('/api/private', body)
+      .subscribe(data =>{
+          const { data: form} = data;
+          this.currentForm = form;
+          this.context.childrens = form.structure || [];
         },
-          error => this.error = error
+        error => this.error = error
       );
+
   }
 
   deleteForm() {
@@ -317,7 +344,7 @@ export class PageDesignerComponent implements OnInit {
   updateForm() {
     const body = {
       data: {
-        _id: this.formsDropDown.value,
+        _id: this.ctrlId,
         structure: this.context.childrens
       },
       proxy: {
@@ -338,9 +365,7 @@ export class PageDesignerComponent implements OnInit {
     this.getForms();
   }
 
-  ngOnInit() {
-    this.getForms();
-  }
+
 
   state = {
     components: [
@@ -353,6 +378,19 @@ export class PageDesignerComponent implements OnInit {
           class:'label',
           items:[{a:1, text:"ion", checked:true},{a:2, text:"Maria"}],
           childrens: []
+        }
+      },
+      {
+        name: 'navigation',
+        structure: {
+          type:'navigation',
+          items:[],
+          add: function () {
+            this.items.push({
+              title: '',
+              'url': ''
+            });
+          }
         }
       },
       {
@@ -785,7 +823,7 @@ export class PageDesignerComponent implements OnInit {
 
   refreshContext() {
     this.updateForm();
-  this.pubSubService.publish('datachanged', this.context);
+    this.pubSubService.publish('datachanged', this.context);
   }
 
   handleDrop(e) {

@@ -9,6 +9,8 @@ import {PageDesignerComponent} from "../dynamic/pages/page-designer/page-designe
 // import {LoginComponent} from "../pages/login/login.component";
 import {CustomPageRendererComponent} from "../pages/customPageRenderer/customPageRenderer.component";
 import {CustomPageRendererResolve} from "../pages/customPageRenderer/customPageRendererResolve";
+import {DashboardComponent} from "../pages/dashboard/dashboard.component";
+import {AppControlComponent} from "../pages/app-controls/appcontrol.component";
 
 const appRoutes: Routes = [
   {
@@ -23,6 +25,15 @@ const appRoutes: Routes = [
     path: 'designer',
     component: PageDesignerComponent
   },
+  {
+    path: 'dashboard',
+    component: DashboardComponent
+  },
+  {
+    path: 'controls',
+    component: AppControlComponent
+  },
+
   {
     path: 'notfound',
     component: NotFoundComponent
@@ -41,7 +52,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(
       appRoutes,
       {
-        enableTracing: true, // <-- debugging purposes only
+        enableTracing: false, // <-- debugging purposes only
         // preloadingStrategy: SelectivePreloadingStrategy,
 
       }

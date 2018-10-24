@@ -1,0 +1,36 @@
+.icon-container {
+  position: relative;
+}
+
+
+.icon-invalid {
+  color: #F44336;
+   height: 42px;
+   line-height: 42px;
+   width: 42px;
+   position: absolute;
+   right: 0;
+   text-align: center;
+   top: 0;
+}
+
+.icon-valid {
+  color: #48f415;
+  height: 42px;
+  line-height: 42px;
+  width: 42px;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 0;
+}
+
+
+.cards {
+  display: flex;
+  justify-content: space-between;
+}
+
+.selected{
+  border: 1px solid red;
+}

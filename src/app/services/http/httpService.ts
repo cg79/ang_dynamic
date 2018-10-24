@@ -1,13 +1,14 @@
 import {Injectable} from '@angular/core';
 // import {Http, Headers, Response, RequestOptions} from '@angular/http';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient} from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 
-import {Observable} from "rxjs";
+import {Observable} from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
-import {PubSubService} from "../pubSub/pubsub";
+import {PubSubService} from '../pubSub/pubsub';
+import {IHttpResponse} from '../../facade/IHttpResponse';
 
 @Injectable()
 export class HttpWrapperService {
@@ -22,7 +23,7 @@ export class HttpWrapperService {
 
 
   // serverUrl = '/';
-  serverUrl = 'http://localhost:6002/';
+  serverUrl = 'http://localhost:6002';
 
 
   //http://www.angulartypescript.com/angular-2-http-example-typescript/
@@ -45,17 +46,17 @@ export class HttpWrapperService {
 
       const apiUrl = this.serverUrl + url;
 
-       this.http.post(apiUrl, body, httpOptions)
-      .subscribe(
-        (data: any) => data, // success path
-        error => {
-          console.log('error');
-          return {
-            data: null,
-            success: false
-          };
-        } // error path
-      );
+       return this.http.post(apiUrl, body, httpOptions);
+      // .subscribe(
+      //   (data: any) => data, // success path
+      //   error => {
+      //     console.log('error');
+      //     return {
+      //       data: null,
+      //       success: false
+      //     };
+      //   } // error path
+      // );
     //     .map(response => response.json())
     //     .catch((e: any) => {
     //       debugger;
@@ -91,7 +92,7 @@ export class HttpWrapperService {
   }
 
 
-  async postJsonAsync(url, body) {
+  async postJsonAsync(url, body): Promise<IHttpResponse> {
 
     // let promise = new Promise((resolve, reject) => {
     //
@@ -130,14 +131,13 @@ export class HttpWrapperService {
       const apiUrl = this.serverUrl + url;
 
       const response = await this.http.post(apiUrl, body, httpOptions).toPromise();
-      return response;
+      return <IHttpResponse>response;
       // return {
       //   data: response.json(),
       //   success: true
       // };
-    }
-    catch (e) {
-      return {
+    } catch (e) {
+      return <IHttpResponse>{
         data: null,
         success: false,
         e
