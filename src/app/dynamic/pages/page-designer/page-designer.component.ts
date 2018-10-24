@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild, SimpleChanges, NgZone} from '@angular/core
 import {PubSubService} from "../../../services/pubSub/pubsub";
 import {HttpWrapperService} from "../../../services/http/httpService";
 import {ActivatedRoute} from "@angular/router";
+import {FormsService} from "../../../pages/dashboard/forms.service";
 
 @Component({
   selector: 'app-page-designer',
@@ -79,7 +80,8 @@ export class PageDesignerComponent implements OnInit {
 
   constructor( private pubSubService: PubSubService, private httpWrapperService: HttpWrapperService,
                private route: ActivatedRoute,
-               private zone: NgZone
+               private zone: NgZone,
+               private formsService: FormsService
   ) {
 
 
@@ -217,12 +219,11 @@ export class PageDesignerComponent implements OnInit {
     this.route.queryParams
       .subscribe(params => {
         console.log(params); // {order: "popular"}
-        const {app, name, id} = params;
-        this.appId = app;
+        const {name, id} = params;
         this.ctrlId = id;
         this.ctrlName = name;
 
-        this.getFormByName(name);
+        this.getControlById(id);
       });
   }
 
@@ -281,11 +282,11 @@ export class PageDesignerComponent implements OnInit {
   error: any = null;
   currentForm: any = null;
 
-  getFormByName(name)
+  getControlById(id)
   {
     const body = {
       data: {
-        _id: this.ctrlId,
+        _id: id
       },
       proxy: {
         module: 'generic',
@@ -348,8 +349,12 @@ export class PageDesignerComponent implements OnInit {
         structure: this.context.childrens
       },
       proxy: {
-        module: "form",
-        method: "edit"
+        module: "generic",
+        method: "edit",
+        info: {
+          fields: ['structure'],
+          collection: 'applications'
+        }
       }
     };
     this.httpWrapperService.postJson('/api/private', body).subscribe(

@@ -18,6 +18,7 @@ export class FormsService {
     icon: ''
   };
   controls = [];
+  selectedControl: any = null;
 
   error: any = null;
 
@@ -72,6 +73,8 @@ export class FormsService {
     this.httpWrapperService.postJson('/api/private', body)
         .subscribe(
             (data) => {
+              this.appData.name = '';
+              this.appGetAll();
               const {data: serverData} = data;
               if (!serverData) {
                 this.appData.icon = 'icon-valid fa fa-check';
@@ -87,11 +90,10 @@ export class FormsService {
   appGetAll() {
     const body = {
       data: {
-        name: this.appData.name
       },
       proxy: {
         module: 'generic',
-        method: 'find',
+        method: 'findList',
         info: {
           collection: 'applications'
         }
@@ -117,7 +119,7 @@ export class FormsService {
       },
       proxy: {
         module: 'generic',
-        method: 'find',
+        method: 'removeOne',
         info: {
           collection: 'applications'
         }
@@ -126,8 +128,7 @@ export class FormsService {
     this.httpWrapperService.postJson('/api/private', body)
         .subscribe(
             (data) => {
-              const {data: serverData} = data;
-              this.applications = serverData;
+              this.applications = this.applications.filter(el=>el._id !== app._id);
             } , // success path
             error => this.error = error // error path
         );
@@ -137,6 +138,7 @@ export class FormsService {
     this.applications.map(el =>  el.css = '');
     app.css = 'selected';
     this.selectedApplication = app;
+    this.controlGetAll();
   }
 
   //---------------------------------------------------------------------------------------------------------------------------
@@ -144,7 +146,8 @@ export class FormsService {
   controlSearchDb() {
     const body = {
       data: {
-        name: this.appData.name
+        name: this.ctrlData.name,
+        parentId: this.selectedApplication._id
       },
       proxy: {
         module: 'generic',
@@ -172,7 +175,8 @@ export class FormsService {
   controlCreate() {
     const body = {
       data: {
-        name: this.appData.name
+        name: this.ctrlData.name,
+        parentId: this.selectedApplication._id
       },
       proxy: {
         module: 'generic',
@@ -185,13 +189,8 @@ export class FormsService {
     this.httpWrapperService.postJson('/api/private', body)
         .subscribe(
             (data) => {
-              const {data: serverData} = data;
-              if (!serverData) {
-                this.ctrlData.icon = 'icon-valid fa fa-check';
-
-              } else {
-                this.ctrlData.icon = 'icon-invalid fa fa-times';
-              }
+              this.ctrlData.name = '';
+             this.controlGetAll();
             } , // success path
             error => this.error = error // error path
         );
@@ -204,7 +203,7 @@ export class FormsService {
       },
       proxy: {
         module: 'generic',
-        method: 'find',
+        method: 'findList',
         info: {
           collection: 'controls'
         }
@@ -214,23 +213,21 @@ export class FormsService {
         .subscribe(
             (data) => {
               const {data: serverData} = data;
-              this.applications = serverData;
+              this.controls = serverData;
             } , // success path
             error => this.error = error // error path
         );
   }
 
   controlDelete(ctrl) {
-    if(! this.selectedApplication) {
-      return;
-    }
+
     const body = {
       data: {
         _id: ctrl._id
       },
       proxy: {
         module: 'generic',
-        method: 'remove',
+        method: 'removeOne',
         info: {
           collection: 'controls'
         }
@@ -240,7 +237,7 @@ export class FormsService {
         .subscribe(
             (data) => {
               const {data: serverData} = data;
-              this.applications = serverData;
+              this.controls = this.controls.filter(el=>el._id !== ctrl._id);
             } , // success path
             error => this.error = error // error path
         );
@@ -256,5 +253,27 @@ export class FormsService {
     this.ctrlData.icon = value;
   }
 
+  controlGetById(id) {
+    const body = {
+      data: {
+        _id: id
+      },
+      proxy: {
+        module: 'generic',
+        method: 'findOne',
+        info: {
+          collection: 'controls'
+        }
+      }
+    };
+    this.httpWrapperService.postJson('/api/private', body)
+        .subscribe(
+            (data) => {
+              const {data: serverData} = data;
+              this.selectedControl = serverData;
+            } , // success path
+            error => this.error = error // error path
+        );
+  }
 
 }

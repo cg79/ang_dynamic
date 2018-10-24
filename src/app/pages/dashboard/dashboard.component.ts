@@ -100,9 +100,9 @@ export class DashboardComponent implements OnInit {
 
   //---------------------------------------------------------------------------------------------------------------------
 
-  gotoappcontrols(app) {
-    //this.router.navigate(['/designer'], { queryParams: { app: app.name }});
-    this.router.navigate(['/controls'], { queryParams: { app: app.name, id: app._id }});
+  gotoDesigner(control) {
+    this.router.navigate(['/designer'], { queryParams: { name: control.name, id: control._id }});
+    // this.router.navigate(['/controls'], { queryParams: { app: app.name, id: app._id }});
   }
 
   controlSearchDb() {
@@ -120,10 +120,6 @@ export class DashboardComponent implements OnInit {
   controlGetAll()
   {
     this.formsService.controlGetAll();
-  }
-
-  controlDelete(control) {
-    this.formsService.controlDelete(control);
   }
 
 }
