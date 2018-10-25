@@ -30,11 +30,7 @@ import {PubSubService} from "../../../../services/pubSub/pubsub";
   keys : any = null;
 
   constructor(private pubSubService: PubSubService) {
-    this.pubSubService.subscribe('getComponentTYpeResult', (val) => {
-      debugger;
-      val.add.bind(this.node);
-      this.node.add();
-    });
+
   }
 
   ngOnInit() {
@@ -58,11 +54,31 @@ import {PubSubService} from "../../../../services/pubSub/pubsub";
 
   callAddFunction() {
     // this.node.items
-    this.pubSubService.publish('getComponentTYpe', this.node.type);
+    const evtName = this.newGuid();
+    this.pubSubService.subscribe(evtName, (val) => {
+      debugger;
+      // val.add.bind(this.node);
+      this.node.add = val.add;
+      this.node.add();
+      delete this.node.add;
 
+      this.pubSubService.unsubscribe(evtName);
+    });
+
+    this.pubSubService.publish('getComponentType', {
+      type: this.node.type,
+      evtName
+    });
 
   }
 
+  callRemoveFunction(el) {
+    // this.node.items
+    this.node.items = this.node.items.filter(x => x.key != el.key);
+    // this.pubSubService.publish('refreshTree', null);
+    var x = JSON.stringify(this.node);
+    this.node = JSON.parse(x);
+  }
 
   hideShowObject(el) {
     el.expanded = !el.expanded;

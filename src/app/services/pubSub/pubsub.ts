@@ -47,6 +47,17 @@ export class PubSubService {
     inst.dict[eventName].subscribe(handler);
   }
 
+
+  unsubscribe(eventName:string) {
+    let inst = PubSubService.getInstance();
+    if(!inst.dict[eventName])
+    {
+      return;
+    }
+    delete inst.dict[eventName];
+  }
+
+
   setKeyValue(key:string,value:any)
   {
     let inst = PubSubService.getInstance();

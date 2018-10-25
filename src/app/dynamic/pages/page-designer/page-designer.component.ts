@@ -84,9 +84,10 @@ export class PageDesignerComponent implements OnInit {
                private formsService: FormsService
   ) {
 
-    this.pubSubService.subscribe('getComponentTYpe', (val) => {
-      const comp = this.state.components.find(el => el.structure.type === val);
-      this.pubSubService.publish('getComponentTYpeResult', comp.structure);
+    this.pubSubService.subscribe('getComponentType', (val) => {
+      const {type, evtName } = val;
+      const comp = this.state.components.find(el => el.structure.type === type);
+      this.pubSubService.publish(evtName, comp.structure);
     });
 
     this.pubSubService.subscribe('refreshJsonEditor', (val) => {
@@ -374,7 +375,7 @@ export class PageDesignerComponent implements OnInit {
   }
 
 
-
+  newGuid = () => (((1+Math.random())*0x10000)|0).toString(16);
   state = {
     components: [
       {
@@ -397,7 +398,9 @@ export class PageDesignerComponent implements OnInit {
           add: function () {
             this.items.push({
               title: '',
-              'url': ''
+              url: '',
+              rm:1,
+              key: (((1+Math.random())*0x10000)|0).toString(16)
             });
           }
         }
