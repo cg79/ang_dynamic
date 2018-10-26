@@ -13,13 +13,15 @@
 
 
 .scroll {
-  height: 600px;
+  /*height: 600px;*/
   overflow: auto;
+  background-color: #dadada;
   /*border-left: 1px solid grey;*/
 }
 .scroll2{
   height: 600px;
   overflow: auto;
+  background-color: #dadada;
   /*border-left: 1px solid grey;*/
 }
 

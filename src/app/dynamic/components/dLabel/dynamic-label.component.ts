@@ -7,25 +7,14 @@ import {DynamicComponent} from "../../dynamic.component";
 @Component({
   selector:'[dinamicLabel]',
   template: `
-    <!--<ng-container *ngIf="template == 'default'">-->
      <label id="{{context?.id}}" class="{{context?.class}}">
       {{context?.value}}
        <ng-template #dynamic1></ng-template>
-       <pre>{{data | json}} </pre>
     </label>
-    
-  <!--</ng-container>-->
-
-    <!--<ng-container *ngIf="template == 'data'">-->
-        <!--<label  id="{{context?.id}}" class="{{context?.class}}">-->
-          <!--<span>{{data[context.value]}}</span>-->
-          <!--<ng-template #dynamic1></ng-template>-->
-        <!--</label>-->
-    <!--</ng-container>-->
-    
-    
   `
 })
+
+//LINK: https://jaxenter.com/new-angular6-143995.html
 export class DynamicLabelComponent extends DynamicComponent {
   @ViewChild('dynamic1', { read: ViewContainerRef }) viewContainerRef: ViewContainerRef;
 
@@ -50,5 +39,17 @@ export class DynamicLabelComponent extends DynamicComponent {
     }
     this.addChildrens(this.viewContainerRef, this.componentFactoryResolver);
   }
+
+  // ngAfterViewInit() {
+  //   debugger;
+  //   const el = this.el;
+  //   const parentElement = el.nativeElement.parentElement;
+  //   const element = el.nativeElement;
+  //   parentElement.removeChild(element);
+  //   parentElement.parentNode.insertBefore(element, parentElement.nextSibling);
+  //   parentElement.parentNode.removeChild(parentElement);
+  //
+  //
+  // }
 
 }

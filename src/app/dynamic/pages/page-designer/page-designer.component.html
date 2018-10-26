@@ -1,32 +1,31 @@
 
 
 <p>
-  page-designer works!
 
-  <input type="button" value="Start" (click)="start()"/>
+  <!--<input type="button" value="Start" (click)="start()"/>-->
 
   <!--<dynamic-dropdown *ngIf="started" [context]="formsDropDown" ></dynamic-dropdown>-->
-  <input type="text" [(ngModel)]="formName">
+  <!--<input type="text" [(ngModel)]="formName">-->
 
-  <input type="button" value="new Form" (click)="createForm()"/>
+  <!--<input type="button" value="new Form" (click)="createForm()"/>-->
 
-  <select class="browser-default"
-          (change)="onChange($event.target.value)"
-          [(ngModel)]="formsDropDown.value">
-    <option *ngFor="let item of formsDropDown.items"
-            [value]=item[formsDropDown.bindValue]>
-      {{item[formsDropDown.bindText]}}
-    </option>
-  </select>
+  <!--<select class="browser-default"-->
+          <!--(change)="onChange($event.target.value)"-->
+          <!--[(ngModel)]="formsDropDown.value">-->
+    <!--<option *ngFor="let item of formsDropDown.items"-->
+            <!--[value]=item[formsDropDown.bindValue]>-->
+      <!--{{item[formsDropDown.bindText]}}-->
+    <!--</option>-->
+  <!--</select>-->
 
-<input type="button" value="Delete" (click)="deleteForm()"/>
+<!--<input type="button" value="Delete" (click)="deleteForm()"/>-->
 
 
   <!--<pre *ngIf="context">{{ context.childrens | json}} </pre>-->
 <!---->
 
 
-<input type="button" (click)="refreshContext()" value="Refresh">
+
 
 </p>
 
@@ -51,6 +50,7 @@
         <li class = "tab col"><span (click)="showTabPage(2)"> Actions</span></li>
       </ul>
     </div>
+
     <div class = "row">
     <div *ngIf="!tabPage" id = "componets" class = "">
       <div *ngFor="let option of state.components; index as i;">
@@ -88,6 +88,9 @@
         <span (click)="toggleComponents()">{{hideShowComponents.text}}</span>
       </div>
 
+      <div class="col">
+        <input type="button" (click)="refreshContext()" value="View and Save">
+        </div>
 
     </div>
 

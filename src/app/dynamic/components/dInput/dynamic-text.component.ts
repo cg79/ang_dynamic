@@ -2,6 +2,7 @@ import {Component, ViewContainerRef, ViewChild, ComponentFactoryResolver, Change
 import { DynamicComponent } from '../../dynamic.component';
 import {PubSubService} from "../../../services/pubSub/pubsub";
 
+//https://stackoverflow.com/questions/38716105/angular2-render-a-component-without-its-wrapping-tag
 @Component({
     selector: '[dynamic-text]',
   changeDetection: ChangeDetectionStrategy.OnPush,

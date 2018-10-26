@@ -3,6 +3,7 @@ import {PubSubService} from "../../../services/pubSub/pubsub";
 import {HttpWrapperService} from "../../../services/http/httpService";
 import {ActivatedRoute} from "@angular/router";
 import {FormsService} from "../../../pages/dashboard/forms.service";
+import {Renderer3} from "@angular/core/src/render3/interfaces/renderer";
 
 @Component({
   selector: 'app-page-designer',
@@ -57,8 +58,8 @@ export class PageDesignerComponent implements OnInit {
   hideShowComponents ={
     text: "Hide",
     visible: true,
-    css1: "col s6 d1 scroll",
-    css2: "col s6 d1 scroll"
+    css1: "col s6 d1-",
+    css2: "col s6 d1-"
   };
 
   tabPage: any = null;
@@ -81,7 +82,7 @@ export class PageDesignerComponent implements OnInit {
   constructor( private pubSubService: PubSubService, private httpWrapperService: HttpWrapperService,
                private route: ActivatedRoute,
                private zone: NgZone,
-               private formsService: FormsService
+               private formsService: FormsService,
   ) {
 
     this.pubSubService.subscribe('getComponentType', (val) => {
@@ -222,6 +223,7 @@ export class PageDesignerComponent implements OnInit {
   ngOnInit() {
     this.route.queryParams
       .subscribe(params => {
+        debugger;
         console.log(params); // {order: "popular"}
         const {name, id} = params;
         this.ctrlId = id;
@@ -302,6 +304,7 @@ export class PageDesignerComponent implements OnInit {
     };
     this.httpWrapperService.postJson('/api/private', body)
       .subscribe(data =>{
+        debugger;
           const { data: form} = data;
           this.currentForm = form;
           this.context.childrens = form.structure || [];
@@ -367,12 +370,12 @@ export class PageDesignerComponent implements OnInit {
     );
   }
 
-  started: boolean = true;
-  start()
-  {
-    this.started = true;
-    this.getForms();
-  }
+  // started: boolean = true;
+  // start()
+  // {
+  //   this.started = true;
+  //   this.getForms();
+  // }
 
 
   newGuid = () => (((1+Math.random())*0x10000)|0).toString(16);
@@ -880,7 +883,7 @@ export class PageDesignerComponent implements OnInit {
     }
   }
 
-  newGuid = () => (((1+Math.random())*0x10000)|0).toString(16);
+  // newGuid = () => (((1+Math.random())*0x10000)|0).toString(16);
 
   changeIds  =(node) =>{
     if(node.id) {
