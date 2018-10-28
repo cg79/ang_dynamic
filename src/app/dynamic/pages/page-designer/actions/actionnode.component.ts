@@ -65,10 +65,25 @@ import {PubSubService} from "../../../../services/pubSub/pubsub";
       this.pubSubService.unsubscribe(evtName);
     });
 
-    this.pubSubService.publish('getComponentType', {
-      type: this.node.type,
-      evtName
-    });
+    if (this.node.type) {
+      this.pubSubService.publish('getComponentType', {
+        type: this.node.type,
+        evtName
+      });
+    } else {
+
+      this.node.items.push({
+        propName: '',
+        ctrlId: '',
+        rm: 1,
+        key: (((1+Math.random())*0x10000)|0).toString(16)
+      });
+
+      // this.pubSubService.publish('getOperationByKey', {
+      //   key: this.node.key,
+      //   evtName
+      // });
+    }
 
   }
 

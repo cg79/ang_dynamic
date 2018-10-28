@@ -108,7 +108,7 @@ export class CreateUserComponent implements OnInit {
   // }
 
   markAsDirty(ctrlName, dirty = true){
-    this.currentForm.controls[ctrlName].markAsDirty({onlySelf:dirty});
+    //this.currentForm.controls[ctrlName].markAsDirty({onlySelf:dirty});
   }
 
   validateInput(ctrlName){
@@ -146,25 +146,25 @@ export class CreateUserComponent implements OnInit {
       return;
     }
 
-    let formData: FormData = new FormData();
+    // let formData: FormData = new FormData();
 
-    if(this.ui.companyLogo) {
-      let fileName = this.ui.companyLogo.name;
-      if (fileName) {
-        formData.append('1', this.ui.companyLogo, fileName);
-      }
-    }
+    // if(this.ui.companyLogo) {
+    //   let fileName = this.ui.companyLogo.name;
+    //   if (fileName) {
+    //     formData.append('1', this.ui.companyLogo, fileName);
+    //   }
+    // }
 
     let proxy: any = {
       module: 'security',
       method: 'createUser',
     };
 
-    const newUI: any = { ...this.ui};
-    delete  newUI.companyLogo;
-    formData.append('data', JSON.stringify(newUI));
+    // const newUI: any = { ...this.ui};
+    // delete  newUI.companyLogo;
+    // formData.append('data', JSON.stringify(newUI));
 
-    formData.append('proxy', JSON.stringify(proxy));
+    // formData.append('proxy', JSON.stringify(proxy));
     //formData.append('q', JSON.stringify(q));
     //formData.append('timer', JSON.stringify(this.question.timer));
 
@@ -174,7 +174,7 @@ export class CreateUserComponent implements OnInit {
 
 
 
-    const resp = await this.httpService.postFormData("api/pub/form", formData);
+    const resp = await this.httpService.postJsonAsync("/api/pub/security/createUser", this.ui);
     const respData = resp.data;
     if(!respData.success){
 

@@ -91,6 +91,14 @@ export class PageDesignerComponent implements OnInit {
       this.pubSubService.publish(evtName, comp.structure);
     });
 
+    this.pubSubService.subscribe('getOperationByKey', (val) => {
+      const {type, evtName } = val;
+      const objByKkey = null;
+      this.fin
+      const comp = this.state.components.find(el => el.structure.type === type);
+      this.pubSubService.publish(evtName, comp.structure);
+    });
+
     this.pubSubService.subscribe('refreshJsonEditor', (val) => {
 
       const sss = JSON.stringify(this.context.childrens);
@@ -219,6 +227,10 @@ export class PageDesignerComponent implements OnInit {
 
   }
 
+
+  findObjectRecursivellyByPropValue(obj, key, value) {
+
+  }
 
   ngOnInit() {
     this.route.queryParams
@@ -638,7 +650,7 @@ export class PageDesignerComponent implements OnInit {
         name: 'button',
         structure: {
           type:'button',
-          class:'',
+          class:'waves-effect waves-light btn',
           compType:'link',
           value:'btn',
           actions: []
@@ -694,13 +706,27 @@ export class PageDesignerComponent implements OnInit {
     operations: [
       {
         httpPost: {
-          url: '',
+          url: '/api/pub/',
           proxy: {
-            collection: '',
-            module: '',
-            method: ''
+            info: {
+              collection: ''
+            },
+            module: 'generic',
+            method: 'add'
           },
-          body: '',
+          body: {
+            items: [],
+            da:1,
+            key: 'httppost',
+            add: function () {
+              this.items.push({
+                propName: '',
+                ctrlId: '',
+                rm:1,
+                key: (((1+Math.random())*0x10000)|0).toString(16)
+              });
+            }
+          },
         }
       },
       {

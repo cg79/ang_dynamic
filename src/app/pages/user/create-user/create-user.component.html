@@ -80,7 +80,6 @@
                      name="phone"
                    required
                    id="phone"
-                   pattern="\(\d{4}\) \d{3}-\d{3}"
                    [(ngModel)]="ui.phone"
             >
             <div class="row1 col-mdt-12 error">
@@ -88,8 +87,7 @@
               (currentForm.form.controls.phone.dirty)">
 
                 <p *ngIf="currentForm.form.controls.phone.errors.required">Introduceti telefonul</p>
-                <p *ngIf="currentForm.form.controls.phone.errors.pattern">Telefonul nu este complet</p>
-                <!--<p *ngIf="currentForm.form.controls.phone.errors.required">Lungimea numelui este prea mare</p>-->
+                <!--<p *ngIf="currentForm.form.controls.phone.errors.pattern">Telefonul nu este complet</p>-->
               </div>
             </div>
           </div>

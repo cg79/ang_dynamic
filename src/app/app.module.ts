@@ -165,7 +165,8 @@ const configSocket: SocketIoConfig = { url: 'http://localhost:6002', options: {}
     SocketService,
     ActionService,
     LocalizationService,
-    FormsService
+    FormsService,
+    { provide: AuthServiceConfig, useFactory: getAuthServiceConfigs }
     // CustomPageRendererResolve,
     // {
     //   provide: AuthServiceConfig,

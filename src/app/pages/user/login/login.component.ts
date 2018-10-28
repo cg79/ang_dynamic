@@ -13,10 +13,9 @@ import {IHttpResponse} from "../../../facade/IHttpResponse";
   styleUrls: ['login.component.css']
 })
 
-export class LoginComponent implements OnDestroy  {
+export class LoginComponent implements OnInit  {
 
   private text: string;
-  private  httpService: HttpWrapperService;
   public user;
   sub: any;
 
@@ -33,7 +32,7 @@ export class LoginComponent implements OnDestroy  {
   uiMessage: string = '';
 
   constructor(
-              httpService: HttpWrapperService,
+              private httpService: HttpWrapperService,
               private router: Router,
               private localStorageService: LocalStorageService,
               private pubSubService: PubSubService,
@@ -82,6 +81,7 @@ export class LoginComponent implements OnDestroy  {
     const {data} = resp;
     this.localStorageService.set('user',data);
    this.pubSubService.publish("login", data);
+   this.pubSubService.setKeyValue('user', data);
     this.router.navigate(['/home']);
     // this.router.navigate(['/home'], { queryParams: { returnUrl: 'sd' }});
   }
@@ -172,6 +172,9 @@ export class LoginComponent implements OnDestroy  {
     // if(this.sub) {
     //   this.sub.unsubscribe();
     // }
+  }
+
+  ngOnInit(): void {
   }
 
 }

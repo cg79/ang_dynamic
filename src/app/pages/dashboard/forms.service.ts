@@ -144,6 +144,9 @@ export class FormsService {
   //---------------------------------------------------------------------------------------------------------------------------
 
   controlSearchDb() {
+    if(!this.selectedApplication) {
+      return;
+    }
     const body = {
       data: {
         name: this.ctrlData.name,
