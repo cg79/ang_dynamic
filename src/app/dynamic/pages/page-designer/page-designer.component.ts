@@ -94,7 +94,6 @@ export class PageDesignerComponent implements OnInit {
     this.pubSubService.subscribe('getOperationByKey', (val) => {
       const {type, evtName } = val;
       const objByKkey = null;
-      this.fin
       const comp = this.state.components.find(el => el.structure.type === type);
       this.pubSubService.publish(evtName, comp.structure);
     });
@@ -143,7 +142,6 @@ export class PageDesignerComponent implements OnInit {
       }
     });
 
-    //-------------------------------
     this.pubSubService.subscribe('copyNode', (val) => {
       this.treeNode = null;
       this.searchTree(this.context, val);
@@ -174,7 +172,7 @@ export class PageDesignerComponent implements OnInit {
     this.pubSubService.subscribe('pasteNode', (val) => {
       this.treeNode = null;
       this.searchTree(this.context, val);
-      if(this.treeNode) {
+      if (this.treeNode) {
         const { parentNode, element } = this.treeNode;
         const clipboard = this.pubSubService.getKeyValue('clipboard');
         const clipboardNode = JSON.parse(clipboard);
@@ -188,7 +186,7 @@ export class PageDesignerComponent implements OnInit {
     });
 
     this.pubSubService.subscribe('refreshTree', (val) => {
-      if(!val) {
+      if (!val) {
         return;
       }
       debugger;
@@ -865,6 +863,8 @@ export class PageDesignerComponent implements OnInit {
   refreshContext() {
     this.updateForm();
     this.pubSubService.publish('datachanged', this.context);
+
+    this.pubSubService.publish('dataChanged1',{ a: 1 });
   }
 
   handleDrop(e) {
