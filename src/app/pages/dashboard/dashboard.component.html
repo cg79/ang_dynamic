@@ -33,6 +33,7 @@ dashboard
               <!--I am convenient because I require little markup to use effectively.</p>-->
             </div>
             <div class="card-action">
+                <a (click)="viewApp(app); $event.stopPropagation()">View App</a>
               <a (click)="gotoappcontrols(app)">Details</a>
               <a (click)="appDelete(app); $event.stopPropagation()">Delete</a>
             </div>

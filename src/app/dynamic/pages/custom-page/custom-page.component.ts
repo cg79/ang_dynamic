@@ -211,7 +211,7 @@ export class CustomPageComponent implements OnInit {
       this.getFormByName(this.pageName);
     }
     if (this.data) {
-      this.context = this.data;
+      this.context.childrens = this.data;
     }
 
   }

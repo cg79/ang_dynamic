@@ -20,25 +20,50 @@ export class CustomPageRendererResolve implements Resolve<Hero> {
   error: any;
 
   constructor( private pubSubService: PubSubService,
-               private socketService:SocketService,
+               private socketService: SocketService,
                private httpWrapperService: HttpWrapperService,
                private router: Router) { }
 
   resolve(route: ActivatedRouteSnapshot,
       state: RouterStateSnapshot): Observable<Hero>  {
-    debugger;
+
+      //   route.queryParams
+      // .subscribe(params => {
+      //   debugger;
+      //   console.log(params); // {order: "popular"}
+      //   const {app, id} = params;
+      // });
+debugger;
+      const { url } = route;
+
+
+    
+    // const body = {
+    //   data: {
+    //     name: 'formName'
+    //   },
+    //   proxy: {
+    //     module: "form",
+    //     method: "getByName"
+    //   }
+    // };
+
+    const appId = url[0].path;
     const body = {
       data: {
-        name: 'formName'
+        userName: url[0].path,
+        appName: url[1].path,
       },
       proxy: {
-        module: "form",
-        method: "getByName"
+        module: 'form',
+        method: 'getControlsForApp',
+        info: {
+          collection: 'controls'
+        }
       }
     };
-
     // let id = +route.params['id'];
-    return this.httpWrapperService.postJson('/api/private', body)
+    return this.httpWrapperService.postJson('/api/private', body);
       // .catch(err => {
       //   console.error(err); // deal with API error (eg not found)
       //   this.router.navigate(['/']); // could redirect to error page

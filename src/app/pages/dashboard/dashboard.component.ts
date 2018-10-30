@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
   constructor (
                private pubSubService: PubSubService,
                private router: Router,
-               private socketService:SocketService,
+               private socketService: SocketService,
                private httpWrapperService: HttpWrapperService,
                private formsService: FormsService
   )
@@ -38,6 +38,13 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.appGetAll();
+  }
+
+  viewApp(app) {
+    debugger;
+    const user = this.pubSubService.getKeyValue('user');
+    const url = `/${user.name}/${app.name}`;
+    this.router.navigate([url]);
   }
 
   debounce = (fn, time) => {

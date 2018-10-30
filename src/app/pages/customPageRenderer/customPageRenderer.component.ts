@@ -14,7 +14,8 @@ export class CustomPageRendererComponent implements OnInit {
   ngOnInit() {
     debugger;
     this.route.data.subscribe((data) => {
-      this.jsonData = data;
+      const { hero } = data;
+      this.jsonData = hero.data[0].structure;
     });
   }
 
