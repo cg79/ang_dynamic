@@ -11,7 +11,7 @@ import { ComponentInjectorService } from '../../component-injector.service';
 import {PubSubService} from "../../../services/pubSub/pubsub";
 
 @Component({
-    selector: '[dynamic-div]',
+    selector: 'dynamic-div',
     template: `
     <div  id="{{context?.id}}" class="{{context?.class}}" [ngClass]="getClass()">
       <ng-template #dynamic></ng-template>

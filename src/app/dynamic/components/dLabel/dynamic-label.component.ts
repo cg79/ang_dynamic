@@ -5,7 +5,7 @@ import {DynamicComponent} from "../../dynamic.component";
  import {PubSubService} from "../../../services/pubSub/pubsub";
 
 @Component({
-  selector:'[dinamicLabel]',
+  selector:'dinamicLabel',
   template: `
      <label id="{{context?.id}}" class="{{context?.class}}">
       {{context?.value}}

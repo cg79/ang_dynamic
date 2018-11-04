@@ -1,0 +1,5 @@
+https://hackernoon.com/angular-pro-tip-how-to-dynamically-create-components-in-body-ba200cc289e6
+
+memory testing and stress test
+
+https://medium.com/front-end-hacking/dynamically-add-components-to-the-dom-with-angular-71b0cb535286

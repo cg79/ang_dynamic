@@ -46,10 +46,10 @@ export class DynamicComponent implements OnInit, OnDestroy {
 
   private mappings = {
     'container': 'dynamic-container',
-    'label': '[dinamicLabel]',
+    'label': 'dinamicLabel',
     'dynamic-content': 'dynamic-content',
-    'div': '[dynamic-div]',
-    'text': '[dynamic-text]',
+    'div': 'dynamic-div',
+    'text': 'dynamic-text',
     'chkLblLeft': '[dynamic-chk-lbl-left]',
     'chkLblRight': '[dynamic-chk-lbl-right]',
     'chkLblLeftList': '[dynamic-chk-lbl-left-list]',
