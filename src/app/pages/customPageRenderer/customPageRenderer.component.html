@@ -2,4 +2,8 @@
  custom page renderer
 </p>
 <!-- <pre>{{jsonData | json}} </pre> -->
-<app-custom-page [data]="jsonData"></app-custom-page>
+
+<div *ngFor="let js of jsonData">
+  <app-custom-page [data]="js.structure"></app-custom-page>
+</div>
+

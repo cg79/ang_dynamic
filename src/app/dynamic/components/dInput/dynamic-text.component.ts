@@ -1,10 +1,13 @@
-import {Component, ViewContainerRef, ViewChild, ComponentFactoryResolver, ChangeDetectionStrategy} from '@angular/core';
+import {
+  Component, ViewContainerRef, ViewChild, ComponentFactoryResolver, ChangeDetectionStrategy,
+  ViewEncapsulation
+} from '@angular/core';
 import {DynamicComponent} from '../../dynamic.component';
 import {PubSubService} from '../../../services/pubSub/pubsub';
 
 //https://stackoverflow.com/questions/38716105/angular2-render-a-component-without-its-wrapping-tag
 @Component({
-  selector: '[dynamic-text]',
+  selector: 'dynamic-text',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <ng-container>
@@ -17,19 +20,6 @@ import {PubSubService} from '../../../services/pubSub/pubsub';
         (input)="change($event)">
       <ng-template #errcontainer></ng-template>
     </ng-container>
-
-    <!--<ng-container *ngIf="template == 'data'">-->
-    <!--<input type="text" -->
-    <!--class="{{context.class}}" -->
-    <!--id="{{context.id}}" -->
-    <!--name="{{context.name || context.id}}" -->
-    <!--[(ngModel)]="data[context.value]"  -->
-    <!--(input)="change($event)">-->
-    <!---->
-    <!--<ng-template #errcontainer></ng-template>-->
-    <!--</ng-container>-->
-
-    <!--<pre> {{context | json}} </pre>-->
   `
 })
 
