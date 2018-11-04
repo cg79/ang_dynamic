@@ -31,7 +31,6 @@ export class DynamicButtonComponent extends DynamicComponent {
   }
 
   exec() {
-    debugger;
     this.pubSubService.publish('exec', this.context);
   }
 

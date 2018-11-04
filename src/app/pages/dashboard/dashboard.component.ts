@@ -41,7 +41,6 @@ export class DashboardComponent implements OnInit {
   }
 
   viewApp(app) {
-    debugger;
     const user = this.pubSubService.getKeyValue('user');
     const url = `/${user.name}/${app.name}`;
     this.router.navigate([url]);

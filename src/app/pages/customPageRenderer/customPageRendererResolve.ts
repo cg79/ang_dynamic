@@ -29,11 +29,9 @@ export class CustomPageRendererResolve implements Resolve<Hero> {
 
       //   route.queryParams
       // .subscribe(params => {
-      //   debugger;
       //   console.log(params); // {order: "popular"}
       //   const {app, id} = params;
       // });
-debugger;
       const { url } = route;
 
 

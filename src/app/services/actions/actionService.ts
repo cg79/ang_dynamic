@@ -12,7 +12,6 @@ export class ActionService {
 
   constructor(private http: HttpWrapperService, private pubSubService: PubSubService) {
     // this.pubSubService.subscribe("exec", (actions)=>{
-    //   debugger;
     //   for(let i=0;i<actions.length;i++) {
     //     const action = actions[i];
     //   }

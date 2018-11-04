@@ -56,7 +56,6 @@ import {PubSubService} from "../../../../services/pubSub/pubsub";
     // this.node.items
     const evtName = this.newGuid();
     this.pubSubService.subscribe(evtName, (val) => {
-      debugger;
       // val.add.bind(this.node);
       this.node.add = val.add;
       this.node.add();
@@ -100,7 +99,6 @@ import {PubSubService} from "../../../../services/pubSub/pubsub";
   }
 
   onDropAction(event) {
-    debugger;
     //let dataTransfer = event.dataTransfer.getData('data');
     var data0 = event.dataTransfer.getData("text/plain");
     const droppedData = JSON.parse(data0);
@@ -113,13 +111,11 @@ import {PubSubService} from "../../../../services/pubSub/pubsub";
     node.actions.push(droppedData);
     this.node.prop = false;
     this.node.prop = true;
-    // debugger;
     // this.tree.push(this.dragData);
     // event.preventDefault();
   }
 
   onDropRowTemplate(event) {
-    debugger;
     //let dataTransfer = event.dataTransfer.getData('data');
     var data0 = event.dataTransfer.getData("text/plain");
     const droppedData = JSON.parse(data0);
@@ -140,7 +136,6 @@ import {PubSubService} from "../../../../services/pubSub/pubsub";
     // node.actions.push(droppedData);
     // this.node.prop = false;
     // this.node.prop = true;
-    // debugger;
     // this.tree.push(this.dragData);
     // event.preventDefault();
   }
@@ -159,7 +154,6 @@ import {PubSubService} from "../../../../services/pubSub/pubsub";
       node.childrens = [];
     }
     node.childrens.push(droppedData.structure);
-    // debugger;
 
     // this.tree.push(this.dragData);
     this.pubSubService.publish('refreshJsonEditor',null);
@@ -266,7 +260,6 @@ import {PubSubService} from "../../../../services/pubSub/pubsub";
 
 
   addParam(o, event){
-    debugger;
     const n = this.node;
     n.actions.push({
       id: '',

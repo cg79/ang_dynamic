@@ -39,7 +39,6 @@ export class CustomPageComponent implements OnInit {
     this.socketService.subscribe(evt);
 
     this.pubSubService.subscribe('exec', async (ctrlCtx) => {
-      debugger;
       const {actions} = ctrlCtx;
       if (!actions) {
         return;
@@ -48,7 +47,6 @@ export class CustomPageComponent implements OnInit {
     });
 
     this.pubSubService.subscribe('validate', async (validation) => {
-      debugger;
       // let { validation, value } = ctrlCtx;
       this.createFormValues(this.context);
 
@@ -115,7 +113,6 @@ export class CustomPageComponent implements OnInit {
   info: any = null;
 
   async executeAction(action) {
-    debugger;
     const type = Object.keys(action)[0];
     switch (type) {
       case 'http' : {
@@ -135,7 +132,7 @@ export class CustomPageComponent implements OnInit {
         const { httpPost } = action;
         this.info = null;
 
-        const { body, proxy, url } = httpPost;
+        const { body, proxy, url, storeKey } = httpPost;
         const { items } = body;
 
         const data = {};
@@ -149,6 +146,10 @@ export class CustomPageComponent implements OnInit {
           data
         };
         const response = await this.httpWrapperService.postJsonAsync(url, req);
+        if (storeKey) {
+          this.pubSubService.setKeyValue(storeKey, response);
+          this.pubSubService.publish(storeKey, response);
+        }
         return response;
         // console.log(response);
       }
@@ -176,7 +177,6 @@ export class CustomPageComponent implements OnInit {
   }
 
   formUpdated(data) {
-    debugger;
     if (this.pageName !== data.name) {
       return;
     }

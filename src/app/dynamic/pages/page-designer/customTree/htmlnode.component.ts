@@ -21,7 +21,6 @@ import {PubSubService} from "../../../../services/pubSub/pubsub";
 
 
   onDrop(event) {
-    debugger;
     //let dataTransfer = event.dataTransfer.getData('data');
     var data0 = event.dataTransfer.getData("text/plain");
     const droppedData = JSON.parse(data0);
@@ -42,7 +41,6 @@ import {PubSubService} from "../../../../services/pubSub/pubsub";
   }
 
   onDropAction(event) {
-    debugger;
     //let dataTransfer = event.dataTransfer.getData('data');
     var data0 = event.dataTransfer.getData("text/plain");
     const droppedData = JSON.parse(data0);

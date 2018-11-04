@@ -101,7 +101,6 @@ export class AppControlComponent implements OnInit {
   }
 
   createControl() {
-    debugger;
     const body = {
       data: {
         name: this.form.name,

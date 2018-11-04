@@ -189,7 +189,6 @@ export class PageDesignerComponent implements OnInit {
       if (!val) {
         return;
       }
-      debugger;
       var x = JSON.stringify(this.context.childrens);
 
       // this.treeNode = null;
@@ -233,7 +232,6 @@ export class PageDesignerComponent implements OnInit {
   ngOnInit() {
     this.route.queryParams
       .subscribe(params => {
-        debugger;
         console.log(params); // {order: "popular"}
         const {name, id} = params;
         this.ctrlId = id;
@@ -314,7 +312,6 @@ export class PageDesignerComponent implements OnInit {
     };
     this.httpWrapperService.postJson('/api/private', body)
       .subscribe(data =>{
-        debugger;
           const { data: form} = data;
           this.currentForm = form;
           this.context.childrens = form.structure || [];
@@ -399,6 +396,7 @@ export class PageDesignerComponent implements OnInit {
           id:'l1',
           class:'label',
           items:[{a:1, text:"ion", checked:true},{a:2, text:"Maria"}],
+          dataSubscribe: '',
           childrens: []
         }
       },
@@ -704,6 +702,7 @@ export class PageDesignerComponent implements OnInit {
     operations: [
       {
         httpPost: {
+          name: '',
           url: '/api/pub/',
           proxy: {
             info: {
@@ -725,6 +724,7 @@ export class PageDesignerComponent implements OnInit {
               });
             }
           },
+          storeKey: ''
         }
       },
       {

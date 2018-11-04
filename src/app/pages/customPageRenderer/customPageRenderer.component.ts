@@ -12,7 +12,6 @@ export class CustomPageRendererComponent implements OnInit {
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
-    debugger;
     this.route.data.subscribe((data) => {
       const { hero } = data;
       this.jsonData = hero.data[0].structure;

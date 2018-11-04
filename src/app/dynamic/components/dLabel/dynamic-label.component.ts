@@ -41,7 +41,6 @@ export class DynamicLabelComponent extends DynamicComponent {
   }
 
   // ngAfterViewInit() {
-  //   debugger;
   //   const el = this.el;
   //   const parentElement = el.nativeElement.parentElement;
   //   const element = el.nativeElement;

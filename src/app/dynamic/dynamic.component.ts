@@ -225,7 +225,6 @@ export class DynamicComponent implements OnInit, OnDestroy {
     const { id } = this.context;
     if (id) {
       this.dataChangedObs = this.pubSubService.subscribe('dataChanged1', (data) => {
-        debugger;
         // this.dataChangedObs.unsubscribe();
       });
     }
