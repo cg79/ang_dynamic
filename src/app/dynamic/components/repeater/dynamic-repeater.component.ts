@@ -44,8 +44,15 @@ export class DynamicRepeaterComponent extends DynamicComponent {
         setTimeout(this.renderItems.bind(this),1);
       });
     }
-    
+
+    const rrr = this.renderItems.bind(this);
+    setInterval(() => {
+      this.context.items.push({a:"aaa", text: this.newGuid()});
+      rrr();
+    }, 1000);
   }
+
+  counter = 0;
 
   renderItems(){
     if(!this.context )
@@ -58,22 +65,26 @@ export class DynamicRepeaterComponent extends DynamicComponent {
       return;
     }
 
+    const childrensClone = [...childrens];
+
     if (!this.context.id) {
       this.context.id = this.newGuid();
     }
     this.viewContainerRef.clear();
     const { id } = this.context;
-    let counter = 0;
-    let compId = '';
 
-    for(var j=0; j < this.context.items.length; j++) {
-      const data = this.context.items[j];
+    let compId = '';
+    const items = [...this.context.items];
+    for(var j=0; j < items.length; j++) {
+      const data = items[j];
       console.log('render', j);
-      for(var i=0;i<childrens.length;i++) {
-        counter ++;
-        compId = `${id}${counter}`;
-        const children = childrens[i];
+      for(var i=0;i<childrensClone.length;i++) {
+        this.counter ++;
+        compId = `${id}${this.counter}`;
+        const children = childrensClone[i];
+        if(!children.asString ) {
         children.asString = JSON.stringify(children);
+        }
         this.addChild2(this.viewContainerRef,this.componentFactoryResolver, children, data, compId);
       }
     }

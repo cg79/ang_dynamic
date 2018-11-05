@@ -191,7 +191,7 @@ export class DynamicComponent implements OnInit, OnDestroy {
     const inst = <DynamicComponent>component.instance;
     inst.context = componentFromRepeaterContext;
     inst.data = data;
-    // container.insert(component.hostView);
+     // container.insert(component.hostView);
     return component;
   }
 
