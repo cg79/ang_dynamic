@@ -80,8 +80,8 @@ export class DynamicComponent implements OnInit, OnDestroy {
   };
 
   protected componentRef: ComponentRef<{}>;
-
-
+  protected viewContainerRef1: ViewContainerRef;
+  protected componentFactoryResolver1: ComponentFactoryResolver;
   // @ViewChild(TemplateRef) template;
   //
 
@@ -183,7 +183,7 @@ export class DynamicComponent implements OnInit, OnDestroy {
     componentFromRepeaterContext.id = compId;
 
     const {value} = componentFromRepeaterContext;
-    if (value.startsWith('[')) {
+    if (value && value.startsWith('[')) {
       const newv = value.replace('[', '').replace(']', '');
       componentFromRepeaterContext.value = data[newv];
     }
@@ -212,6 +212,9 @@ export class DynamicComponent implements OnInit, OnDestroy {
         children.key = this.newGuid();
       }
       if (this.data) {
+        if(!children.asString ) {
+          children.asString = JSON.stringify(children);
+        }
         this.addChild2(container, factoryResolver, children, this.data, 'kkk');
       } else {
         this.addChild1(container, factoryResolver, children);

@@ -119,7 +119,7 @@
       <!--o.key !== 'childrens'-->
       <ul *ngIf="o.type === 'array'" class="browser-default">
         <!--{{o | json}}-->
-        <button  *ngIf="o.key === 'actions'"(click)="addParam(node, $event)">add param </button>
+        <!--<button  *ngIf="o.key === 'actions'"(click)="addParam(node, $event)">add param </button>-->
 
         <li *ngFor="let el of o.value;index as i;" class="browser-default1">
           <ul>

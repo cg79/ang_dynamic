@@ -389,6 +389,13 @@ export class PageDesignerComponent implements OnInit {
   state = {
     components: [
       {
+        name: 'onStart',
+        structure: {
+          type:'onStart',
+          actions: []
+        }
+      },
+      {
         name: 'repeater',
         structure: {
           type:'repeater',
@@ -535,7 +542,22 @@ export class PageDesignerComponent implements OnInit {
           type:'div',
           id:'',
           class:"row",
-          cols: 0
+          cols: 0,
+          state: {
+            name: '',
+            type: 'state',
+            items:[],
+            da:1,
+            add: function () {
+              debugger;
+              this.items.push({
+                propName: '',
+                value: '',
+                rm:1,
+                key: (((1+Math.random())*0x10000)|0).toString(16)
+              });
+            }
+          }
         }
       },
       {
@@ -716,6 +738,7 @@ export class PageDesignerComponent implements OnInit {
             da:1,
             key: 'httppost',
             add: function () {
+              debugger;
               this.items.push({
                 propName: '',
                 ctrlId: '',
@@ -809,8 +832,29 @@ export class PageDesignerComponent implements OnInit {
     id:'asf1',
     type:'container',
     key:'aaaa',
-    childrens: this.tree
+    childrens: this.tree,
   };
+
+  // contextActions = [{
+  //   type:'',
+  //   actions: []
+  // }];
+
+  // contextActions: any = {
+  //   name: '',
+  //   type: 'state',
+  //   items: [],
+  //   da: 1,
+  //   add: function () {
+  //     debugger;
+  //     this.items.push({
+  //       propName: '',
+  //       value: '',
+  //       rm: 1,
+  //       key: (((1 + Math.random()) * 0x10000) | 0).toString(16)
+  //     });
+  //   }
+  // };
 
   renderContext: any = {
     "id": "asf1",

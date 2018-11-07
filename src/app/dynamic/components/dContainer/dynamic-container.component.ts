@@ -36,13 +36,23 @@ export class DynamicContainerComponent extends DynamicComponent  {
     this.renderComponets();
   }
 
-
+  onStart = null;
   constructor(pubSubService: PubSubService,
               private componentFactoryResolver: ComponentFactoryResolver
   ) {
     super(pubSubService);
-    this.pubSubService.subscribe('datachanged', (val) => {
-      this.context = val;
+    this.pubSubService.subscribe('datachanged', (data) => {
+      debugger;
+
+      const dataCloneStr = JSON.stringify(data);
+      const dataClone = JSON.parse(dataCloneStr);
+
+
+      this.onStart = dataClone.childrens.find(el => el.type == 'onStart');
+      dataClone.childrens = dataClone.childrens.filter(el => el.type !== 'onStart');
+
+      this.context = dataClone;
+
       this.renderComponets();
     });
   }

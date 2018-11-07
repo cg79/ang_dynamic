@@ -15,6 +15,7 @@ import {PubSubService} from "../../../services/pubSub/pubsub";
     template: `
     <div  id="{{context?.id}}" class="{{context?.class}}" [ngClass]="getClass()">
       <ng-template #dynamic></ng-template>
+      <!--<pre>{{context | json}} </pre>-->
     </div>`
 })
 export class DynamicDivComponent extends DynamicComponent {
@@ -27,6 +28,8 @@ export class DynamicDivComponent extends DynamicComponent {
     ) {
     super(pubSubService);
     // this.service = service;
+    this.viewContainerRef1 = this.viewContainerRef;
+    this.componentFactoryResolver1 = componentFactoryResolver;
   }
 
   ngOnInit() {
@@ -39,6 +42,9 @@ export class DynamicDivComponent extends DynamicComponent {
   }
 
   getClass() {
+    if(!this.context) {
+      return;
+    }
     const { cols } = this.context;
     if (cols) {
       return `col s${cols}`;

@@ -206,11 +206,16 @@ export class CustomPageComponent implements OnInit {
       );
   }
 
+  onStart = null;
+
   ngOnInit() {
+    debugger;
     if (this.pageName) {
       this.getFormByName(this.pageName);
     }
     if (this.data) {
+      this.onStart = this.data.find(el => el.type == 'onStart');
+      this.data.childrens = this.data.filter(el => el.type !== 'onStart');
       this.context.childrens = this.data;
     }
 

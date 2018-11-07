@@ -53,6 +53,7 @@ import {PubSubService} from "../../../../services/pubSub/pubsub";
 }
 
   callAddFunction() {
+    debugger;
     // this.node.items
     const evtName = this.newGuid();
     this.pubSubService.subscribe(evtName, (val) => {
@@ -65,10 +66,20 @@ import {PubSubService} from "../../../../services/pubSub/pubsub";
     });
 
     if (this.node.type) {
-      this.pubSubService.publish('getComponentType', {
-        type: this.node.type,
-        evtName
-      });
+      if(this.node.type === 'state') {
+        this.node.items.push({
+          propName: '',
+          value: '',
+          rm:1,
+          key: (((1+Math.random())*0x10000)|0).toString(16)
+        });
+      }else{
+        this.pubSubService.publish('getComponentType', {
+          type: this.node.type,
+          evtName
+        });
+      }
+
     } else {
 
       this.node.items.push({
@@ -207,7 +218,6 @@ import {PubSubService} from "../../../../services/pubSub/pubsub";
     //
     //
     //
-    // this.pubSubService.publish('datachanged', this.renderContext);
     event.preventDefault();
   }
 

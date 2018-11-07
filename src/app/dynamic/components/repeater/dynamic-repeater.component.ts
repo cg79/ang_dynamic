@@ -6,7 +6,6 @@ import {PubSubService} from "../../../services/pubSub/pubsub";
     selector: '[dynamic-repeater]',
   template: `
       <ng-template #dynamic1></ng-template>
-      <pre>{{context | json}} </pre>
   `
 })
 
@@ -45,11 +44,11 @@ export class DynamicRepeaterComponent extends DynamicComponent {
       });
     }
 
-    const rrr = this.renderItems.bind(this);
-    setInterval(() => {
-      this.context.items.push({a:"aaa", text: this.newGuid()});
-      rrr();
-    }, 1000);
+    // const rrr = this.renderItems.bind(this);
+    // setInterval(() => {
+    //   this.context.items.push({a:"aaa", text: this.newGuid()});
+    //   rrr();
+    // }, 1000);
   }
 
   counter = 0;

@@ -110,7 +110,6 @@ import {PubSubService} from "../../../../services/pubSub/pubsub";
     //
     //
     //
-    // this.pubSubService.publish('datachanged', this.renderContext);
     event.preventDefault();
   }
 
